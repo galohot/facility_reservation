@@ -1,14 +1,23 @@
-<x-app-layout>
-    <x-slot name="slot">
-        @if ($errors->any())
+<?php if (isset($component)) { $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54 = $attributes; } ?>
+<?php $component = App\View\Components\AppLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('app-layout'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\AppLayout::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+     <?php $__env->slot('slot', null, []); ?> 
+        <?php if($errors->any()): ?>
             <div class="alert alert-danger">
                 <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li><?php echo e($error); ?></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </ul>
             </div>
-        @endif
+        <?php endif; ?>
         <section>
             <!-- Include Select2 CSS -->
             <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
@@ -20,10 +29,10 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
             <div class="col">
-                <form class="card" action="{{ route('facilities.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
+                <form class="card" action="<?php echo e(route('facilities.store')); ?>" method="POST" enctype="multipart/form-data">
+                    <?php echo csrf_field(); ?>
                     <div class="card-header">
-                        <h3 class="card-title">Create {{ $pageTitle }}</h3>
+                        <h3 class="card-title">Create <?php echo e($pageTitle); ?></h3>
                     </div>
                     <div class="card-body">
                         <div class="mb-4">
@@ -46,27 +55,27 @@
                             <label class="form-label required" for="facility_category_id">Select Category</label>
                             <select name="facility_category_id" id="facility_category_id" class="form-select" style="width: 80%">
                                 <option value="">Select Category</option>
-                                @foreach ($facilityCategories as $facilityCategory)
-                                    <option value="{{ $facilityCategory->id }}">{{ $facilityCategory->category_str }}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $facilityCategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $facilityCategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($facilityCategory->id); ?>"><?php echo e($facilityCategory->category_str); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                         <div class="mb-4">
                             <label class="form-label required" for="uker_masters_id">Select Unit Kerja</label>
-                            @if(auth()->check() && auth()->user()->hasRole('admin'))
+                            <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
                             <select name="uker_masters_id" id="uker_masters_id" class="form-select" style="width: 80%">
                                 <option value="">Select Unit Kerja</option>
-                                @foreach ($ukerMasters as $ukerMaster)
-                                    <option value="{{ $ukerMaster->id }}">{{ $ukerMaster->nama_unit_kerja_eselon_2 }}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $ukerMasters; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ukerMaster): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($ukerMaster->id); ?>"><?php echo e($ukerMaster->nama_unit_kerja_eselon_2); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
-                            @else
+                            <?php else: ?>
                             <div class="mb-4">
                                 <label class="form-label" for="uker"></label>
-                                <input type="text" value="{{ Auth::user()->ukerMaster->id }}" name="uker_masters_id" id="uker_masters_id" class="form-control" readonly required>
-                                <p>{{ Auth::user()->ukerMaster->nama_unit_kerja_eselon_2 }}</p>
+                                <input type="text" value="<?php echo e(Auth::user()->ukerMaster->id); ?>" name="uker_masters_id" id="uker_masters_id" class="form-control" readonly required>
+                                <p><?php echo e(Auth::user()->ukerMaster->nama_unit_kerja_eselon_2); ?></p>
                             </div>
-                            @endif
+                            <?php endif; ?>
                         </div>
                         <!-- Add image input fields -->
                         <div class="mb-4">
@@ -99,14 +108,15 @@
                         <div class="mb-4">
                             <label class="form-label" for="addons">Select Addons</label>
                             <div>
-                                @foreach ($addons as $addon)
+                                <?php $__currentLoopData = $addons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $addon): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="addons[]" value="{{ $addon->id }}" id="addon{{ $addon->id }}">
-                                        <label class="form-check-label" for="addon{{ $addon->id }}">
-                                            {{ $addon->addon_str }}
+                                        <input class="form-check-input" type="checkbox" name="addons[]" value="<?php echo e($addon->id); ?>" id="addon<?php echo e($addon->id); ?>">
+                                        <label class="form-check-label" for="addon<?php echo e($addon->id); ?>">
+                                            <?php echo e($addon->addon_str); ?>
+
                                         </label>
                                     </div>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                         </div>
 
@@ -132,5 +142,15 @@
                 });
             });
         </script>
-    </x-slot>
-</x-app-layout>
+     <?php $__env->endSlot(); ?>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
+<?php $attributes = $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
+<?php unset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
+<?php $component = $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
+<?php unset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
+<?php endif; ?>
+<?php /**PATH C:\Users\UKPBJ\Herd\facility_reservation\resources\views/facilities/create.blade.php ENDPATH**/ ?>

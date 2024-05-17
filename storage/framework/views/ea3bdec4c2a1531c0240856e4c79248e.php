@@ -1,5 +1,14 @@
-<x-app-layout>
-    <x-slot name="slot">
+<?php if (isset($component)) { $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54 = $attributes; } ?>
+<?php $component = App\View\Components\AppLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('app-layout'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\AppLayout::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+     <?php $__env->slot('slot', null, []); ?> 
         <div class="page">
             <div class="content">
                 <div class="container-xl">
@@ -11,26 +20,26 @@
                                         <div class="subheader">Approved Reservation</div>
                                     </div>
                                     <div class="mb-3 h1">
-                                        @php
+                                        <?php
                                             $approvedReservation = 0
-                                        @endphp
-                                        @foreach ($allReservations as $reservation)
-                                            @if ($reservation->status == 'approved')
-                                                @php
+                                        ?>
+                                        <?php $__currentLoopData = $allReservations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reservation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($reservation->status == 'approved'): ?>
+                                                <?php
                                                     $approvedReservation++
-                                                @endphp
-                                            @endif
-                                        @endforeach
-                                        {{ number_format($approvedReservation / $allReservations->count() * 100, 2) }} %
+                                                ?>
+                                            <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php echo e(number_format($approvedReservation / $allReservations->count() * 100, 2)); ?> %
                                     </div>
                                     <div class="mb-2 d-flex">
-                                        <div>Approved Reservation: {{ $approvedReservation }}</div>
+                                        <div>Approved Reservation: <?php echo e($approvedReservation); ?></div>
                                     </div>
                                     <div class="progress progress-sm">
-                                        <div class="progress-bar bg-success" style="width: {{$approvedReservation / $allReservations->count() * 100 }}%" role="progressbar"
-                                            aria-valuenow="{{$approvedReservation / $allReservations->count() * 100 }}" aria-valuemin="0" aria-valuemax="100"
-                                            aria-label="{{$approvedReservation / $allReservations->count() * 100 }}% Complete">
-                                            <span class="visually-hidden">{{$approvedReservation / $allReservations->count() * 100 }}% Complete</span>
+                                        <div class="progress-bar bg-success" style="width: <?php echo e($approvedReservation / $allReservations->count() * 100); ?>%" role="progressbar"
+                                            aria-valuenow="<?php echo e($approvedReservation / $allReservations->count() * 100); ?>" aria-valuemin="0" aria-valuemax="100"
+                                            aria-label="<?php echo e($approvedReservation / $allReservations->count() * 100); ?>% Complete">
+                                            <span class="visually-hidden"><?php echo e($approvedReservation / $allReservations->count() * 100); ?>% Complete</span>
                                         </div>
                                     </div>
                                 </div>
@@ -43,26 +52,26 @@
                                         <div class="subheader">Rejected Reservation</div>
                                     </div>
                                     <div class="mb-3 h1">
-                                        @php
+                                        <?php
                                             $rejectedReservation = 0
-                                        @endphp
-                                        @foreach ($allReservations as $reservation)
-                                            @if ($reservation->status == 'rejected')
-                                                @php
+                                        ?>
+                                        <?php $__currentLoopData = $allReservations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reservation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($reservation->status == 'rejected'): ?>
+                                                <?php
                                                     $rejectedReservation++
-                                                @endphp
-                                            @endif
-                                        @endforeach
-                                        {{ number_format($rejectedReservation / $allReservations->count() * 100, 2) }} %
+                                                ?>
+                                            <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php echo e(number_format($rejectedReservation / $allReservations->count() * 100, 2)); ?> %
                                     </div>
                                     <div class="mb-2 d-flex">
-                                        <div>Rejected Reservation: {{ $rejectedReservation }}</div>
+                                        <div>Rejected Reservation: <?php echo e($rejectedReservation); ?></div>
                                     </div>
                                     <div class="progress progress-sm">
-                                        <div class="progress-bar bg-danger" style="width: {{$rejectedReservation / $allReservations->count() * 100 }}%" role="progressbar"
-                                            aria-valuenow="{{$rejectedReservation / $allReservations->count() * 100 }}" aria-valuemin="0" aria-valuemax="100"
-                                            aria-label="{{$rejectedReservation / $allReservations->count() * 100 }}% Complete">
-                                            <span class="visually-hidden">{{$rejectedReservation / $allReservations->count() * 100 }}% Complete</span>
+                                        <div class="progress-bar bg-danger" style="width: <?php echo e($rejectedReservation / $allReservations->count() * 100); ?>%" role="progressbar"
+                                            aria-valuenow="<?php echo e($rejectedReservation / $allReservations->count() * 100); ?>" aria-valuemin="0" aria-valuemax="100"
+                                            aria-label="<?php echo e($rejectedReservation / $allReservations->count() * 100); ?>% Complete">
+                                            <span class="visually-hidden"><?php echo e($rejectedReservation / $allReservations->count() * 100); ?>% Complete</span>
                                         </div>
                                     </div>
                                 </div>
@@ -75,26 +84,26 @@
                                         <div class="subheader">Pending Reservation</div>
                                     </div>
                                     <div class="mb-3 h1">
-                                        @php
+                                        <?php
                                             $pendingReservation = 0
-                                        @endphp
-                                        @foreach ($allReservations as $reservation)
-                                            @if ($reservation->status == 'pending')
-                                                @php
+                                        ?>
+                                        <?php $__currentLoopData = $allReservations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reservation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($reservation->status == 'pending'): ?>
+                                                <?php
                                                     $pendingReservation++
-                                                @endphp
-                                            @endif
-                                        @endforeach
-                                        {{ number_format($pendingReservation / $allReservations->count() * 100, 2) }} %
+                                                ?>
+                                            <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php echo e(number_format($pendingReservation / $allReservations->count() * 100, 2)); ?> %
                                     </div>
                                     <div class="mb-2 d-flex">
-                                        <div>Pending Reservation: {{ $pendingReservation }}</div>
+                                        <div>Pending Reservation: <?php echo e($pendingReservation); ?></div>
                                     </div>
                                     <div class="progress progress-sm">
-                                        <div class="progress-bar bg-warning" style="width: {{$pendingReservation / $allReservations->count() * 100 }}%" role="progressbar"
-                                            aria-valuenow="{{$pendingReservation / $allReservations->count() * 100 }}" aria-valuemin="0" aria-valuemax="100"
-                                            aria-label="{{$pendingReservation / $allReservations->count() * 100 }}% Complete">
-                                            <span class="visually-hidden">{{$pendingReservation / $allReservations->count() * 100 }}% Complete</span>
+                                        <div class="progress-bar bg-warning" style="width: <?php echo e($pendingReservation / $allReservations->count() * 100); ?>%" role="progressbar"
+                                            aria-valuenow="<?php echo e($pendingReservation / $allReservations->count() * 100); ?>" aria-valuemin="0" aria-valuemax="100"
+                                            aria-label="<?php echo e($pendingReservation / $allReservations->count() * 100); ?>% Complete">
+                                            <span class="visually-hidden"><?php echo e($pendingReservation / $allReservations->count() * 100); ?>% Complete</span>
                                         </div>
                                     </div>
                                 </div>
@@ -113,19 +122,20 @@
                                                     </span>
                                                 </div>
                                                 <div class="col">
-                                                    <div class="font-weight-medium">{{ $allReservations->count() }} Total Reservations</div>
+                                                    <div class="font-weight-medium"><?php echo e($allReservations->count()); ?> Total Reservations</div>
                                                     <div class="text-secondary">
-                                                        @php
+                                                        <?php
                                                             $pendingCount = 0;
-                                                        @endphp
-                                                        @foreach ($allReservations as $reservation)
-                                                            @if ($reservation->status == 'pending')
-                                                                @php
+                                                        ?>
+                                                        <?php $__currentLoopData = $allReservations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reservation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <?php if($reservation->status == 'pending'): ?>
+                                                                <?php
                                                                     $pendingCount++;
-                                                                @endphp
-                                                            @endif
-                                                        @endforeach
-                                                        {{ $pendingCount > 0 ? $pendingCount . ' Pending' : '0 pending' }}
+                                                                ?>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                        <?php echo e($pendingCount > 0 ? $pendingCount . ' Pending' : '0 pending'); ?>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -143,8 +153,8 @@
                                                     </span>
                                                 </div>
                                                 <div class="col">
-                                                    <div class="font-weight-medium"> {{ $allFacilities->count() }} Facilities</div>
-                                                    <div class="text-secondary"> {{ $facilityCategories->count() }} Categories</div>
+                                                    <div class="font-weight-medium"> <?php echo e($allFacilities->count()); ?> Facilities</div>
+                                                    <div class="text-secondary"> <?php echo e($facilityCategories->count()); ?> Categories</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -161,7 +171,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="col">
-                                                    <div class="font-weight-medium">{{ $allUsers->count() }} Users</div>
+                                                    <div class="font-weight-medium"><?php echo e($allUsers->count()); ?> Users</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -178,8 +188,8 @@
                                                     </span>
                                                 </div>
                                                 <div class="col">
-                                                    <div class="font-weight-medium"> {{$allUkers->count()}} Unit Kerja </div>
-                                                    <div class="text-secondary"> {{$allSatkers->count()}} Satuan Kerja </div>
+                                                    <div class="font-weight-medium"> <?php echo e($allUkers->count()); ?> Unit Kerja </div>
+                                                    <div class="text-secondary"> <?php echo e($allSatkers->count()); ?> Satuan Kerja </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -200,12 +210,12 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($reservationCounts as $facility => $count)
+                                    <?php $__currentLoopData = $reservationCounts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $facility => $count): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td>{{ $facility }}</td>
-                                        <td>{{ $count }}</td>
+                                        <td><?php echo e($facility); ?></td>
+                                        <td><?php echo e($count); ?></td>
                                     </tr>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                             </div>
@@ -223,12 +233,12 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($facilityReservations as $satker => $count)
+                                    <?php $__currentLoopData = $facilityReservations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $satker => $count): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td>{{ $satker }}</td>
-                                        <td>{{ $count }}</td>
+                                        <td><?php echo e($satker); ?></td>
+                                        <td><?php echo e($count); ?></td>
                                     </tr>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                             </div>
@@ -248,49 +258,53 @@
                                     <div class="card" style="height: 28rem">
                                         <div class="card-body card-body-scrollable card-body-scrollable-shadow">
                                             <div class="divide-y">
-                                                @foreach ($reservations as $reservation)
+                                                <?php $__currentLoopData = $reservations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reservation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <div>
                                                         <div class="row">
                                                             <div class="col">
                                                                 <div class="text-truncate">
-                                                                    <strong>{{ $reservation->user->ukerMaster->nama_unit_kerja_eselon_2 }}
+                                                                    <strong><?php echo e($reservation->user->ukerMaster->nama_unit_kerja_eselon_2); ?>
+
                                                                     </strong>
-                                                                    <span>({{ $reservation->user->name }})</span>
+                                                                    <span>(<?php echo e($reservation->user->name); ?>)</span>
                                                                     <br />requested to reserve
-                                                                    <strong>{{ $reservation->facility->name }}</strong>
-                                                                    <br />category: <strong>{{ $reservation->facility->facilityCategory->category_str }}</strong>
+                                                                    <strong><?php echo e($reservation->facility->name); ?></strong>
+                                                                    <br />category: <strong><?php echo e($reservation->facility->facilityCategory->category_str); ?></strong>
                                                                 </div>
                                                                 <div class="text-secondary">For
-                                                                    {{ $reservation->reservation_start->translatedFormat('l, j F Y, H:i') }}
+                                                                    <?php echo e($reservation->reservation_start->translatedFormat('l, j F Y, H:i')); ?>
+
                                                                     -
-                                                                    {{ $reservation->reservation_end->translatedFormat('l, j F Y, H:i') }}
+                                                                    <?php echo e($reservation->reservation_end->translatedFormat('l, j F Y, H:i')); ?>
+
                                                                 </div>
                                                                 <div class="text-secondary">
-                                                                    {{ $reservation->timeDifference }}</div>
+                                                                    <?php echo e($reservation->timeDifference); ?></div>
                                                             </div>
                                                             <div class="col-auto align-self-center">
-                                                                @switch($reservation->status)
-                                                                    @case('pending')
+                                                                <?php switch($reservation->status):
+                                                                    case ('pending'): ?>
                                                                         <div class="badge bg-warning"></div>
-                                                                    @break
+                                                                    <?php break; ?>
 
-                                                                    @case('approved')
+                                                                    <?php case ('approved'): ?>
                                                                         <div class="badge bg-success"></div>
-                                                                    @break
+                                                                    <?php break; ?>
 
-                                                                    @case('rejected')
+                                                                    <?php case ('rejected'): ?>
                                                                         <div class="badge bg-danger"></div>
-                                                                    @break
+                                                                    <?php break; ?>
 
-                                                                    @default
-                                                                @endswitch
+                                                                    <?php default: ?>
+                                                                <?php endswitch; ?>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    @endforeach
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </div>
                                             </div>
-                                            {{ $reservations->links() }}
+                                            <?php echo e($reservations->links()); ?>
+
                                     </div>
                                 </div>
                             </div>
@@ -317,8 +331,8 @@
                     fill: {
                         opacity: 1,
                     },
-                    series: @json($facilityByCategoryCount->values()), // Pass the counts as series data
-                    labels: @json($facilityByCategoryCount->keys()), // Pass the category names as labels
+                    series: <?php echo json_encode($facilityByCategoryCount->values(), 15, 512) ?>, // Pass the counts as series data
+                    labels: <?php echo json_encode($facilityByCategoryCount->keys(), 15, 512) ?>, // Pass the category names as labels
                     tooltip: {
                         theme: 'dark'
                     },
@@ -335,5 +349,15 @@
         </script>
 
 
-    </x-slot>
-</x-app-layout>
+     <?php $__env->endSlot(); ?>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
+<?php $attributes = $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
+<?php unset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
+<?php $component = $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
+<?php unset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
+<?php endif; ?>
+<?php /**PATH C:\Users\UKPBJ\Herd\facility_reservation\resources\views/dashboard.blade.php ENDPATH**/ ?>

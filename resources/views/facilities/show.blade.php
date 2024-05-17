@@ -131,6 +131,15 @@
                             <div class="mb-2">
                               Satuan Kerja <br /> <strong>{{ $facility->ukerMaster->satkerMaster->nama_satker }}</strong>
                             </div>
+                            <div class="mb-2">
+                              Addons: <br />
+                            <ul style="list-style-type: none;">
+                                @foreach ($facility->addons as $addon)
+                                    <li><strong>{{ $addon->addon_str }}</strong></li>
+                                @endforeach
+                            </ul>
+
+                            </div>
                           </div>
                         </div>
                       </div>
