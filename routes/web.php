@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddonController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FacilityAddonController;
@@ -38,14 +39,14 @@ Route::middleware(['auth', 'role:admin,manager'])->group(function () {
     Route::patch('/facility-categories/{facilityCategory}', [FacilityCategoryController::class, 'update'])->name('facility_categories.update');
     Route::delete('/facility-categories/{facilityCategory}', [FacilityCategoryController::class, 'destroy'])->name('facility_categories.destroy');
 
-        // New Facility Addon routes
-        Route::get('/facility-addons', [FacilityAddonController::class, 'index'])->name('facility_addons.index');
-        Route::get('/facility-addons/create', [FacilityAddonController::class, 'create'])->name('facility_addons.create');
-        Route::post('/facility-addons', [FacilityAddonController::class, 'store'])->name('facility_addons.store');
-        Route::get('/facility-addons/{facilityAddon}', [FacilityAddonController::class, 'show'])->name('facility_addons.show');
-        Route::get('/facility-addons/{facilityAddon}/edit', [FacilityAddonController::class, 'edit'])->name('facility_addons.edit');
-        Route::patch('/facility-addons/{facilityAddon}', [FacilityAddonController::class, 'update'])->name('facility_addons.update');
-        Route::delete('/facility-addons/{facilityAddon}', [FacilityAddonController::class, 'destroy'])->name('facility_addons.destroy');
+    // Addon Routes
+    Route::get('/addons', [AddonController::class, 'index'])->name('addons.index');
+    Route::get('/addons/create', [AddonController::class, 'create'])->name('addons.create');
+    Route::post('/addons', [AddonController::class, 'store'])->name('addons.store');
+    Route::get('/addons/{addon}', [AddonController::class, 'show'])->name('addons.show');
+    Route::get('/addons/{addon}/edit', [AddonController::class, 'edit'])->name('addons.edit');
+    Route::patch('/addons/{addon}', [AddonController::class, 'update'])->name('addons.update');
+    Route::delete('/addons/{addon}', [AddonController::class, 'destroy'])->name('addons.destroy');
 });
 
 Route::middleware('auth')->group(function () {

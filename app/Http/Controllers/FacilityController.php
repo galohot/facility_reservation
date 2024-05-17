@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Addon;
 use App\Models\Facility;
 use App\Models\FacilityCategory;
 use App\Models\Reservation;
@@ -71,12 +72,13 @@ class FacilityController extends Controller
         return view('facilities.reservation-history', compact('reservations','facilities','categories'));
 
     }
-        public function create()
+    public function create()
     {
         $facilityCategories = FacilityCategory::all();
         $ukerMasters = UkerMaster::all();
+        $addons = Addon::all(); // Fetch all addons
 
-        return view('facilities.create', compact('facilityCategories','ukerMasters'));
+        return view('facilities.create', compact('facilityCategories', 'ukerMasters', 'addons'));
     }
 
     public function store(Request $request)
@@ -94,14 +96,13 @@ class FacilityController extends Controller
             'image_3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:6144',
             'location' => 'nullable|string',
             'google_map_link' => 'nullable|string',
+            'addons' => 'array', // Validate addons as an array
+            'addons.*' => 'exists:addons,id', // Validate each addon exists in addons table
         ]);
 
         $data = $request->all();
-
-        // Create the facility record
         $facility = Facility::create($data);
 
-        // Handle image uploads
         foreach (['image_main', 'image_1', 'image_2', 'image_3'] as $imageField) {
             if ($request->hasFile($imageField)) {
                 $filename = $this->generateImageFilename($facility, $imageField);
@@ -110,6 +111,7 @@ class FacilityController extends Controller
             }
         }
 
+        $facility->addons()->sync($request->addons); // Sync addons with the facility
         $facility->save();
 
         return redirect()->route('facilities.index')
@@ -135,20 +137,23 @@ class FacilityController extends Controller
         $facilityCategories = FacilityCategory::all();
         $ukerMasters = UkerMaster::all();
         $reservations = Reservation::all();
-        return view('facilities.show', compact('facility','facilityCategories','ukerMasters','reservations'));
+        $facility->load('addons'); // Load addons relationship
+        return view('facilities.show', compact('facility', 'facilityCategories', 'ukerMasters', 'reservations'));
     }
 
     public function edit(Facility $facility)
     {
         $facilityCategories = FacilityCategory::all();
         $ukerMasters = UkerMaster::all();
-        return view('facilities.edit', compact('facility','facilityCategories','ukerMasters'));
+        $addons = Addon::all(); // Fetch all addons
+        $facility->load('addons'); // Load addons relationship
+        return view('facilities.edit', compact('facility', 'facilityCategories', 'ukerMasters', 'addons'));
     }
 
     public function update(Request $request, Facility $facility)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:facilities,name,'.$facility->id,
+            'name' => 'required|string|max:255|unique:facilities,name,' . $facility->id,
             'description' => 'required|string',
             'capacity' => 'nullable|integer',
             'floor' => 'required|integer|max:50',
@@ -158,18 +163,18 @@ class FacilityController extends Controller
             'image_1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:6144',
             'image_2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:6144',
             'image_3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:6144',
+            'addons' => 'array', // Validate addons as an array
+            'addons.*' => 'exists:addons,id', // Validate each addon exists in addons table
         ]);
 
         $data = $request->all();
 
-        // Delete old images if new ones are uploaded
         foreach (['image_main', 'image_1', 'image_2', 'image_3'] as $imageField) {
             if ($request->hasFile($imageField) && $facility->$imageField) {
                 Storage::delete('public/' . $facility->$imageField);
             }
         }
 
-        // Handle image uploads
         foreach (['image_main', 'image_1', 'image_2', 'image_3'] as $imageField) {
             if ($request->hasFile($imageField)) {
                 $filename = $this->generateImageFilename($facility, $imageField);
@@ -179,6 +184,7 @@ class FacilityController extends Controller
         }
 
         $facility->update($data);
+        $facility->addons()->sync($request->addons); // Sync addons with the facility
 
         return redirect()->route('facilities.index')
             ->with('success', 'Facility updated successfully.');

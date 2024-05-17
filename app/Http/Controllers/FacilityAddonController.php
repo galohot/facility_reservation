@@ -12,8 +12,7 @@ class FacilityAddonController extends Controller
      */
     public function index()
     {
-        $facilityAddons = FacilityAddon::all();
-        return view('facility_addons.index', compact('facilityAddons'));
+        //
     }
 
     /**
@@ -21,7 +20,7 @@ class FacilityAddonController extends Controller
      */
     public function create()
     {
-        return view('facility_addons.create');
+        //
     }
 
     /**
@@ -29,14 +28,7 @@ class FacilityAddonController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'facility_id' => 'required|exists:facilities,id',
-            'facility_addons' => 'required|string',
-        ]);
-
-        FacilityAddon::create($request->all());
-
-        return redirect()->route('facility_addons.index')->with('success', 'Facility addon created successfully.');
+        //
     }
 
     /**
@@ -44,7 +36,7 @@ class FacilityAddonController extends Controller
      */
     public function show(FacilityAddon $facilityAddon)
     {
-        return view('facility_addons.show', compact('facilityAddon'));
+        //
     }
 
     /**
@@ -52,7 +44,7 @@ class FacilityAddonController extends Controller
      */
     public function edit(FacilityAddon $facilityAddon)
     {
-        return view('facility_addons.edit', compact('facilityAddon'));
+        //
     }
 
     /**
@@ -60,14 +52,7 @@ class FacilityAddonController extends Controller
      */
     public function update(Request $request, FacilityAddon $facilityAddon)
     {
-        $request->validate([
-            'facility_id' => 'required|exists:facilities,id',
-            'facility_addons' => 'required|string',
-        ]);
-
-        $facilityAddon->update($request->all());
-
-        return redirect()->route('facility_addons.index')->with('success', 'Facility addon updated successfully.');
+        //
     }
 
     /**
@@ -75,8 +60,6 @@ class FacilityAddonController extends Controller
      */
     public function destroy(FacilityAddon $facilityAddon)
     {
-        $facilityAddon->delete();
-
-        return redirect()->route('facility_addons.index')->with('success', 'Facility addon deleted successfully.');
+        //
     }
 }

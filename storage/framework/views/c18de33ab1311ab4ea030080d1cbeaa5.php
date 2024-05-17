@@ -102,5 +102,15 @@
         </a>
       </li>
     <li class="nav-item">
+        <a class="nav-link" href="<?php echo e(route('addons.index')); ?>" >
+          <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-car"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5" /></svg>
+          </span>
+          <span class="nav-link-title">
+            Addon
+          </span>
+        </a>
+      </li>
+    <li class="nav-item">
   </ul>
 <?php /**PATH C:\Users\UKPBJ\Herd\facility_reservation\resources\views/layouts/navigation/navitems.blade.php ENDPATH**/ ?>

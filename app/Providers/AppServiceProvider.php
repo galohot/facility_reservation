@@ -48,8 +48,8 @@ class AppServiceProvider extends ServiceProvider
             $view->with('pageTitle', 'Reservation');
         });
 
-        View::composer(['facility_addons.index', 'facility_addons.create', 'facility_addons.show', 'facility_addons.edit'], function ($view) {
-            $view->with('pageTitle', 'Facility Addon');
+        View::composer(['addons.index', 'addons.create', 'addons.show', 'addons.edit'], function ($view) {
+            $view->with('pageTitle', 'Addon');
         });
 
         Paginator::useBootstrap();

@@ -22,8 +22,9 @@ class Facility extends Model
     {
         return $this->hasMany(Reservation::class);
     }
-    public function facilityAddons()
+
+    public function addons()
     {
-        return $this->hasMany(FacilityAddon::class);
+        return $this->belongsToMany(Addon::class, 'facility_addons');
     }
 }
