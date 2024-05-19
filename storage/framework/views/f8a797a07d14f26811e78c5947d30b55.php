@@ -1,0 +1,1 @@
+<?php /**PATH C:\Users\UKPBJ\Herd\facility_reservation\resources\views\error.blade.php ENDPATH**/ ?>

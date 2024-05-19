@@ -140,6 +140,15 @@
                             <div class="mb-2">
                               Satuan Kerja <br /> <strong><?php echo e($facility->ukerMaster->satkerMaster->nama_satker); ?></strong>
                             </div>
+                            <div class="mb-2">
+                              Addons: <br />
+                            <ul style="list-style-type: none;">
+                                <?php $__currentLoopData = $facility->addons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $addon): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <li><strong><?php echo e($addon->addon_str); ?></strong></li>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </ul>
+
+                            </div>
                           </div>
                         </div>
                       </div>

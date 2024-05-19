@@ -28,12 +28,11 @@
             <!-- Include Select2 JS -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
-
             <div class="col">
                 <form class="card" action="<?php echo e(route('facilities.update', $facility->id)); ?>" method="POST" enctype="multipart/form-data">
                     <a href="<?php echo e(route('facilities.index')); ?>" class="btn btn-secondary" role="button">
                         <i class="fas fa-pencil-alt"></i> Go To <?php echo e($pageTitle); ?> Table
-                      </a>
+                    </a>
                     <?php echo csrf_field(); ?>
                     <?php echo method_field('PATCH'); ?>
                     <div class="card-header">
@@ -42,7 +41,7 @@
                     <div class="card-body">
                         <div class="mb-4">
                             <label class="form-label required" for="name">Name</label>
-                            <input type="text" name="name" id="name" class="form-control" value="<?php echo e($facility->name); ?>"required>
+                            <input type="text" name="name" id="name" class="form-control" value="<?php echo e($facility->name); ?>" required>
                         </div>
                         <div class="mb-4">
                             <label class="form-label" for="description">Description</label>
@@ -128,6 +127,24 @@
                             <input type="text" name="google_map_link" id="google_map_link" class="form-control" value="<?php echo e($facility->google_map_link); ?>">
                         </div>
                         <!-- End of image input fields -->
+
+                        <!-- Addon Checkboxes -->
+                        <div class="mb-4">
+                            <label class="form-label" for="addons">Select Addons</label>
+                            <div>
+                                <?php $__currentLoopData = $addons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $addon): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="addons[]" value="<?php echo e($addon->id); ?>" id="addon<?php echo e($addon->id); ?>"
+                                        <?php echo e(in_array($addon->id, $facility->addons->pluck('id')->toArray()) ? 'checked' : ''); ?>>
+                                        <label class="form-check-label" for="addon<?php echo e($addon->id); ?>">
+                                            <?php echo e($addon->addon_str); ?>
+
+                                        </label>
+                                    </div>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </div>
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>

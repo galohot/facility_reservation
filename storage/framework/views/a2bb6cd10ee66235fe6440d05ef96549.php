@@ -28,7 +28,6 @@
             <!-- Include Select2 JS -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
-
             <div class="col">
                 <form class="card" action="<?php echo e(route('facilities.store')); ?>" method="POST" enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
@@ -104,6 +103,23 @@
                             <input type="text" name="google_map_link" id="google_map_link" class="form-control">
                         </div>
                         <!-- End of image input fields -->
+
+                        <!-- Addon Checkboxes -->
+                        <div class="mb-4">
+                            <label class="form-label" for="addons">Select Addons</label>
+                            <div>
+                                <?php $__currentLoopData = $addons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $addon): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="addons[]" value="<?php echo e($addon->id); ?>" id="addon<?php echo e($addon->id); ?>">
+                                        <label class="form-check-label" for="addon<?php echo e($addon->id); ?>">
+                                            <?php echo e($addon->addon_str); ?>
+
+                                        </label>
+                                    </div>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </div>
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
@@ -126,7 +142,6 @@
                 });
             });
         </script>
-
      <?php $__env->endSlot(); ?>
  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>

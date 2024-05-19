@@ -42,6 +42,31 @@ class DashboardController extends Controller
 
         return view('dashboard', compact('facilityByCategoryCount','facilityCategories', 'reservations', 'reservationCounts','facilityReservations', 'allReservations', 'allFacilities', 'allUsers', 'allUkers', 'allSatkers'));
     }
+    public function landingIndex(Request $request)
+    {
+        $facilityCategories = FacilityCategory::all();
+        $reservations = Reservation::orderBy('created_at', 'desc')->paginate(20);
+
+        // Calculate time differences for each reservation
+        foreach ($reservations as $reservation) {
+            $createdAt = Carbon::parse($reservation->created_at);
+            $reservation->timeDifference = $createdAt->diffForHumans();
+        }
+
+        // Calculate reservation counts per "Satker"
+        $reservationCounts = $this->calculateReservationCounts();
+        $facilityReservations = $this->calculateFacilityReservations();
+        $facilityByCategoryCount = $this->calculateFacilityCategoryReservations();
+
+        $allReservations = Reservation::all();
+        $allFacilities = Facility::all();
+        $allUsers = User::all();
+        $allUkers = UkerMaster::all();
+        $allSatkers = SatkerMaster::all();
+
+
+        return view('landing.content.satker-activity', compact('facilityByCategoryCount','facilityCategories', 'reservations', 'reservationCounts','facilityReservations', 'allReservations', 'allFacilities', 'allUsers', 'allUkers', 'allSatkers'));
+    }
 
     private function calculateReservationCounts()
     {

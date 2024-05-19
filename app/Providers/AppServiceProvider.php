@@ -54,5 +54,8 @@ class AppServiceProvider extends ServiceProvider
 
         Paginator::useBootstrap();
 
+        $navItems = FacilityCategory::all();
+        View::share('navItems', $navItems);
+
     }
 }

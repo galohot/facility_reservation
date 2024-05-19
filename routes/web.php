@@ -20,6 +20,9 @@ Route::get('/', function () { return redirect('dashboard');});
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+Route::get('/landing/dashboard', [DashboardController::class, 'landingIndex'])
+    ->middleware(['auth', 'verified'])
+    ->name('landing.dashboard');
 
 Route::middleware(['auth', 'role:admin,manager'])->group(function () {
     Route::get('/facilities/create', [FacilityController::class, 'create'])->name('facilities.create');
@@ -63,6 +66,14 @@ Route::middleware('auth')->group(function () {
     // Route::get('/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservations.edit');
     // Route::patch('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
     // Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
+    Route::get('/landing/my-reservation', [ReservationController::class, 'landingIndex'])->name('reservation.myreservation');
+    Route::get('/landing', [FacilityController::class, 'landingPage'])->name('landing');
+    Route::post('/landing/search', [FacilityController::class, 'searchFacilities'])->name('landing.search');
+    Route::get('/landing/search', [FacilityController::class, 'landingPage'])->name('landing.search.get');
+    Route::get('/landing/reservation/make', [ReservationController::class, 'landingCreate'])->name('reservation.make');
+    Route::post('/landing', [ReservationController::class, 'landingStore'])->name('landing.store');
+    Route::get('/landing/calendar',[EventController::class,'landingIndex'])->name('landing.calendar');
+    Route::get('/landing/available-facility/{facilityCategory}', [FacilityCategoryController::class, 'landingShow'])->name('available-facilities.show');
 
 });
 

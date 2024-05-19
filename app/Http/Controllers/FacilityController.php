@@ -238,7 +238,61 @@ class FacilityController extends Controller
         return redirect()->route('facilities.index')
             ->with('success', 'Facility and associated images deleted successfully');
     }
+    public function landingPage()
+    {
+        try {
+            $categories = FacilityCategory::all();
+            return view('landing.content.search', compact('categories'));
+        } catch (\Exception $e) {
+            // Return an error view or a response with a message
+            return view('error')->with('message', 'Unable to load categories. Please try again later.');
+        }
+    }
 
+    public function searchFacilities(Request $request)
+    {
+        $request->validate([
+            'category' => 'nullable|exists:facility_categories,id',
+            'start_date' => 'required|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
+        ]);
+
+        $category = $request->input('category');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        try {
+            $facilities = Facility::whereDoesntHave('reservations', function ($query) use ($startDate, $endDate) {
+                $query->where('status', 'approved')
+                      ->where(function ($query) use ($startDate, $endDate) {
+                          if ($endDate) {
+                              $query->whereBetween('reservation_start', [$startDate, $endDate])
+                                    ->orWhereBetween('reservation_end', [$startDate, $endDate])
+                                    ->orWhere(function ($query) use ($startDate, $endDate) {
+                                        $query->where('reservation_start', '<=', $startDate)
+                                              ->where('reservation_end', '>=', $endDate);
+                                    });
+                          } else {
+                              $query->where('reservation_start', '<=', $startDate)
+                                    ->where('reservation_end', '>=', $startDate);
+                          }
+                      });
+            })
+            ->when($category, function ($query, $category) {
+                $query->whereHas('facilityCategory', function ($categoryQuery) use ($category) {
+                    $categoryQuery->where('id', $category);
+                });
+            })
+            ->get(); // Adjust the number to the desired items per page
+
+            $categories = FacilityCategory::all();
+            return view('landing.content.search', compact('facilities', 'categories', 'startDate', 'endDate', 'category'));
+        } catch (\Exception $e) {
+            // Log the error
+            // Return an error view or a response with a message
+            return view('error')->with('message', 'Unable to search facilities. Please try again later.');
+        }
+    }
 
 
 }

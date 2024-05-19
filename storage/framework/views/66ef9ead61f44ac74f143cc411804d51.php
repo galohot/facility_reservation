@@ -8,6 +8,7 @@
 <?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
+     <?php $__env->slot('title', null, []); ?> Dashboard <?php $__env->endSlot(); ?>
      <?php $__env->slot('slot', null, []); ?> 
         <div class="page">
             <div class="content">
@@ -267,7 +268,7 @@
 
                                                                     </strong>
                                                                     <span>(<?php echo e($reservation->user->name); ?>)</span>
-                                                                    <br />placed a reservation for
+                                                                    <br />requested to reserve
                                                                     <strong><?php echo e($reservation->facility->name); ?></strong>
                                                                     <br />category: <strong><?php echo e($reservation->facility->facilityCategory->category_str); ?></strong>
                                                                 </div>

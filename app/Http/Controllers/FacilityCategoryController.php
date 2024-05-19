@@ -44,6 +44,11 @@ class FacilityCategoryController extends Controller
         $facilities = Facility::all();
         return view('facility_categories.show', compact('facilities','facilityCategory'));
     }
+    public function landingShow(FacilityCategory $facilityCategory)
+    {
+        $facilities = Facility::all();
+        return view('landing.content.facility.show', compact('facilities','facilityCategory'));
+    }
 
     public function edit(FacilityCategory $facilityCategory)
     {
@@ -69,4 +74,5 @@ class FacilityCategoryController extends Controller
         return redirect()->route('facility_categories.index')
             ->with('success', 'Facility category deleted successfully');
     }
+
 }
