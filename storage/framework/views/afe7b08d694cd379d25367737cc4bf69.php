@@ -76,7 +76,7 @@
                                     </div>
                                     <div class="top-0 m-3 d-flex flex-column align-items-end position-absolute end-0">
                                         <a href="<?php echo e(route('reservation.make')); ?>?facility_id=<?php echo e($facility->id); ?>" class="my-2 btn btn-success w-100">Make reservation</a>
-                                        <a href="<?php echo e(route('facilities.show', $facility->id)); ?>" class="btn btn-primary w-100" role="button">
+                                        <a href="<?php echo e(route('facility.page', $facility->id)); ?>" class="btn btn-primary w-100" role="button">
                                             <i class="fas fa-eye"></i> View
                                         </a>
                                     </div>

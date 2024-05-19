@@ -55,7 +55,7 @@
                         <?php if($facility->facility_category_id == $facilityCategory->id): ?>
                         <tr>
                             <td class="sort-uker"><?php echo e($facility->name); ?></td>
-                            <td class="sort-satker"><a href="<?php echo e(route('facilities.show', $facility->id)); ?>" class="btn btn-primary" role="button">
+                            <td class="sort-satker"><a href="<?php echo e(route('facility.page', $facility->id)); ?>" class="btn btn-primary" role="button">
                                 <i class="fas fa-eye"></i> View
                               </a></td>
                         </tr>

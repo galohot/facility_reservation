@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/landing', [ReservationController::class, 'landingStore'])->name('landing.store');
     Route::get('/landing/calendar',[EventController::class,'landingIndex'])->name('landing.calendar');
     Route::get('/landing/available-facility/{facilityCategory}', [FacilityCategoryController::class, 'landingShow'])->name('available-facilities.show');
-
+    Route::get('/landing/facility-page/{facility}', [FacilityController::class, 'facilityPage'])->name('facility.page');
 });
 
 

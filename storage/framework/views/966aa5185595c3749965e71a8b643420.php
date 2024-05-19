@@ -1,10 +1,10 @@
-<?php if (isset($component)) { $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54 = $attributes; } ?>
-<?php $component = App\View\Components\AppLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
-<?php $component->withName('app-layout'); ?>
+<?php if (isset($component)) { $__componentOriginal61b7c119be9b054fc3033ecd71de14c0 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal61b7c119be9b054fc3033ecd71de14c0 = $attributes; } ?>
+<?php $component = App\View\Components\LandingLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('landing-layout'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\AppLayout::class))->getConstructor()): ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\LandingLayout::class))->getConstructor()): ?>
 <?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
@@ -23,9 +23,9 @@
                 <div class="container-xl">
                     <div class="row row-cards">
                         <div class="col-12">
-                            <div class="card">
+                            <div class="my-2 card">
                                 <div class="card-header">
-                                    <h3 class="card-title"><?php echo e($pageTitle); ?> Details</h3>
+                                    <h3 class="card-title">Facilities</h3>
                                 </div>
                                 <div class="card-body">
                                     <p><strong>Category ID</strong> <?php echo e($facilityCategory->id); ?></p>
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="my-1 card">
             <div class="card-body">
               <div id="table-default" class="table-responsive">
                 <table class="table">
@@ -69,12 +69,12 @@
      <?php $__env->endSlot(); ?>
  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
-<?php if (isset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
-<?php $attributes = $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
-<?php unset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
+<?php if (isset($__attributesOriginal61b7c119be9b054fc3033ecd71de14c0)): ?>
+<?php $attributes = $__attributesOriginal61b7c119be9b054fc3033ecd71de14c0; ?>
+<?php unset($__attributesOriginal61b7c119be9b054fc3033ecd71de14c0); ?>
 <?php endif; ?>
-<?php if (isset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
-<?php $component = $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
-<?php unset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
+<?php if (isset($__componentOriginal61b7c119be9b054fc3033ecd71de14c0)): ?>
+<?php $component = $__componentOriginal61b7c119be9b054fc3033ecd71de14c0; ?>
+<?php unset($__componentOriginal61b7c119be9b054fc3033ecd71de14c0); ?>
 <?php endif; ?>
 <?php /**PATH C:\Users\UKPBJ\Herd\facility_reservation\resources\views\landing\content\facility\show.blade.php ENDPATH**/ ?>

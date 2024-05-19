@@ -140,6 +140,14 @@ class FacilityController extends Controller
         $facility->load('addons'); // Load addons relationship
         return view('facilities.show', compact('facility', 'facilityCategories', 'ukerMasters', 'reservations'));
     }
+    public function facilityPage(Facility $facility)
+    {
+        $facilityCategories = FacilityCategory::all();
+        $ukerMasters = UkerMaster::all();
+        $reservations = Reservation::all();
+        $facility->load('addons'); // Load addons relationship
+        return view('landing.content.facility.page', compact('facility', 'facilityCategories', 'ukerMasters', 'reservations'));
+    }
 
     public function edit(Facility $facility)
     {

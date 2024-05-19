@@ -46,7 +46,7 @@
                         @if ($facility->facility_category_id == $facilityCategory->id)
                         <tr>
                             <td class="sort-uker">{{ $facility->name }}</td>
-                            <td class="sort-satker"><a href="{{ route('facilities.show', $facility->id) }}" class="btn btn-primary" role="button">
+                            <td class="sort-satker"><a href="{{ route('facility.page', $facility->id) }}" class="btn btn-primary" role="button">
                                 <i class="fas fa-eye"></i> View
                               </a></td>
                         </tr>
