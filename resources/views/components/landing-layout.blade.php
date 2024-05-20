@@ -122,11 +122,11 @@
                           <div class="dropdown-menu">
                             <div class="dropdown-menu-columns">
                               <div class="dropdown-menu-column">
-                                @foreach ($navItems as $navItem)
+                                {{-- @foreach ($navItems as $navItem)
                                 <a class="dropdown-item" href="{{ route('available-facilities.show', $navItem->id) }}">
                                   {{$navItem->category_str}}
                                 </a>
-                                @endforeach
+                                @endforeach --}}
                               </div>
                             </div>
                           </div>
