@@ -20,17 +20,19 @@ class FacilityController extends Controller
         $categories = FacilityCategory::all();
         $facilities = Facility::query()
             ->when($search, function ($query, $search) {
-                $query->where('name', 'like', '%'.$search.'%')
-                    ->orWhere('location', 'like', '%'.$search.'%')
-                    ->orWhere('capacity', 'like', '%'.$search.'%')
+                $query
+                    ->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('location', 'like', '%' . $search . '%')
+                    ->orWhere('capacity', 'like', '%' . $search . '%')
                     ->orWhereHas('facilityCategory', function ($categoryQuery) use ($search) {
-                        $categoryQuery->where('category_str', 'like', '%'.$search.'%');
+                        $categoryQuery->where('category_str', 'like', '%' . $search . '%');
                     })
                     ->orWhereHas('ukerMaster', function ($ukerQuery) use ($search) {
-                        $ukerQuery->where('nama_unit_kerja_eselon_2', 'like', '%'.$search.'%');
+                        $ukerQuery->where('nama_unit_kerja_eselon_2', 'like', '%' . $search . '%');
                     });
             })
-            ->when($category, function ($query, $category) { // New line to filter by category
+            ->when($category, function ($query, $category) {
+                // New line to filter by category
                 $query->whereHas('facilityCategory', function ($categoryQuery) use ($category) {
                     $categoryQuery->where('category_str', $category);
                 });
@@ -38,7 +40,7 @@ class FacilityController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(20);
 
-        return view('facilities.index', compact('facilities','categories'));
+        return view('facilities.index', compact('facilities', 'categories'));
     }
 
     public function reservationHistory(Request $request)
@@ -49,17 +51,19 @@ class FacilityController extends Controller
         $categories = FacilityCategory::all();
         $facilities = Facility::query()
             ->when($search, function ($query, $search) {
-                $query->where('name', 'like', '%'.$search.'%')
-                    ->orWhere('location', 'like', '%'.$search.'%')
-                    ->orWhere('capacity', 'like', '%'.$search.'%')
+                $query
+                    ->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('location', 'like', '%' . $search . '%')
+                    ->orWhere('capacity', 'like', '%' . $search . '%')
                     ->orWhereHas('facilityCategory', function ($categoryQuery) use ($search) {
-                        $categoryQuery->where('category_str', 'like', '%'.$search.'%');
+                        $categoryQuery->where('category_str', 'like', '%' . $search . '%');
                     })
                     ->orWhereHas('ukerMaster', function ($ukerQuery) use ($search) {
-                        $ukerQuery->where('nama_unit_kerja_eselon_2', 'like', '%'.$search.'%');
+                        $ukerQuery->where('nama_unit_kerja_eselon_2', 'like', '%' . $search . '%');
                     });
             })
-            ->when($category, function ($query, $category) { // New line to filter by category
+            ->when($category, function ($query, $category) {
+                // New line to filter by category
                 $query->whereHas('facilityCategory', function ($categoryQuery) use ($category) {
                     $categoryQuery->where('category_str', $category);
                 });
@@ -69,8 +73,7 @@ class FacilityController extends Controller
 
         $reservations = Reservation::all();
 
-        return view('facilities.reservation-history', compact('reservations','facilities','categories'));
-
+        return view('facilities.reservation-history', compact('reservations', 'facilities', 'categories'));
     }
     public function create()
     {
@@ -114,8 +117,7 @@ class FacilityController extends Controller
         $facility->addons()->sync($request->addons); // Sync addons with the facility
         $facility->save();
 
-        return redirect()->route('facilities.index')
-            ->with('success', 'Facility created successfully.');
+        return redirect()->route('facilities.index')->with('success', 'Facility created successfully.');
     }
 
     private function generateImageFilename(Facility $facility, $imageField)
@@ -194,8 +196,7 @@ class FacilityController extends Controller
         $facility->update($data);
         $facility->addons()->sync($request->addons); // Sync addons with the facility
 
-        return redirect()->route('facilities.index')
-            ->with('success', 'Facility updated successfully.');
+        return redirect()->route('facilities.index')->with('success', 'Facility updated successfully.');
     }
 
     public function destroy(Facility $facility)
@@ -205,8 +206,7 @@ class FacilityController extends Controller
 
         // If there are reservations related to the facility, prevent deletion and show error message
         if ($hasReservations) {
-            return redirect()->route('facilities.index')
-                ->with('error', 'Cannot delete facility because it is being used in an active reservation');
+            return redirect()->route('facilities.index')->with('error', 'Cannot delete facility because it is being used in an active reservation');
         }
 
         // Determine which images need to be deleted
@@ -224,12 +224,10 @@ class FacilityController extends Controller
 
         // Check if any other facilities are using the same folder for images
         $remainingFacilitiesWithImages = Facility::where(function ($query) use ($facility) {
-            $query->whereNotNull('image_main')
-                ->orWhereNotNull('image_1')
-                ->orWhereNotNull('image_2')
-                ->orWhereNotNull('image_3');
-        })->where('id', '<>', $facility->id)
-        ->exists();
+            $query->whereNotNull('image_main')->orWhereNotNull('image_1')->orWhereNotNull('image_2')->orWhereNotNull('image_3');
+        })
+            ->where('id', '<>', $facility->id)
+            ->exists();
 
         // If no other facilities are using the same folder, delete it
         if (!$remainingFacilitiesWithImages) {
@@ -243,8 +241,7 @@ class FacilityController extends Controller
         // Then delete the facility
         $facility->delete();
 
-        return redirect()->route('facilities.index')
-            ->with('success', 'Facility and associated images deleted successfully');
+        return redirect()->route('facilities.index')->with('success', 'Facility and associated images deleted successfully');
     }
     public function landingPage()
     {
@@ -271,27 +268,25 @@ class FacilityController extends Controller
 
         try {
             $facilities = Facility::whereDoesntHave('reservations', function ($query) use ($startDate, $endDate) {
-                $query->where('status', 'approved')
-                      ->where(function ($query) use ($startDate, $endDate) {
-                          if ($endDate) {
-                              $query->whereBetween('reservation_start', [$startDate, $endDate])
-                                    ->orWhereBetween('reservation_end', [$startDate, $endDate])
-                                    ->orWhere(function ($query) use ($startDate, $endDate) {
-                                        $query->where('reservation_start', '<=', $startDate)
-                                              ->where('reservation_end', '>=', $endDate);
-                                    });
-                          } else {
-                              $query->where('reservation_start', '<=', $startDate)
-                                    ->where('reservation_end', '>=', $startDate);
-                          }
-                      });
-            })
-            ->when($category, function ($query, $category) {
-                $query->whereHas('facilityCategory', function ($categoryQuery) use ($category) {
-                    $categoryQuery->where('id', $category);
+                $query->where('status', 'approved')->where(function ($query) use ($startDate, $endDate) {
+                    if ($endDate) {
+                        $query
+                            ->whereBetween('reservation_start', [$startDate, $endDate])
+                            ->orWhereBetween('reservation_end', [$startDate, $endDate])
+                            ->orWhere(function ($query) use ($startDate, $endDate) {
+                                $query->where('reservation_start', '<=', $startDate)->where('reservation_end', '>=', $endDate);
+                            });
+                    } else {
+                        $query->where('reservation_start', '<=', $startDate)->where('reservation_end', '>=', $startDate);
+                    }
                 });
             })
-            ->get(); // Adjust the number to the desired items per page
+                ->when($category, function ($query, $category) {
+                    $query->whereHas('facilityCategory', function ($categoryQuery) use ($category) {
+                        $categoryQuery->where('id', $category);
+                    });
+                })
+                ->get(); // Adjust the number to the desired items per page
 
             $categories = FacilityCategory::all();
             return view('landing.content.search', compact('facilities', 'categories', 'startDate', 'endDate', 'category'));
@@ -301,6 +296,4 @@ class FacilityController extends Controller
             return view('error')->with('message', 'Unable to search facilities. Please try again later.');
         }
     }
-
-
 }

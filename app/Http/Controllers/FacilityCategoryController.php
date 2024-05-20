@@ -44,11 +44,24 @@ class FacilityCategoryController extends Controller
         $facilities = Facility::all();
         return view('facility_categories.show', compact('facilities','facilityCategory'));
     }
-    public function landingShow(FacilityCategory $facilityCategory)
+    public function landingShow(Request $request, FacilityCategory $facilityCategory)
     {
-        $facilities = Facility::all();
-        return view('landing.content.facility.show', compact('facilities','facilityCategory'));
+        $search = $request->input('search');
+        $facilities = Facility::query()
+            ->where('facility_category_id', $facilityCategory->id)
+            ->when($search, function ($query, $search) {
+                $query->where(function($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%')
+                      ->orWhere('location', 'like', '%' . $search . '%');
+                });
+            })
+            ->paginate(10);
+
+        $selectedCategory = $facilityCategory->category_str;
+
+        return view('landing.content.facility.show', compact('facilities', 'facilityCategory', 'selectedCategory'));
     }
+
 
     public function edit(FacilityCategory $facilityCategory)
     {

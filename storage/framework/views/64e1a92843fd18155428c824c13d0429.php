@@ -32,14 +32,12 @@
     </style>
     <link href="<?php echo e(asset('css/fullcalendar.min.css')); ?>" rel="stylesheet">
     <script src="<?php echo e(asset('js/fullcalendar.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('../build/assets/js/demo-theme.min.js?1692870487')); ?>"></script>
+    <?php echo e($header ?? ''); ?>
+
 </head>
 
-<body>
-    <script src="<?php echo e(asset('../build/assets/js/demo-theme.min.js?1692870487')); ?>"></script>
-    </head>
-
     <body>
-        <script src="<?php echo e(asset('../build/assets/js/demo-theme.min.js?1692870487')); ?>"></script>
         <div class="page">
             <!-- Navbar -->
             <header class="navbar navbar-expand-md d-print-none">
@@ -67,81 +65,132 @@
 
             <header class="navbar-expand-md">
                 <div class="collapse navbar-collapse" id="navbar-menu">
-                  <div class="navbar">
-                    <div class="container-xl">
-                      <ul class="navbar-nav">
-                        <li class="nav-item">
-                          <a class="nav-link" href="<?php echo e(route('landing')); ?>" >
-                            <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
-                            </span>
-                            <span class="nav-link-title">
-                              Home
-                            </span>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="<?php echo e(route('reservation.myreservation')); ?>" >
-                            <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
-                            </span>
-                            <span class="nav-link-title">
-                              My Reservation
-                            </span>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="<?php echo e(route('landing.calendar')); ?>" >
-                            <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
-                            </span>
-                            <span class="nav-link-title">
-                              Calendar
-                            </span>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="<?php echo e(route('landing.dashboard')); ?>" >
-                            <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
-                            </span>
-                            <span class="nav-link-title">
-                              Satker Activity
-                            </span>
-                          </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
-                            <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
-                              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" /><path d="M12 12l8 -4.5" /><path d="M12 12l0 9" /><path d="M12 12l-8 -4.5" /><path d="M16 5.25l-8 4.5" /></svg>
-                            </span>
-                            <span class="nav-link-title">
-                              Available Facilities
-                            </span>
-                          </a>
-                          <div class="dropdown-menu">
-                            <div class="dropdown-menu-columns">
-                              <div class="dropdown-menu-column">
-                                <?php $__currentLoopData = $navItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $navItem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <a class="dropdown-item" href="<?php echo e(route('available-facilities.show', $navItem->id)); ?>">
-                                  <?php echo e($navItem->category_str); ?>
+                    <div class="navbar">
+                        <div class="container-xl">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?php echo e(route('landing')); ?>">
+                                        <span
+                                            class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+                                                height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+                                                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                                                <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+                                            </svg>
+                                        </span>
+                                        <span class="nav-link-title">
+                                            Home
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?php echo e(route('reservation.myreservation')); ?>">
+                                        <span
+                                            class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+                                                height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+                                                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                                                <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+                                            </svg>
+                                        </span>
+                                        <span class="nav-link-title">
+                                            My Reservation
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?php echo e(route('landing.calendar')); ?>">
+                                        <span
+                                            class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+                                                height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+                                                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                                                <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+                                            </svg>
+                                        </span>
+                                        <span class="nav-link-title">
+                                            Calendar
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?php echo e(route('landing.dashboard')); ?>">
+                                        <span
+                                            class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+                                                height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+                                                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                                                <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+                                            </svg>
+                                        </span>
+                                        <span class="nav-link-title">
+                                            Satker Activity
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
+                                        data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                        <span
+                                            class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+                                                height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
+                                                <path d="M12 12l8 -4.5" />
+                                                <path d="M12 12l0 9" />
+                                                <path d="M12 12l-8 -4.5" />
+                                                <path d="M16 5.25l-8 4.5" />
+                                            </svg>
+                                        </span>
+                                        <span class="nav-link-title">
+                                            Available Facilities
+                                        </span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <div class="dropdown-menu-columns">
+                                            <div class="dropdown-menu-column">
+                                                <?php $__currentLoopData = $navItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $navItem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <a class="dropdown-item"
+                                                        href="<?php echo e(route('available-facilities.show', $navItem->id)); ?>">
+                                                        <?php echo e($navItem->category_str); ?>
 
-                                </a>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
+                                                    </a>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <marquee width="100%" direction="left" height="20px" class="text-white bg-primary font-weight-bold d-flex align-items-center">
+                            (<?php echo e(Auth::user()->name); ?>, <?php echo e(Auth::user()->roleMaster->role_str); ?>) DEVELOPMENT ENVIRONMENT
+                        </marquee>
                     </div>
-                  </div>
                 </div>
-              </header>
+            </header>
             <div class="page-wrapper">
                 <!-- Page body -->
                 <div class="page-body">
                     <div class="container-xl">
-
                         <div class="page">
                             <div class="content">
                                 <div class="container-xl">

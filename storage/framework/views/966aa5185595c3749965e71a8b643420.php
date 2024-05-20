@@ -18,54 +18,38 @@
                 </ul>
             </div>
         <?php endif; ?>
-        <div class="page">
-            <div class="content">
-                <div class="container-xl">
-                    <div class="row row-cards">
-                        <div class="col-12">
-                            <div class="my-2 card">
-                                <div class="card-header">
-                                    <h3 class="card-title">Facilities</h3>
-                                </div>
+
+        <div class="my-4">
+            <form action="<?php echo e(route('available.facilities.show', $facilityCategory->id)); ?>" method="GET">
+                <input type="text" name="search" placeholder="Search name or location" class="form-control">
+                <button type="submit" class="mt-2 btn btn-primary">Search</button>
+            </form>
+        </div>
+
+        <h2 class="mt-2 mb-5 page-title">
+            Available Facilities for <?php echo e($selectedCategory); ?>
+
+        </h2>
+
+        <?php $__currentLoopData = $facilities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $facility): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php if($facility->facility_category_id == $facilityCategory->id): ?>
+                <div class="my-2 col">
+                    <div class="card">
+                        <div class="row row-0">
+                            <div class="col-3">
+                                <img src="<?php echo e(asset('storage/' . $facility->image_main)); ?>" class="object-cover w-100 h-100 card-img-start" alt="Main Image for Facility" />
+                            </div>
+                            <div class="col">
                                 <div class="card-body">
-                                    <p><strong>Category ID</strong> <?php echo e($facilityCategory->id); ?></p>
-                                    <p><strong>Category Name</strong> <?php echo e($facilityCategory->category_str); ?></p>
-                                    <a href="./" class="btn btn-secondary">Back</a>
-                                    <a href="<?php echo e(route('facility_categories.edit', $facilityCategory->id)); ?>" class="btn btn-primary">edit</a>
+                                    <h3 class="card-title"><?php echo e($facility->name); ?></h3>
+                                    <p class="text-secondary">Capacity: <?php echo e($facility->capacity); ?>, location: <?php echo e($facility->location); ?></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="my-1 card">
-            <div class="card-body">
-              <div id="table-default" class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                        <th><button class="table-sort" data-sort="sort-uker">User</button></th>
-                        <th><button class="table-sort" data-sort="sort-satker">Actiom</button></th>
-                    </tr>
-                  </thead>
-                  <tbody class="table-tbody">
-                    <?php $__currentLoopData = $facilities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $facility): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <?php if($facility->facility_category_id == $facilityCategory->id): ?>
-                        <tr>
-                            <td class="sort-uker"><?php echo e($facility->name); ?></td>
-                            <td class="sort-satker"><a href="<?php echo e(route('facilities.show', $facility->id)); ?>" class="btn btn-primary" role="button">
-                                <i class="fas fa-eye"></i> View
-                              </a></td>
-                        </tr>
-                        <?php endif; ?>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-        </div>
+            <?php endif; ?>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
      <?php $__env->endSlot(); ?>
  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
