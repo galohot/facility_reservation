@@ -54,7 +54,7 @@
                         </select>
                         <button type="submit" class="mx-2 btn btn-primary">Search</button>
                     </form>
-                    <a href="<?php echo e(route('reservations.create')); ?>" class="m-2 btn btn-success">
+                    <a href="<?php echo e(route('reservation.make')); ?>" class="m-2 btn btn-success">
                         Make Reservation
                     </a>
                 </div>
@@ -106,13 +106,13 @@
                                     <td class="sort-actions">
                                         <div class="mr-2" role="group" aria-label="User Actions">
                                             <div class="m-1 d-block">
-                                                <a href="<?php echo e(route('reservations.show', $reservation->id)); ?>" class="btn btn-primary" role="button">
+                                                <a href="<?php echo e(route('landing.reservation.show', $reservation->id)); ?>" class="btn btn-primary" role="button">
                                                     <i class="fas fa-eye"></i> View
                                                 </a>
                                             </div>
                                             <?php if(Auth::user()->roleMaster->role_str == 'admin' || $reservation->status == 'pending'): ?>
                                             <div class="m-1 d-block">
-                                                <a href="<?php echo e(route('reservations.edit', $reservation->id)); ?>" class="btn btn-secondary" role="button">
+                                                <a href="<?php echo e(route('landing.reservation.edit', $reservation->id)); ?>" class="btn btn-secondary" role="button">
                                                     <i class="fas fa-pencil-alt"></i> Edit
                                                 </a>
                                             </div>

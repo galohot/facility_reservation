@@ -188,7 +188,7 @@ class ReservationController extends Controller
 
         Reservation::create($data);
 
-        return redirect()->route('landing')
+        return redirect()->route('reservation.myreservation')
             ->with('success', 'Reservation created successfully.');
     }
 
@@ -199,11 +199,20 @@ class ReservationController extends Controller
     {
         return view('reservations.show', compact('reservation'));
     }
+    public function landingShow(Reservation $reservation)
+    {
+        return view('landing.content.reservation.show', compact('reservation'));
+    }
 
     public function edit(Reservation $reservation)
     {
         $facilities = Facility::all();
         return view('reservations.edit', compact('reservation','facilities'));
+    }
+    public function landingEdit(Reservation $reservation)
+    {
+        $facilities = Facility::all();
+        return view('landing.content.reservation.edit', compact('reservation','facilities'));
     }
 
     public function preverify(Reservation $reservation)
@@ -274,6 +283,70 @@ class ReservationController extends Controller
         $reservation->update($data);
 
         return redirect()->route('reservations.index')
+            ->with('success', 'Reservation updated successfully');
+    }
+    public function landingUpdate(Request $request, Reservation $reservation)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'facility_id' => 'required|exists:facilities,id',
+            'event' => 'required|string|max:255',
+            'reservation_start' => 'required|date',
+            'reservation_end' => 'required|date|after_or_equal:reservation_start',
+            'description' => 'nullable|string',
+            'document' => 'required|file|mimes:pdf|max:2048',
+            'document_attachment' => 'nullable|file|mimes:pdf|max:2048'
+        ], [
+            'user_id.required' => 'The user ID field is required.',
+            'user_id.exists' => 'The selected user ID is invalid.',
+            'facility_id.required' => 'The facility ID field is required.',
+            'facility_id.exists' => 'The selected facility ID is invalid.',
+            'event.required' => 'The event field is required.',
+            'event.string' => 'The event must be a string.',
+            'event.max' => 'The event may not be greater than :max characters.',
+            'reservation_start.required' => 'The reservation start field is required.',
+            'reservation_start.date' => 'The reservation start must be a date.',
+            'reservation_end.required' => 'The reservation end field is required.',
+            'reservation_end.date' => 'The reservation end must be a date.',
+            'reservation_end.after_or_equal' => 'The reservation end must be after or equal to the reservation start.',
+            'description.string' => 'The description must be a string.',
+            'document.file' => 'The document must be a file.',
+            'document.mimes' => 'The document must be a file of type: pdf.',
+            'document.max' => 'The document may not be greater than :max kilobytes.',
+            'document_attachment.file' => 'The document attachment must be a file.',
+            'document_attachment.mimes' => 'The document attachment must be a file of type: pdf.',
+            'document_attachment.max' => 'The document attachment may not be greater than :max kilobytes.'
+        ]);
+
+        $data = $request->all();
+
+        // Exclude current reservation from unique rule when not updating document
+        if (!$request->hasFile('document')) {
+            $request->merge(['document' => $reservation->document]);
+        }
+
+        // Exclude current reservation from unique rule when not updating document_attachment
+        if (!$request->hasFile('document_attachment')) {
+            $request->merge(['document_attachment' => $reservation->document_attachment]);
+        }
+
+        if ($request->hasFile('document')) {
+            $documentName = Str::slug($request->input('event')) . '_document.' . $request->file('document')->getClientOriginalExtension();
+            Storage::delete('public/' . $reservation->document);
+            $documentPath = $request->file('document')->storeAs('public/documents', $documentName);
+            $data['document'] = $documentPath;
+        }
+
+        if ($request->hasFile('document_attachment')) {
+            $documentAttachmentName = Str::slug($request->input('event')) . '_attachment.' . $request->file('document_attachment')->getClientOriginalExtension();
+            Storage::delete('public/' . $reservation->document_attachment);
+            $documentAttachmentPath = $request->file('document_attachment')->storeAs('public/document-attachments', $documentAttachmentName);
+            $data['document_attachment'] = $documentAttachmentPath;
+        }
+
+        $reservation->update($data);
+
+        return redirect()->route('reservation.myreservation')
             ->with('success', 'Reservation updated successfully');
     }
 

@@ -73,8 +73,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/landing/reservation/make', [ReservationController::class, 'landingCreate'])->name('reservation.make');
     Route::post('/landing', [ReservationController::class, 'landingStore'])->name('landing.store');
     Route::get('/landing/calendar',[EventController::class,'landingIndex'])->name('landing.calendar');
-    Route::get('/landing/available-facility/{facilityCategory}', [FacilityCategoryController::class, 'landingShow'])->name('available-facilities.show');
+    Route::get('/landing/available-facility/{facilityCategory}', [FacilityCategoryController::class, 'landingShow'])->name('available.facilities.show');
     Route::get('/landing/facility-page/{facility}', [FacilityController::class, 'facilityPage'])->name('facility.page');
+    Route::get('/landing/reservation-detail/{reservation}', [ReservationController::class, 'landingShow'])->name('landing.reservation.show');
+    Route::get('/landing/reservation/{reservation}/edit', [ReservationController::class, 'landingEdit'])->name('landing.reservation.edit');
+    Route::patch('/landing/reservation/{reservation}', [ReservationController::class, 'landingUpdate'])->name('landing.reservation.update');
 });
 
 

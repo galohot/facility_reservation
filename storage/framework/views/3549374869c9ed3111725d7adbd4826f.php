@@ -24,7 +24,7 @@
                 <div class="row align-items-center">
                   <div class="col">
                     <a href="./" class="my-2 btn btn-secondary">Back</a>
-                    <a href="<?php echo e(route('reservations.create')); ?>?facility_id=<?php echo e($facility->id); ?>" class="my-2 btn btn-success">Make reservation</a>
+                    <a href="<?php echo e(route('reservation.make')); ?>?facility_id=<?php echo e($facility->id); ?>" class="my-2 btn btn-success">Make reservation</a>
                     <?php if(Auth::user()->roleMaster->role_str == 'admin' || Auth::user()->roleMaster->role_str == 'manager' && $facility->ukerMaster->id == Auth::user()->ukerMaster->id): ?>
                     <a href="<?php echo e(route('facilities.edit', $facility->id)); ?>" class="my-2 btn btn-info">Edit Facility</a>
                     <?php endif; ?>

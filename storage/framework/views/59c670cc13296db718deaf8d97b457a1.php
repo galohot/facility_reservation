@@ -41,7 +41,7 @@
                     },
                     dateClick: function(info) {
                         // Redirect to the reservation creation page with the clicked date as a query parameter
-                        window.location.href = "<?php echo e(route('reservations.create')); ?>?start_date=" + info
+                        window.location.href = "<?php echo e(route('reservation.make')); ?>?start_date=" + info
                             .dateStr;
                     }
                 });
