@@ -130,6 +130,7 @@
                                             <?php endif; ?>
                                             </div>
                                             <?php endif; ?>
+                                            <?php if(Auth::user()->roleMaster->role_str == "admin" || Auth::user()->roleMaster->role_str == "manager" || Auth::user()->roleMaster->role_str == "verifcator" || Auth::user()->roleMaster->role_str == "user" && $reservation->status != 'approved'): ?>
                                             <div class="m-1 d-block">
                                                 <form action="<?php echo e(route('reservations.destroy', $reservation->id)); ?>" method="POST" class="inline">
                                                     <?php echo csrf_field(); ?>
@@ -139,6 +140,7 @@
                                                     </button>
                                                 </form>
                                             </div>
+                                            <?php endif; ?>
                                         </div>
                                     </td>
                                 </tr>

@@ -71,18 +71,23 @@
                                     <div class="col-12 col-md-9">
                                         <div class="card-body">
                                             <h3 class="card-title"><?php echo e($facility->name); ?></h3>
-                                            <p class="text-secondary">Capacity: <?php echo e($facility->capacity); ?>, location:
+                                            <p class="text-secondary">Capacity: <?php echo e($facility->capacity); ?>, Location:
                                                 <?php echo e($facility->location); ?></p>
+                                            <?php $hasUpcomingReservation = false; ?>
                                             <?php $__currentLoopData = $facility->reservations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reservation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <?php if(time() < $startDate && $reservation->status == 'approved'): ?>
-                                                    <p>upcoming reservation: <span
+                                                    <p>Upcoming Reservation: <span
                                                             class="text-white badge bg-warning"><?php echo e($reservation->reservation_start->translatedFormat('l, j F Y, H:i')); ?></span>
                                                         to <span
                                                             class="text-white badge bg-warning"><?php echo e($reservation->reservation_end->translatedFormat('l, j F Y, H:i')); ?></span>
                                                     </p>
+                                                    <?php $hasUpcomingReservation = true; ?>
                                                 <?php break; ?>
                                             <?php endif; ?>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if(!$hasUpcomingReservation): ?>
+                                            <p class="text-white badge bg-success">No Upcoming Reservations</p>
+                                        <?php endif; ?>
                                         <p>Managed by: <span
                                                 class="text-white badge bg-info"><?php echo e($facility->ukerMaster->nama_unit_kerja_eselon_2); ?></span>
                                         </p>
@@ -90,21 +95,20 @@
                                     <div
                                         class="top-0 m-3 d-flex flex-column align-items-end position-absolute end-0">
                                         <a href="<?php echo e(route('reservation.make')); ?>?facility_id=<?php echo e($facility->id); ?>"
-                                            class="my-2 btn btn-success w-100">Make reservation</a>
+                                            class="my-2 btn btn-success w-100">Make Reservation</a>
                                         <a href="<?php echo e(route('facility.page', $facility->id)); ?>"
-                                            class="btn btn-primary w-100" role="button">
-                                            <i class="fas fa-eye"></i> View
-                                        </a>
+                                            class="btn btn-primary w-100" role="button"><i class="fas fa-eye"></i>
+                                            View</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <li class="list-group-item">No facilities available for the selected date range and category.
                     </li>
                 <?php endif; ?>
+
             </ul>
             <!-- Pagination Links -->
         <?php endif; ?>
