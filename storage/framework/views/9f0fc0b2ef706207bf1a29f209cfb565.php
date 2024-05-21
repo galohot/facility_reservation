@@ -33,7 +33,7 @@
 
 
             <div class="col">
-                <form class="card" action="<?php echo e(route('reservations.store')); ?>" method="POST" enctype="multipart/form-data">
+                <form class="card" action="<?php echo e(route('landing.store')); ?>" method="POST" enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
                     <div class="card-header">
                         <h3 class="card-title">Make Reservation</h3>

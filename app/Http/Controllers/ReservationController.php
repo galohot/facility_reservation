@@ -230,7 +230,7 @@ class ReservationController extends Controller
             'reservation_start' => 'required|date',
             'reservation_end' => 'required|date|after_or_equal:reservation_start',
             'description' => 'nullable|string',
-            'document' => 'required|file|mimes:pdf|max:2048',
+            'document' => 'nullable|file|mimes:pdf|max:2048',
             'document_attachment' => 'nullable|file|mimes:pdf|max:2048'
         ], [
             'user_id.required' => 'The user ID field is required.',
@@ -294,7 +294,7 @@ class ReservationController extends Controller
             'reservation_start' => 'required|date',
             'reservation_end' => 'required|date|after_or_equal:reservation_start',
             'description' => 'nullable|string',
-            'document' => 'required|file|mimes:pdf|max:2048',
+            'document' => 'nullable|file|mimes:pdf|max:2048',
             'document_attachment' => 'nullable|file|mimes:pdf|max:2048'
         ], [
             'user_id.required' => 'The user ID field is required.',
