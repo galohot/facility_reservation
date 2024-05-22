@@ -17,7 +17,7 @@
             <form action="<?php echo e(route('landing.search')); ?>" method="POST">
                 <?php echo csrf_field(); ?>
                 <div class="row">
-                    <div class="form-group col-3">
+                    <div class="form-group col-sm-12 col-md-3">
                         <label for="category">Category</label>
                         <p>(Leave blank for all categories)</p>
                         <select name="category" id="category" class="form-control">
@@ -30,13 +30,13 @@
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
-                    <div class="form-group col-3">
+                    <div class="form-group col-sm-12 col-md-3">
                         <label for="start_date">Start Date</label>
                         <p>(This cannot be empty)</p>
                         <input type="datetime-local" name="start_date" id="start_date" class="form-control"
                             value="<?php echo e(old('start_date', $startDate ?? '')); ?>">
                     </div>
-                    <div class="form-group col-3" id="end-date-group"
+                    <div class="form-group col-sm-12 col-md-3" id="end-date-group"
                         style="<?php echo e(old('end_date', $endDate ?? '') ? 'display:block;' : 'display:none;'); ?>">
                         <label for="end_date">End Date</label>
                         <p>(Fill in the end date)</p>

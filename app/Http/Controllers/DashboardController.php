@@ -65,6 +65,7 @@ class DashboardController extends Controller
         $allSatkers = SatkerMaster::all();
 
 
+
         return view('landing.content.satker-activity', compact('facilityByCategoryCount','facilityCategories', 'reservations', 'reservationCounts','facilityReservations', 'allReservations', 'allFacilities', 'allUsers', 'allUkers', 'allSatkers'));
     }
 

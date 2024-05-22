@@ -8,7 +8,7 @@
             <form action="{{ route('landing.search') }}" method="POST">
                 @csrf
                 <div class="row">
-                    <div class="form-group col-3">
+                    <div class="form-group col-sm-12 col-md-3">
                         <label for="category">Category</label>
                         <p>(Leave blank for all categories)</p>
                         <select name="category" id="category" class="form-control">
@@ -20,13 +20,13 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group col-3">
+                    <div class="form-group col-sm-12 col-md-3">
                         <label for="start_date">Start Date</label>
                         <p>(This cannot be empty)</p>
                         <input type="datetime-local" name="start_date" id="start_date" class="form-control"
                             value="{{ old('start_date', $startDate ?? '') }}">
                     </div>
-                    <div class="form-group col-3" id="end-date-group"
+                    <div class="form-group col-sm-12 col-md-3" id="end-date-group"
                         style="{{ old('end_date', $endDate ?? '') ? 'display:block;' : 'display:none;' }}">
                         <label for="end_date">End Date</label>
                         <p>(Fill in the end date)</p>

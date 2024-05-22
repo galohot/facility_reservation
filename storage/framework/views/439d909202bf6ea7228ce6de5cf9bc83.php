@@ -25,7 +25,7 @@
                                             $approvedReservation = 0;
                                         ?>
                                         <?php $__currentLoopData = $allReservations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reservation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <?php if($reservation->status == 'approved'): ?>
+                                            <?php if($reservation->status == 'approved' && Auth::user()->ukerMaster->id == $reservation->user->ukerMaster->id): ?>
                                                 <?php
                                                     $approvedReservation++;
                                                 ?>
@@ -62,7 +62,7 @@
                                             $rejectedReservation = 0;
                                         ?>
                                         <?php $__currentLoopData = $allReservations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reservation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <?php if($reservation->status == 'rejected'): ?>
+                                            <?php if($reservation->status == 'rejected' && Auth::user()->ukerMaster->id == $reservation->user->ukerMaster->id): ?>
                                                 <?php
                                                     $rejectedReservation++;
                                                 ?>
@@ -99,7 +99,7 @@
                                             $pendingReservation = 0;
                                         ?>
                                         <?php $__currentLoopData = $allReservations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reservation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <?php if($reservation->status == 'pending'): ?>
+                                            <?php if($reservation->status == 'pending' && Auth::user()->ukerMaster->id == $reservation->user->ukerMaster->id): ?>
                                                 <?php
                                                     $pendingReservation++;
                                                 ?>

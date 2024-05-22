@@ -30,7 +30,7 @@
 <?php unset($__componentOriginal7c1bf3a9346f208f66ee83b06b607fb5); ?>
 <?php endif; ?>
 
-    <form method="POST" action="<?php echo e(route('login')); ?>">
+    <form method="POST" action="<?php echo e(secure_url('login')); ?>">
         <?php echo csrf_field(); ?>
 
         <!-- Email Address -->

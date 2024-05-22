@@ -16,7 +16,7 @@
                                             $approvedReservation = 0;
                                         @endphp
                                         @foreach ($allReservations as $reservation)
-                                            @if ($reservation->status == 'approved')
+                                            @if ($reservation->status == 'approved' && Auth::user()->ukerMaster->id == $reservation->user->ukerMaster->id)
                                                 @php
                                                     $approvedReservation++;
                                                 @endphp
@@ -53,7 +53,7 @@
                                             $rejectedReservation = 0;
                                         @endphp
                                         @foreach ($allReservations as $reservation)
-                                            @if ($reservation->status == 'rejected')
+                                            @if ($reservation->status == 'rejected' && Auth::user()->ukerMaster->id == $reservation->user->ukerMaster->id)
                                                 @php
                                                     $rejectedReservation++;
                                                 @endphp
@@ -90,7 +90,7 @@
                                             $pendingReservation = 0;
                                         @endphp
                                         @foreach ($allReservations as $reservation)
-                                            @if ($reservation->status == 'pending')
+                                            @if ($reservation->status == 'pending' && Auth::user()->ukerMaster->id == $reservation->user->ukerMaster->id)
                                                 @php
                                                     $pendingReservation++;
                                                 @endphp
