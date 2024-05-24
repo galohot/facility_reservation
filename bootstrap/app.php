@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\ForceHttps;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Middleware\VerificationStatus;
 use App\Http\Middleware\VerifyManager;
@@ -21,6 +22,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'verify.manager' => VerifyManager::class,
             'verify.status' => VerificationStatus::class,
         ]);
+        // Append ForceHttps middleware to the global stack
+        $middleware->append(ForceHttps::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
