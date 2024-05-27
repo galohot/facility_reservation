@@ -11,6 +11,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -58,15 +59,26 @@ class DashboardController extends Controller
         $facilityReservations = $this->calculateFacilityReservations();
         $facilityByCategoryCount = $this->calculateFacilityCategoryReservations();
 
+        // Calculate counts for approved, rejected, and pending reservations
+        $approvedReservationCount = $this->calculateReservationStatusCount('approved');
+        $rejectedReservationCount = $this->calculateReservationStatusCount('rejected');
+        $pendingReservationCount = $this->calculateReservationStatusCount('pending');
+
         $allReservations = Reservation::all();
         $allFacilities = Facility::all();
         $allUsers = User::all();
         $allUkers = UkerMaster::all();
         $allSatkers = SatkerMaster::all();
-
-
-
-        return view('landing.content.satker-activity', compact('facilityByCategoryCount','facilityCategories', 'reservations', 'reservationCounts','facilityReservations', 'allReservations', 'allFacilities', 'allUsers', 'allUkers', 'allSatkers'));
+        return view('landing.content.satker-activity', compact(
+            'facilityByCategoryCount',
+            'facilityCategories',
+            'reservations',
+            'reservationCounts',
+            'facilityReservations',
+            'approvedReservationCount',
+            'rejectedReservationCount',
+            'pendingReservationCount', 'allReservations', 'allFacilities', 'allUsers', 'allUkers', 'allSatkers'
+        ));
     }
 
     private function calculateReservationCounts()
@@ -107,6 +119,20 @@ class DashboardController extends Controller
             });
 
         return $facilityReservations;
+    }
+
+    private function calculateReservationStatusCount($status)
+    {
+        $userId = auth()->id(); // Get the current user's ID
+        $userUkerId = User::find($userId)->ukerMaster->id; // Get the current user's UKER ID
+
+        $count = Reservation::where('status', $status)
+            ->whereHas('user', function ($query) use ($userUkerId) {
+                $query->where('uker_master_id', $userUkerId); // Filter reservations by user's UKER ID
+            })
+            ->count();
+
+        return $count;
     }
 
 
