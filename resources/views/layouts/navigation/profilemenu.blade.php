@@ -11,7 +11,7 @@
   </a>
   <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
     <div class="dropdown-divider"></div>
-    <p class="block w-full px-4 py-2 text-start text-sm leading-5 badge bg-info text-white">{{ Auth::user()->email }}</p>
+    <p class="block w-full px-4 py-2 text-sm leading-5 text-white text-start badge bg-info">{{ Auth::user()->email }}</p>
     <div class="dropdown-divider"></div>
     @if(auth()->check() && auth()->user()->hasRole('admin'))
     <x-dropdown-link :href="route('profile.edit')">
@@ -19,9 +19,9 @@
     </x-dropdown-link>
     <div class="dropdown-divider"></div>
     @endif
-    <form method="POST" action="{{ route('logout') }}">
+    <form method="POST" action="{{ secure_url('logout') }}">
         @csrf
-        <x-dropdown-link :href="route('logout')"
+        <x-dropdown-link :href="secure_url('logout')"
             onclick="event.preventDefault();
                         this.closest('form').submit();">
             {{ __('Log Out') }}
