@@ -32,12 +32,32 @@ class UserSeeder extends Seeder
             'email_verified_at' => now()
         ]);
         User::create([
+            'name' => 'bum manager',
+            'email' => 'bum@manager.com',
+            'password' => bcrypt('manager8um'),
+            'role_master_id' => 2,
+            'uker_master_id' => 6, // Assuming there is an existing UkerMaster with id 1
+            'has_facility' => true,
+            'has_reservation' => true,
+            'email_verified_at' => now()
+        ]);
+        User::create([
             'name' => 'Biro Umum',
             'email' => 'verifikator@verifikator.com',
             'password' => bcrypt('1234567890'),
             'role_master_id' => 3,
             'uker_master_id' => 6, // Assuming there is an existing UkerMaster with id 1
             'has_facility' => true,
+            'has_reservation' => false,
+            'email_verified_at' => now()
+        ]);
+        User::create([
+            'name' => 'bum verificator',
+            'email' => 'bum@verifikator.com',
+            'password' => bcrypt('verificator8um'),
+            'role_master_id' => 3,
+            'uker_master_id' => 6, // Assuming there is an existing UkerMaster with id 1
+            'has_facility' => false,
             'has_reservation' => false,
             'email_verified_at' => now()
         ]);
@@ -69,6 +89,16 @@ class UserSeeder extends Seeder
             'uker_master_id' => 38, // Assuming there is an existing UkerMaster with id 1
             'has_facility' => true,
             'has_reservation' => false,
+            'email_verified_at' => now()
+        ]);
+        User::create([
+            'name' => 'user trial',
+            'email' => 'user@trial.com',
+            'password' => bcrypt('user8um'),
+            'role_master_id' => 4,
+            'uker_master_id' => 38, // Assuming there is an existing UkerMaster with id 1
+            'has_facility' => false,
+            'has_reservation' => true,
             'email_verified_at' => now()
         ]);
     }
