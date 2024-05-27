@@ -24,14 +24,14 @@
                     <div class="row row-cards">
                         <div class="col-12">
                             <div class="card">
-                                <a href="{{ secure_url('users.index') }}" class="btn btn-secondary" role="button">
+                                <a href="{{ route('users.index') }}" class="btn btn-secondary" role="button">
                                     <i class="fas fa-pencil-alt"></i> Go To {{ $pageTitle }} Table
                                   </a>
                                 <div class="card-header">
                                         <h3 class="card-title">Edit {{ $pageTitle }}</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form action="{{ secure_url('users.update', $user->id) }}" method="POST">
+                                    <form action="{{ route('users.update', $user->id) }}" method="POST">
                                         @csrf
                                         @method('PATCH')
                                         <div class="mb-3">
