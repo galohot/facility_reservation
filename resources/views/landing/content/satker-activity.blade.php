@@ -5,6 +5,7 @@
             <div class="content">
                 <div class="container-xl">
                     <div class="row row-deck row-cards">
+                        <!-- Approved Reservation -->
                         <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-body">
@@ -12,36 +13,28 @@
                                         <div class="subheader">Approved Reservation</div>
                                     </div>
                                     <div class="mb-3 h1">
-                                        @php
-                                            $approvedReservation = 0;
-                                        @endphp
-                                        @foreach ($allReservations as $reservation)
-                                            @if ($reservation->status == 'approved' && Auth::user()->ukerMaster->id == $reservation->user->ukerMaster->id)
-                                                @php
-                                                    $approvedReservation++;
-                                                @endphp
-                                            @endif
-                                        @endforeach
-                                        {{ number_format(($approvedReservation / $allReservations->count()) * 100, 2) }} %
+                                        {{ number_format(($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100, 2) }}
+                                        %
                                     </div>
                                     <div class="mb-2 d-flex">
-                                        <div>Approved Reservation: {{ $approvedReservation }}</div>
+                                        <div>Approved Reservation: {{ $approvedReservationCount }}</div>
                                     </div>
                                     <div class="progress progress-sm">
                                         <div class="progress-bar bg-success"
-                                            style="width: {{ ($approvedReservation / $allReservations->count()) * 100 }}%"
+                                            style="width: {{ ($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}%"
                                             role="progressbar"
-                                            aria-valuenow="{{ ($approvedReservation / $allReservations->count()) * 100 }}"
+                                            aria-valuenow="{{ ($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}"
                                             aria-valuemin="0" aria-valuemax="100"
-                                            aria-label="{{ ($approvedReservation / $allReservations->count()) * 100 }}% Complete">
+                                            aria-label="{{ ($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}% Complete">
                                             <span
-                                                class="visually-hidden">{{ ($approvedReservation / $allReservations->count()) * 100 }}%
+                                                class="visually-hidden">{{ ($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}%
                                                 Complete</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Rejected Reservation -->
                         <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-body">
@@ -49,36 +42,28 @@
                                         <div class="subheader">Rejected Reservation</div>
                                     </div>
                                     <div class="mb-3 h1">
-                                        @php
-                                            $rejectedReservation = 0;
-                                        @endphp
-                                        @foreach ($allReservations as $reservation)
-                                            @if ($reservation->status == 'rejected' && Auth::user()->ukerMaster->id == $reservation->user->ukerMaster->id)
-                                                @php
-                                                    $rejectedReservation++;
-                                                @endphp
-                                            @endif
-                                        @endforeach
-                                        {{ number_format(($rejectedReservation / $allReservations->count()) * 100, 2) }} %
+                                        {{ number_format(($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100, 2) }}
+                                        %
                                     </div>
                                     <div class="mb-2 d-flex">
-                                        <div>Rejected Reservation: {{ $rejectedReservation }}</div>
+                                        <div>Rejected Reservation: {{ $rejectedReservationCount }}</div>
                                     </div>
                                     <div class="progress progress-sm">
                                         <div class="progress-bar bg-danger"
-                                            style="width: {{ ($rejectedReservation / $allReservations->count()) * 100 }}%"
+                                            style="width: {{ ($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}%"
                                             role="progressbar"
-                                            aria-valuenow="{{ ($rejectedReservation / $allReservations->count()) * 100 }}"
+                                            aria-valuenow="{{ ($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}"
                                             aria-valuemin="0" aria-valuemax="100"
-                                            aria-label="{{ ($rejectedReservation / $allReservations->count()) * 100 }}% Complete">
+                                            aria-label="{{ ($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}% Complete">
                                             <span
-                                                class="visually-hidden">{{ ($rejectedReservation / $allReservations->count()) * 100 }}%
+                                                class="visually-hidden">{{ ($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}%
                                                 Complete</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Pending Reservation -->
                         <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-body">
@@ -86,30 +71,21 @@
                                         <div class="subheader">Pending Reservation</div>
                                     </div>
                                     <div class="mb-3 h1">
-                                        @php
-                                            $pendingReservation = 0;
-                                        @endphp
-                                        @foreach ($allReservations as $reservation)
-                                            @if ($reservation->status == 'pending' && Auth::user()->ukerMaster->id == $reservation->user->ukerMaster->id)
-                                                @php
-                                                    $pendingReservation++;
-                                                @endphp
-                                            @endif
-                                        @endforeach
-                                        {{ number_format(($pendingReservation / $allReservations->count()) * 100, 2) }} %
+                                        {{ number_format(($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100, 2) }}
+                                        %
                                     </div>
                                     <div class="mb-2 d-flex">
-                                        <div>Pending Reservation: {{ $pendingReservation }}</div>
+                                        <div>Pending Reservation: {{ $pendingReservationCount }}</div>
                                     </div>
                                     <div class="progress progress-sm">
                                         <div class="progress-bar bg-warning"
-                                            style="width: {{ ($pendingReservation / $allReservations->count()) * 100 }}%"
+                                            style="width: {{ ($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}%"
                                             role="progressbar"
-                                            aria-valuenow="{{ ($pendingReservation / $allReservations->count()) * 100 }}"
+                                            aria-valuenow="{{ ($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}"
                                             aria-valuemin="0" aria-valuemax="100"
-                                            aria-label="{{ ($pendingReservation / $allReservations->count()) * 100 }}% Complete">
+                                            aria-label="{{ ($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}% Complete">
                                             <span
-                                                class="visually-hidden">{{ ($pendingReservation / $allReservations->count()) * 100 }}%
+                                                class="visually-hidden">{{ ($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}%
                                                 Complete</span>
                                         </div>
                                     </div>
