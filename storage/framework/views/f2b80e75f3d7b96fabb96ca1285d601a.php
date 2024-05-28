@@ -8,6 +8,9 @@
 <?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
+     <?php $__env->slot('title', null, []); ?> 
+        Calendar
+     <?php $__env->endSlot(); ?>
      <?php $__env->slot('slot', null, []); ?> 
         <?php if($errors->any()): ?>
             <div class="alert alert-danger">
@@ -30,10 +33,11 @@
                     events: <?php echo json_encode($events, 15, 512) ?>,
                     eventContent: function(info) {
                         return {
-                            html: '<div class="uker-info"><b>' + info.event.extendedProps.facility.toUpperCase() + '</b><br>' +
-                                  '<b><h6>' + info.event.title + '</h6></b>' +
-                                  '<h6>' + info.event.extendedProps.uker + '</h6>' +
-                                  info.event.extendedProps.status.toUpperCase() + '</div>'
+                            html: '<div class="uker-info"><b>' + info.event.extendedProps.facility
+                                .toUpperCase() + '</b><br>' +
+                                '<b><h6>' + info.event.title + '</h6></b>' +
+                                '<h6>' + info.event.extendedProps.uker + '</h6>' +
+                                info.event.extendedProps.status.toUpperCase() + '</div>'
                             // Render more fields as needed
                         };
                     },
@@ -43,7 +47,8 @@
                     },
                     dateClick: function(info) {
                         // Redirect to the reservation creation page with the clicked date as a query parameter
-                        window.location.href = "<?php echo e(route('reservations.create')); ?>?start_date=" + info.dateStr;
+                        window.location.href = "<?php echo e(route('reservations.create')); ?>?start_date=" + info
+                            .dateStr;
                     }
                 });
                 calendar.render();
@@ -51,19 +56,21 @@
             });
         </script>
 
-<div class="page">
-    <div class="content">
-        <div class="container-xl">
-            <div class="row row-cards">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-md-6">
-                                    <a href="<?php echo e(route('reservations.create')); ?>" class="btn btn-success">
-                                        Make Reservation
-                                    </a>
-                                    <h6 class="text-muted">or select a date to schedule an event</h6>
+        <div class="page">
+            <div class="content">
+                <div class="container-xl">
+                    <div class="row row-cards">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <a href="<?php echo e(route('reservations.create')); ?>" class="btn btn-success">
+                                                Make Reservation
+                                            </a>
+                                            <h6 class="text-muted">or select a date to schedule an event</h6>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -71,8 +78,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 
         <div class="page">
@@ -85,7 +90,8 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="text" name="search" placeholder="Search..." class="form-control">
+                                                <input type="text" name="search" placeholder="Search..."
+                                                    class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-3">

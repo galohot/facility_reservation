@@ -4,8 +4,10 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title><?php echo e($title ?? 'Kemlu Facility Reservation'); ?></title>
+    <title><?php echo e($title ? $title . ' | Layanan Sarpras Kemlu' : 'Layanan Sarpras Kemlu'); ?></title>
     <!-- CSS files -->
+    <link rel="icon" href="<?php echo e(asset('../build/assets/static/kemlu-favicon.png')); ?>" type="image/x-icon">
+    <link rel="shortcut icon" href="<?php echo e(asset('../build/assets/static/kemlu-favicon.png')); ?>" type="image/x-icon">
     <link href="<?php echo e(asset('../build/assets/css/tabler.css?1692870487')); ?>" rel="stylesheet"/>
     <link href="<?php echo e(asset('../build/assets/css/tabler-flags.min.css?1692870487')); ?>" rel="stylesheet"/>
     <link href="<?php echo e(asset('../build/assets/css/tabler-payments.min.css?1692870487')); ?>" rel="stylesheet"/>
@@ -27,9 +29,11 @@
     </style>
     <link href="<?php echo e(asset('css/fullcalendar.min.css')); ?>" rel="stylesheet">
     <script src="<?php echo e(asset('js/fullcalendar.min.js')); ?>"></script>
-  </head>
-  <body >
     <script src="<?php echo e(asset('../build/assets/js/demo-theme.min.js?1692870487')); ?>"></script>
+    <?php echo e($header ?? ''); ?>
+
+  </head>
+  <body>
     <div class="page">
       <!-- Sidebar -->
         <?php echo $__env->make('layouts.navigation.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -151,6 +155,7 @@
         </div>
       </div>
     </div>
+    <?php echo e($script ?? ''); ?>
 
     <!-- Libs JS -->
     <script src="<?php echo e(asset('../build/assets/libs/apexcharts/dist/apexcharts.min.js?1692870487')); ?>" defer></script>

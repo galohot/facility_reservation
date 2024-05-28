@@ -335,48 +335,48 @@
                                             <div class="divide-y">
                                                 <?php $__currentLoopData = $reservations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reservation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <?php if(Auth::user()->ukerMaster->id == $reservation->user->ukerMaster->id || Auth::user()->roleMaster->role_str == 'admin'): ?>
-                                                    <div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="text-truncate">
-                                                                    <strong><?php echo e($reservation->user->ukerMaster->nama_unit_kerja_eselon_2); ?>
+                                                        <div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <div class="text-truncate">
+                                                                        <strong><?php echo e($reservation->user->ukerMaster->nama_unit_kerja_eselon_2); ?>
 
-                                                                    </strong>
-                                                                    <span>(<?php echo e($reservation->user->name); ?>)</span>
-                                                                    <br />requested to reserve
-                                                                    <strong><?php echo e($reservation->facility->name); ?></strong>
-                                                                    <br />category:
-                                                                    <strong><?php echo e($reservation->facility->facilityCategory->category_str); ?></strong>
+                                                                        </strong>
+                                                                        <span>(<?php echo e($reservation->user->name); ?>)</span>
+                                                                        <br />requested to reserve
+                                                                        <strong><?php echo e($reservation->facility->name); ?></strong>
+                                                                        <br />category:
+                                                                        <strong><?php echo e($reservation->facility->facilityCategory->category_str); ?></strong>
+                                                                    </div>
+                                                                    <div class="text-secondary">For
+                                                                        <?php echo e($reservation->reservation_start->translatedFormat('l, j F Y, H:i')); ?>
+
+                                                                        -
+                                                                        <?php echo e($reservation->reservation_end->translatedFormat('l, j F Y, H:i')); ?>
+
+                                                                    </div>
+                                                                    <div class="text-secondary">
+                                                                        <?php echo e($reservation->timeDifference); ?></div>
                                                                 </div>
-                                                                <div class="text-secondary">For
-                                                                    <?php echo e($reservation->reservation_start->translatedFormat('l, j F Y, H:i')); ?>
+                                                                <div class="col-auto align-self-center">
+                                                                    <?php switch($reservation->status):
+                                                                        case ('pending'): ?>
+                                                                            <div class="badge bg-warning"></div>
+                                                                        <?php break; ?>
 
-                                                                    -
-                                                                    <?php echo e($reservation->reservation_end->translatedFormat('l, j F Y, H:i')); ?>
+                                                                        <?php case ('approved'): ?>
+                                                                            <div class="badge bg-success"></div>
+                                                                        <?php break; ?>
 
+                                                                        <?php case ('rejected'): ?>
+                                                                            <div class="badge bg-danger"></div>
+                                                                        <?php break; ?>
+
+                                                                        <?php default: ?>
+                                                                    <?php endswitch; ?>
                                                                 </div>
-                                                                <div class="text-secondary">
-                                                                    <?php echo e($reservation->timeDifference); ?></div>
-                                                            </div>
-                                                            <div class="col-auto align-self-center">
-                                                                <?php switch($reservation->status):
-                                                                    case ('pending'): ?>
-                                                                        <div class="badge bg-warning"></div>
-                                                                    <?php break; ?>
-
-                                                                    <?php case ('approved'): ?>
-                                                                        <div class="badge bg-success"></div>
-                                                                    <?php break; ?>
-
-                                                                    <?php case ('rejected'): ?>
-                                                                        <div class="badge bg-danger"></div>
-                                                                    <?php break; ?>
-
-                                                                    <?php default: ?>
-                                                                <?php endswitch; ?>
                                                             </div>
                                                         </div>
-                                                    </div>
                                                     <?php endif; ?>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </div>

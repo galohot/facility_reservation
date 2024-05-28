@@ -8,6 +8,9 @@
 <?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
+     <?php $__env->slot('title', null, []); ?> 
+        <?php echo e($pageTitle); ?> Detail
+     <?php $__env->endSlot(); ?>
      <?php $__env->slot('slot', null, []); ?> 
         <?php if($errors->any()): ?>
             <div class="alert alert-danger">
@@ -30,8 +33,12 @@
                                 <div class="card-body">
                                     <p><strong>Name:</strong> <?php echo e($user->name); ?></p>
                                     <p><strong>Email:</strong> <?php echo e($user->email); ?></p>
-                                    <p><strong>Satuan Kerja:</strong> <?php echo e($user->ukerMaster->satkerMaster->nama_satker); ?></p>
-                                    <p><strong>Unit Kerja:</strong> <?php echo e($user->ukerMaster->nama_unit_kerja_eselon_2); ?></p>
+                                    <p><strong>Satuan Kerja:</strong> <?php echo e($user->ukerMaster->satkerMaster->nama_satker); ?>
+
+                                    </p>
+                                    <p><strong>Unit Kerja:</strong> <?php echo e($user->ukerMaster->nama_unit_kerja_eselon_2); ?>
+
+                                    </p>
                                     <p><strong>Role</strong> <?php echo e($user->roleMaster->role_str); ?></p>
                                     <a href="<?php echo e(route('users.index')); ?>" class="btn btn-secondary">Back</a>
                                     <a href="<?php echo e(route('users.edit', $user->id)); ?>" class="btn btn-primary">edit</a>

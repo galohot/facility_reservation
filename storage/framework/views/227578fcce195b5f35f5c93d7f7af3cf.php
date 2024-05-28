@@ -8,6 +8,9 @@
 <?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
+     <?php $__env->slot('title', null, []); ?> 
+        My Reservation
+     <?php $__env->endSlot(); ?>
      <?php $__env->slot('slot', null, []); ?> 
         <?php if(session('success')): ?>
             <div class="alert alert-important alert-success alert-dismissible" role="alert">

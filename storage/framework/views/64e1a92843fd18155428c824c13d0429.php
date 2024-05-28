@@ -5,8 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title><?php echo e($title ?? 'static title'); ?></title>
+    <title><?php echo e($title ? $title . ' | Layanan Sarpras Kemlu' : 'Layanan Sarpras Kemlu'); ?></title>
     <!-- CSS files -->
+    <link rel="icon" href="<?php echo e(asset('../build/assets/static/kemlu-favicon.png')); ?>" type="image/x-icon">
+    <link rel="shortcut icon" href="<?php echo e(asset('../build/assets/static/kemlu-favicon.png')); ?>" type="image/x-icon">
     <link href="<?php echo e(asset('../build/assets/css/tabler.css?1692870487')); ?>" rel="stylesheet" />
     <link href="<?php echo e(asset('../build/assets/css/tabler-flags.min.css?1692870487')); ?>" rel="stylesheet" />
     <link href="<?php echo e(asset('../build/assets/css/tabler-payments.min.css?1692870487')); ?>" rel="stylesheet" />
@@ -241,10 +243,11 @@
                             <?php endif; ?>
                         </ul>
                     </div>
-                    <marquee width="100%" direction="left" height="20px"
-                        class="text-white bg-primary font-weight-bold d-flex align-items-center">
-                        DEVELOPMENT ENVIRONMENT, DEVELOPMENT ENVIRONMENT, DEVELOPMENT ENVIRONMENT, DEVELOPMENT ENVIRONMENT, DEVELOPMENT ENVIRONMENT, DEVELOPMENT ENVIRONMENT, DEVELOPMENT ENVIRONMENT, DEVELOPMENT ENVIRONMENT, DEVELOPMENT ENVIRONMENT,
+                    <?php if(app()->environment('local')): ?>
+                    <marquee width="100%" direction="left" height="20px" scrollamount="10" loop="infinite" class="text-white bg-primary font-weight-bold d-flex align-items-center">
+                    THIS WEBSITE IS RUNNING ON LOCAL/DEVELOPMENT ENVIRONMENT ||| CURRENTLY BEING DEVELOPED BY DEV TEAM, CENTER FOR COMMUNICATION AND INFORMATION TECHNOLOGY ||| MINISTRY OF FOREIGN AFFAIRS OF THE REPUBLIC OF INDONESIA
                     </marquee>
+                    <?php endif; ?>
                 </div>
             </div>
         </header>

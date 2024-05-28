@@ -8,6 +8,9 @@
 <?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
+     <?php $__env->slot('title', null, []); ?> 
+        <?php echo e($pageTitle); ?> Detail
+     <?php $__env->endSlot(); ?>
      <?php $__env->slot('slot', null, []); ?> 
         <?php if($errors->any()): ?>
             <div class="alert alert-danger">
@@ -31,37 +34,67 @@
                                     <p><strong>User: </strong><?php echo e($reservation->user->name); ?></p>
                                     <p><strong>Email: </strong><?php echo e($reservation->user->email); ?></p>
                                     <p><strong>Event: </strong> <?php echo e($reservation->event); ?></p>
-                                    <p><strong>Facility: </strong><a href="<?php echo e(route('facilities.show', $reservation->facility->id)); ?>"><?php echo e($reservation->facility->name); ?></a></p>
-                                    <p><strong>Reservation Start: </strong><?php echo e($reservation->reservation_start->translatedFormat('l, j F Y, H:i')); ?></p>
-                                    <p><strong>Reservation End: </strong><?php echo e($reservation->reservation_end->translatedFormat('l, j F Y, H:i')); ?></p>
-                                    <p><strong>Unit Kerja Pemohon: </strong><?php echo e($reservation->user->ukerMaster->nama_unit_kerja_eselon_2); ?></p>
+                                    <p><strong>Facility: </strong><a
+                                            href="<?php echo e(route('facilities.show', $reservation->facility->id)); ?>"><?php echo e($reservation->facility->name); ?></a>
+                                    </p>
+                                    <p><strong>Reservation Start:
+                                        </strong><?php echo e($reservation->reservation_start->translatedFormat('l, j F Y, H:i')); ?>
+
+                                    </p>
+                                    <p><strong>Reservation End:
+                                        </strong><?php echo e($reservation->reservation_end->translatedFormat('l, j F Y, H:i')); ?>
+
+                                    </p>
+                                    <p><strong>Unit Kerja Pemohon:
+                                        </strong><?php echo e($reservation->user->ukerMaster->nama_unit_kerja_eselon_2); ?></p>
                                     
                                     <p>
                                         <strong>Status: </strong>
                                         <?php switch($reservation->status):
                                             case ('pending'): ?>
-                                                <span class="text-white badge bg-warning"><?php echo e(strtoupper($reservation->status)); ?></span>, Verificator: <span class="text-white badge bg-info"><?php echo e($reservation->facility->ukerMaster->nama_unit_kerja_eselon_2); ?></span>
-                                                <?php break; ?>
+                                                <span
+                                                    class="text-white badge bg-warning"><?php echo e(strtoupper($reservation->status)); ?></span>,
+                                                Verificator: <span
+                                                    class="text-white badge bg-info"><?php echo e($reservation->facility->ukerMaster->nama_unit_kerja_eselon_2); ?></span>
+                                            <?php break; ?>
+
                                             <?php case ('approved'): ?>
-                                                <span class="text-white badge bg-success"><?php echo e(strtoupper($reservation->status)); ?></span>, Verificator: <span class="text-white badge bg-info"><?php echo e($reservation->facility->ukerMaster->nama_unit_kerja_eselon_2); ?></span>
-                                                <?php break; ?>
+                                                <span
+                                                    class="text-white badge bg-success"><?php echo e(strtoupper($reservation->status)); ?></span>,
+                                                Verificator: <span
+                                                    class="text-white badge bg-info"><?php echo e($reservation->facility->ukerMaster->nama_unit_kerja_eselon_2); ?></span>
+                                            <?php break; ?>
+
                                             <?php case ('rejected'): ?>
-                                                <span class="text-white badge bg-danger"><?php echo e(strtoupper($reservation->status)); ?></span>, Verificator: <span class="text-white badge bg-info"><?php echo e($reservation->facility->ukerMaster->nama_unit_kerja_eselon_2); ?></span>
-                                                <?php break; ?>
+                                                <span
+                                                    class="text-white badge bg-danger"><?php echo e(strtoupper($reservation->status)); ?></span>,
+                                                Verificator: <span
+                                                    class="text-white badge bg-info"><?php echo e($reservation->facility->ukerMaster->nama_unit_kerja_eselon_2); ?></span>
+                                            <?php break; ?>
+
                                             <?php default: ?>
                                                 <span><?php echo e(strtoupper($reservation->status)); ?></span>
                                         <?php endswitch; ?>
                                     </p>
 
                                     <?php if($reservation->description != 'pending'): ?>
-                                        <p><strong>Description: </strong><span class="<?php echo e($reservation->status == 'approved' ? 'badge bg-success text-white' : ($reservation->status == 'rejected' ? 'badge bg-danger text-white' : 'badge bg-warning text-white')); ?>"><?php echo e($reservation->description); ?></span></p>
+                                        <p><strong>Description: </strong><span
+                                                class="<?php echo e($reservation->status == 'approved' ? 'badge bg-success text-white' : ($reservation->status == 'rejected' ? 'badge bg-danger text-white' : 'badge bg-warning text-white')); ?>"><?php echo e($reservation->description); ?></span>
+                                        </p>
                                     <?php endif; ?>
                                     <a href="./" class="btn btn-secondary">Back</a>
-                                    <?php if(Auth::user()->roleMaster->role_str == 'admin' || $reservation->user->ukerMaster->id == auth()->user()->ukerMaster->id && $reservation->status == 'pending'): ?>
-                                    <a href="<?php echo e(route('reservations.edit', $reservation->id)); ?>" class="btn btn-primary">Edit</a>
+                                    <?php if(Auth::user()->roleMaster->role_str == 'admin' ||
+                                            ($reservation->user->ukerMaster->id == auth()->user()->ukerMaster->id && $reservation->status == 'pending')): ?>
+                                        <a href="<?php echo e(route('reservations.edit', $reservation->id)); ?>"
+                                            class="btn btn-primary">Edit</a>
                                     <?php endif; ?>
-                                    <?php if(auth()->check() && (auth()->user()->hasUker($reservation->facility->ukerMaster->id)) && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('manager') || auth()->user()->hasRole('verificator'))): ?>
-                                    <a href="<?php echo e(route('reservations.verify', $reservation->id)); ?>" class="btn btn-primary">Verify</a>
+                                    <?php if(auth()->check() &&
+                                            auth()->user()->hasUker($reservation->facility->ukerMaster->id) &&
+                                            (auth()->user()->hasRole('admin') ||
+                                                auth()->user()->hasRole('manager') ||
+                                                auth()->user()->hasRole('verificator'))): ?>
+                                        <a href="<?php echo e(route('reservations.verify', $reservation->id)); ?>"
+                                            class="btn btn-primary">Verify</a>
                                     <?php endif; ?>
                                 </div>
                             </div>

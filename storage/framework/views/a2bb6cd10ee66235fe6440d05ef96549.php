@@ -8,6 +8,10 @@
 <?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
+     <?php $__env->slot('title', null, []); ?> 
+        Create <?php echo e($pageTitle); ?>
+
+     <?php $__env->endSlot(); ?>
      <?php $__env->slot('slot', null, []); ?> 
         <?php if($errors->any()): ?>
             <div class="alert alert-danger">
@@ -53,28 +57,35 @@
                         </div>
                         <div class="mb-4">
                             <label class="form-label required" for="facility_category_id">Select Category</label>
-                            <select name="facility_category_id" id="facility_category_id" class="form-select" style="width: 80%">
+                            <select name="facility_category_id" id="facility_category_id" class="form-select"
+                                style="width: 80%">
                                 <option value="">Select Category</option>
                                 <?php $__currentLoopData = $facilityCategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $facilityCategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($facilityCategory->id); ?>"><?php echo e($facilityCategory->category_str); ?></option>
+                                    <option value="<?php echo e($facilityCategory->id); ?>"><?php echo e($facilityCategory->category_str); ?>
+
+                                    </option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                         <div class="mb-4">
                             <label class="form-label required" for="uker_masters_id">Select Unit Kerja</label>
                             <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
-                            <select name="uker_masters_id" id="uker_masters_id" class="form-select" style="width: 80%">
-                                <option value="">Select Unit Kerja</option>
-                                <?php $__currentLoopData = $ukerMasters; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ukerMaster): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($ukerMaster->id); ?>"><?php echo e($ukerMaster->nama_unit_kerja_eselon_2); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
+                                <select name="uker_masters_id" id="uker_masters_id" class="form-select"
+                                    style="width: 80%">
+                                    <option value="">Select Unit Kerja</option>
+                                    <?php $__currentLoopData = $ukerMasters; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ukerMaster): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($ukerMaster->id); ?>">
+                                            <?php echo e($ukerMaster->nama_unit_kerja_eselon_2); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
                             <?php else: ?>
-                            <div class="mb-4">
-                                <label class="form-label" for="uker"></label>
-                                <input type="text" value="<?php echo e(Auth::user()->ukerMaster->id); ?>" name="uker_masters_id" id="uker_masters_id" class="form-control" readonly required>
-                                <p><?php echo e(Auth::user()->ukerMaster->nama_unit_kerja_eselon_2); ?></p>
-                            </div>
+                                <div class="mb-4">
+                                    <label class="form-label" for="uker"></label>
+                                    <input type="text" value="<?php echo e(Auth::user()->ukerMaster->id); ?>"
+                                        name="uker_masters_id" id="uker_masters_id" class="form-control" readonly
+                                        required>
+                                    <p><?php echo e(Auth::user()->ukerMaster->nama_unit_kerja_eselon_2); ?></p>
+                                </div>
                             <?php endif; ?>
                         </div>
                         <!-- Add image input fields -->
@@ -99,7 +110,8 @@
                             <input type="text" name="location" id="location" class="form-control">
                         </div>
                         <div class="mb-4">
-                            <label class="form-label" for="google_map_link">Google Map Link (Example/Contoh: https://maps.app.goo.gl/j9tuxnVLYkgQzbjx8)</label>
+                            <label class="form-label" for="google_map_link">Google Map Link (Example/Contoh:
+                                https://maps.app.goo.gl/j9tuxnVLYkgQzbjx8)</label>
                             <input type="text" name="google_map_link" id="google_map_link" class="form-control">
                         </div>
                         <!-- End of image input fields -->
@@ -110,7 +122,8 @@
                             <div>
                                 <?php $__currentLoopData = $addons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $addon): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="addons[]" value="<?php echo e($addon->id); ?>" id="addon<?php echo e($addon->id); ?>">
+                                        <input class="form-check-input" type="checkbox" name="addons[]"
+                                            value="<?php echo e($addon->id); ?>" id="addon<?php echo e($addon->id); ?>">
                                         <label class="form-check-label" for="addon<?php echo e($addon->id); ?>">
                                             <?php echo e($addon->addon_str); ?>
 

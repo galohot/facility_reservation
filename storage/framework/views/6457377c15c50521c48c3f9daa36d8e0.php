@@ -8,6 +8,10 @@
 <?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
+     <?php $__env->slot('title', null, []); ?> 
+        Edit <?php echo e($pageTitle); ?>
+
+     <?php $__env->endSlot(); ?>
      <?php $__env->slot('slot', null, []); ?> 
         <?php if($errors->any()): ?>
             <div class="alert alert-danger">
@@ -26,9 +30,9 @@
                             <div class="card">
                                 <a href="<?php echo e(route('role_masters.index')); ?>" class="btn btn-secondary" role="button">
                                     <i class="fas fa-pencil-alt"></i> Go To <?php echo e($pageTitle); ?> Table
-                                  </a>
+                                </a>
                                 <div class="card-header">
-                                        <h3 class="card-title">Edit <?php echo e($pageTitle); ?></h3>
+                                    <h3 class="card-title">Edit <?php echo e($pageTitle); ?></h3>
                                 </div>
                                 <div class="card-body">
                                     <form action="<?php echo e(route('role_masters.update', $roleMaster->id)); ?>" method="POST">
@@ -36,11 +40,13 @@
                                         <?php echo method_field('PATCH'); ?>
                                         <div class="mb-3">
                                             <label class="form-label">Role ID</label>
-                                            <input type="text" name="id" id="id" class="form-control" value="<?php echo e($roleMaster->id); ?>" readonly required>
+                                            <input type="text" name="id" id="id" class="form-control"
+                                                value="<?php echo e($roleMaster->id); ?>" readonly required>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Role Name</label>
-                                            <input type="text" name="role_str" id="role_str" class="form-control" value="<?php echo e($roleMaster->role_str); ?>" required>
+                                            <input type="text" name="role_str" id="role_str" class="form-control"
+                                                value="<?php echo e($roleMaster->role_str); ?>" required>
                                         </div>
                                         <div class="mb-3">
                                             <button type="submit" class="btn btn-primary">Update</button>

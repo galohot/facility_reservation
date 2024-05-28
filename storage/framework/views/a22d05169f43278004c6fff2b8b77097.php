@@ -8,6 +8,10 @@
 <?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
+     <?php $__env->slot('title', null, []); ?> 
+        Edit <?php echo e($pageTitle); ?>
+
+     <?php $__env->endSlot(); ?>
      <?php $__env->slot('slot', null, []); ?> 
         <?php if($errors->any()): ?>
             <div class="alert alert-danger">
@@ -26,9 +30,9 @@
                             <div class="card">
                                 <a href="<?php echo e(route('uker_masters.index')); ?>" class="btn btn-secondary" role="button">
                                     <i class="fas fa-pencil-alt"></i> Go To <?php echo e($pageTitle); ?> Table
-                                  </a>
+                                </a>
                                 <div class="card-header">
-                                        <h3 class="card-title">Edit <?php echo e($pageTitle); ?></h3>
+                                    <h3 class="card-title">Edit <?php echo e($pageTitle); ?></h3>
                                 </div>
                                 <div class="card-body">
                                     <form action="<?php echo e(route('uker_masters.update', $ukerMaster->id)); ?>" method="POST">
@@ -36,14 +40,19 @@
                                         <?php echo method_field('PATCH'); ?>
                                         <div class="mb-3">
                                             <label class="form-label">Nama Unit Kerja Eselon II</label>
-                                            <input type="text" name="nama_unit_kerja_eselon_2" id="nama_unit_kerja_eselon_2" class="form-control" value="<?php echo e($ukerMaster->nama_unit_kerja_eselon_2); ?>" required>
+                                            <input type="text" name="nama_unit_kerja_eselon_2"
+                                                id="nama_unit_kerja_eselon_2" class="form-control"
+                                                value="<?php echo e($ukerMaster->nama_unit_kerja_eselon_2); ?>" required>
                                         </div>
                                         <div class="mb-4">
-                                            <label class="form-label required" for="satker_master_id">Select Satuan Kerja Eselon I</label>
-                                            <select name="satker_master_kd_satker" id="satker_master_kd_satker" class="form-select" style="width:80%">
+                                            <label class="form-label required" for="satker_master_id">Select Satuan
+                                                Kerja Eselon I</label>
+                                            <select name="satker_master_kd_satker" id="satker_master_kd_satker"
+                                                class="form-select" style="width:80%">
                                                 <option value="">Select Satuan Kerja</option>
                                                 <?php $__currentLoopData = $satkerMasters; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $satkerMaster): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <option value="<?php echo e($satkerMaster->kd_satker); ?>" <?php echo e($ukerMaster->satker_master_kd_satker == $satkerMaster->kd_satker ? 'selected' : ''); ?>>
+                                                    <option value="<?php echo e($satkerMaster->kd_satker); ?>"
+                                                        <?php echo e($ukerMaster->satker_master_kd_satker == $satkerMaster->kd_satker ? 'selected' : ''); ?>>
                                                         <?php echo e($satkerMaster->nama_satker); ?>
 
                                                     </option>

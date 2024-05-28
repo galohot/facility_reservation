@@ -8,6 +8,10 @@
 <?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
+     <?php $__env->slot('title', null, []); ?> 
+        Create <?php echo e($pageTitle); ?>
+
+     <?php $__env->endSlot(); ?>
      <?php $__env->slot('slot', null, []); ?> 
         <?php if($errors->any()): ?>
             <div class="alert alert-danger">
@@ -30,7 +34,8 @@
 
 
             <div class="col">
-                <form class="card" action="<?php echo e(route('reservations.store')); ?>" method="POST" enctype="multipart/form-data">
+                <form class="card" action="<?php echo e(route('reservations.store')); ?>" method="POST"
+                    enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
                     <div class="card-header">
                         <h3 class="card-title">Create <?php echo e($pageTitle); ?></h3>
@@ -43,7 +48,8 @@
                             <select name="facility_id" id="facility_id" class="form-select" style="width: 80%">
                                 <option value="">Select Facility</option>
                                 <?php $__currentLoopData = $facilities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $facility): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($facility->id); ?>"><?php echo e($facility->name); ?>, <?php echo e($facility->facilityCategory->category_str); ?></option>
+                                    <option value="<?php echo e($facility->id); ?>"><?php echo e($facility->name); ?>,
+                                        <?php echo e($facility->facilityCategory->category_str); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
@@ -53,11 +59,13 @@
                         </div>
                         <div class="mb-4 col-6">
                             <label class="form-label" for="reservation_start">Event Starts</label>
-                            <input type="datetime-local" name="reservation_start" id="reservation_start" class="form-control"></input>
+                            <input type="datetime-local" name="reservation_start" id="reservation_start"
+                                class="form-control"></input>
                         </div>
                         <div class="mb-4 col-6">
                             <label class="form-label" for="reservation_end">Event Ends</label>
-                            <input type="datetime-local" name="reservation_end" id="reservation_end" class="form-control"></input>
+                            <input type="datetime-local" name="reservation_end" id="reservation_end"
+                                class="form-control"></input>
                         </div>
                         <!-- Add doc input fields -->
                         <div class="mb-4">
@@ -65,8 +73,10 @@
                             <input type="file" name="document" id="document" class="form-control">
                         </div>
                         <div class="mb-4">
-                            <label class="form-label" for="document_attachment">Attachment/Lampiran (Not Required)</label>
-                            <input type="file" name="document_attachment" id="document_attachment" class="form-control">
+                            <label class="form-label" for="document_attachment">Attachment/Lampiran (Not
+                                Required)</label>
+                            <input type="file" name="document_attachment" id="document_attachment"
+                                class="form-control">
                         </div>
                         <!-- End of doc input fields -->
                         <button type="submit" class="btn btn-primary">Submit</button>

@@ -8,13 +8,22 @@
 <?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
+     <?php $__env->slot('title', null, []); ?> 
+        <?php echo e($pageTitle); ?>
+
+     <?php $__env->endSlot(); ?>
      <?php $__env->slot('slot', null, []); ?> 
         <?php if(session('success')): ?>
             <div class="alert alert-important alert-success alert-dismissible" role="alert">
                 <div class="d-flex">
                     <div>
                         <!-- Download SVG icon from http://tabler-icons.io/i/check -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24"
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M5 12l5 5l10 -10" />
+                        </svg>
                     </div>
                     <div>
                         <?php echo e(session('success')); ?>
@@ -53,20 +62,26 @@
                 </div>
                 <div class="flex justify-between mt-4 col-6">
                     <form action="<?php echo e(route('facilities.index')); ?>" method="GET" class="flex items-center">
-                        <input type="text" name="search" placeholder="Search name or location, Leave blank to show all data" class="m-2 form-control d-inline-flex">
-                        <select name="category" class="m-2 form-control d-inline-flex"> <!-- New select input for category filter -->
+                        <input type="text" name="search"
+                            placeholder="Search name or location, Leave blank to show all data"
+                            class="m-2 form-control d-inline-flex">
+                        <select name="category" class="m-2 form-control d-inline-flex">
+                            <!-- New select input for category filter -->
                             <option value="">All Categories</option>
                             <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($category->category_str); ?>" <?php echo e(request('category') == $category->category_str ? 'selected' : ''); ?>><?php echo e($category->category_str); ?> (jumlah fasilitas: <?php echo e($category->facilities->count()); ?>)</option>
+                                <option value="<?php echo e($category->category_str); ?>"
+                                    <?php echo e(request('category') == $category->category_str ? 'selected' : ''); ?>>
+                                    <?php echo e($category->category_str); ?> (jumlah fasilitas:
+                                    <?php echo e($category->facilities->count()); ?>)</option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                         <button type="submit" class="mx-2 btn btn-primary">Search</button>
                     </form>
                     <?php if(auth()->check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('manager'))): ?>
-                    <a href="<?php echo e(route('facilities.create')); ?>" class="m-2 btn btn-success">
-                        Create <?php echo e($pageTitle); ?>
+                        <a href="<?php echo e(route('facilities.create')); ?>" class="m-2 btn btn-success">
+                            Create <?php echo e($pageTitle); ?>
 
-                    </a>
+                        </a>
                     <?php endif; ?>
                 </div>
                 <div id="table-default" class="table-responsive">
@@ -84,42 +99,51 @@
                         </thead>
                         <tbody class="table-tbody">
                             <?php $__currentLoopData = $facilities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $facility): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <tr>
-                                <td class="sort-location">
-                                    <?php echo e($facility->location); ?>
+                                <tr>
+                                    <td class="sort-location">
+                                        <?php echo e($facility->location); ?>
 
                                     </td>
-                                <td class="sort-name"><a href="<?php echo e(route('facilities.show', $facility->id)); ?>"><?php echo e($facility->name); ?></a></td>
-                                <td class="sort-description"><?php echo e($facility->description); ?></td>
-                                <td class="sort-category"><?php echo e($facility->facilityCategory->category_str); ?></td>
-                                <td class="sort-capacity"><?php echo e($facility->capacity == null ? 'No data' : $facility->capacity); ?></td>
-                                <td class="sort-facilitymanager"><?php echo e($facility->ukerMaster->nama_unit_kerja_eselon_2); ?>, <?php echo e($facility->ukerMaster->satkerMaster->nama_satker); ?></td>
-                                <td class="sort-actions">
-                                    <div class="mr-2" role="group" aria-label="User Actions">
-                                        <div class="m-1 d-block">
-                                            <a href="<?php echo e(route('facilities.show', $facility->id)); ?>" class="btn btn-primary" role="button">
-                                                <i class="fas fa-eye"></i> View
-                                            </a>
-                                        </div>
-                                        <?php if(auth()->check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('manager'))): ?>
-                                        <div class="m-1 d-block">
-                                            <a href="<?php echo e(route('facilities.edit', $facility->id)); ?>" class="btn btn-secondary" role="button">
-                                                <i class="fas fa-pencil-alt"></i> Edit
-                                            </a>
-                                        </div>
-                                        <form action="<?php echo e(route('facilities.destroy', $facility->id)); ?>" method="POST" class="inline">
-                                            <?php echo csrf_field(); ?>
-                                            <?php echo method_field('DELETE'); ?>
+                                    <td class="sort-name"><a
+                                            href="<?php echo e(route('facilities.show', $facility->id)); ?>"><?php echo e($facility->name); ?></a>
+                                    </td>
+                                    <td class="sort-description"><?php echo e($facility->description); ?></td>
+                                    <td class="sort-category"><?php echo e($facility->facilityCategory->category_str); ?></td>
+                                    <td class="sort-capacity">
+                                        <?php echo e($facility->capacity == null ? 'No data' : $facility->capacity); ?></td>
+                                    <td class="sort-facilitymanager">
+                                        <?php echo e($facility->ukerMaster->nama_unit_kerja_eselon_2); ?>,
+                                        <?php echo e($facility->ukerMaster->satkerMaster->nama_satker); ?></td>
+                                    <td class="sort-actions">
+                                        <div class="mr-2" role="group" aria-label="User Actions">
                                             <div class="m-1 d-block">
-                                                <button type="submit" class="btn btn-danger" role="button" onclick="return confirm('Are you sure you want to delete this user?');">
-                                                    <i class="far fa-trash-alt"></i> Delete
-                                                </button>
+                                                <a href="<?php echo e(route('facilities.show', $facility->id)); ?>"
+                                                    class="btn btn-primary" role="button">
+                                                    <i class="fas fa-eye"></i> View
+                                                </a>
                                             </div>
-                                        </form>
-                                        <?php endif; ?>
-                                    </div>
-                                </td>
-                            </tr>
+                                            <?php if(auth()->check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('manager'))): ?>
+                                                <div class="m-1 d-block">
+                                                    <a href="<?php echo e(route('facilities.edit', $facility->id)); ?>"
+                                                        class="btn btn-secondary" role="button">
+                                                        <i class="fas fa-pencil-alt"></i> Edit
+                                                    </a>
+                                                </div>
+                                                <form action="<?php echo e(route('facilities.destroy', $facility->id)); ?>"
+                                                    method="POST" class="inline">
+                                                    <?php echo csrf_field(); ?>
+                                                    <?php echo method_field('DELETE'); ?>
+                                                    <div class="m-1 d-block">
+                                                        <button type="submit" class="btn btn-danger" role="button"
+                                                            onclick="return confirm('Are you sure you want to delete this user?');">
+                                                            <i class="far fa-trash-alt"></i> Delete
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            <?php endif; ?>
+                                        </div>
+                                    </td>
+                                </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>
@@ -132,12 +156,13 @@
         <script src="<?php echo e(asset('../build/assets/libs/list.js/dist/list.min.js?1692870487')); ?>" defer></script>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
-            const list = new List('table-default', {
-                sortClass: 'table-sort',
-                listClass: 'table-tbody',
-                valueNames: [ 'sort-location', 'sort-name', 'sort-description', 'sort-category','sort-capacity','sort-facilitymanager',
-                ]
-            });
+                const list = new List('table-default', {
+                    sortClass: 'table-sort',
+                    listClass: 'table-tbody',
+                    valueNames: ['sort-location', 'sort-name', 'sort-description', 'sort-category',
+                        'sort-capacity', 'sort-facilitymanager',
+                    ]
+                });
             })
         </script>
      <?php $__env->endSlot(); ?>

@@ -8,16 +8,20 @@
 <?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
+     <?php $__env->slot('title', null, []); ?> 
+        Create <?php echo e($pageTitle); ?>
+
+     <?php $__env->endSlot(); ?>
      <?php $__env->slot('slot', null, []); ?> 
-            <?php if($errors->any()): ?>
-                <div class="alert alert-danger">
-                    <ul>
-                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <li><?php echo e($error); ?></li>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    </ul>
-                </div>
-            <?php endif; ?>
+        <?php if($errors->any()): ?>
+            <div class="alert alert-danger">
+                <ul>
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li><?php echo e($error); ?></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </ul>
+            </div>
+        <?php endif; ?>
         <section>
             <!-- Include Select2 CSS -->
             <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
@@ -49,7 +53,8 @@
                             <select name="uker_master_id" id="uker_master_id" class="form-select" style="width:80%">
                                 <option value="">Select Unit Kerja</option>
                                 <?php $__currentLoopData = $ukerMasters; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ukerMaster): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($ukerMaster->id); ?>"><?php echo e($ukerMaster->nama_unit_kerja_eselon_2); ?>, <?php echo e($ukerMaster->satkerMaster->nama_satker); ?></option>
+                                    <option value="<?php echo e($ukerMaster->id); ?>"><?php echo e($ukerMaster->nama_unit_kerja_eselon_2); ?>,
+                                        <?php echo e($ukerMaster->satkerMaster->nama_satker); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
@@ -58,17 +63,19 @@
                             <select name="role_master_id" id="role_master_id" class="form-select" style="width:80%">
                                 <option value="">Select role</option>
                                 <?php $__currentLoopData = $roleMasters; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $roleMaster): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($roleMaster->id); ?>"><?php echo e($roleMaster->role_str); ?></option>
+                                    <option value="<?php echo e($roleMaster->id); ?>"><?php echo e($roleMaster->role_str); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                         <div class="mb-4">
                             <label class="form-label" for="has_facility">Has Facility:</label>
-                            <input type="checkbox" name="has_facility" id="has_facility" class="form-check-input" value="1">
+                            <input type="checkbox" name="has_facility" id="has_facility" class="form-check-input"
+                                value="1">
                         </div>
                         <div class="mb-4">
                             <label class="form-label" for="has_reservation">Has Reservation:</label>
-                            <input type="checkbox" name="has_reservation" id="has_reservation" class="form-check-input" value="1">
+                            <input type="checkbox" name="has_reservation" id="has_reservation" class="form-check-input"
+                                value="1">
                         </div>
                         <div class="mb-4">
                             <label class="form-label required" for="password">Password:</label>
