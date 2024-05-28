@@ -26,8 +26,7 @@
                         <input type="datetime-local" name="start_date" id="start_date" class="form-control"
                             value="{{ old('start_date', $startDate ?? '') }}">
                     </div>
-                    <div class="form-group col-sm-12 col-md-3" id="end-date-group"
-                        style="{{ old('end_date', $endDate ?? '') ? 'display:block;' : 'display:none;' }}">
+                    <div class="form-group col-sm-12 col-md-3">
                         <label for="end_date">End Date</label>
                         <p>(Fill in the end date)</p>
                         <input type="datetime-local" name="end_date" id="end_date" class="form-control"
@@ -35,8 +34,6 @@
                     </div>
                 </div>
                 <div class="my-3 form-group col-3 d-flex align-items-end">
-                    <button type="button" id="toggle-end-date"
-                        class="btn btn-secondary">{{ old('end_date', $endDate ?? '') ? 'Remove End Date' : 'Add End Date' }}</button>
                     <button type="submit" class="ms-2 btn btn-primary">Search</button>
                 </div>
             </form>
@@ -105,18 +102,6 @@
     </div>
 </x-slot>
 <x-slot name="script">
-    <script>
-        document.getElementById('toggle-end-date').addEventListener('click', function() {
-            var endDateGroup = document.getElementById('end-date-group');
-            if (endDateGroup.style.display === 'none') {
-                endDateGroup.style.display = 'block';
-                this.textContent = 'Remove End Date';
-            } else {
-                endDateGroup.style.display = 'none';
-                document.getElementById('end_date').value = '';
-                this.textContent = 'Add End Date';
-            }
-        });
-    </script>
+    <!-- Removed unnecessary script -->
 </x-slot>
 </x-landing-layout>
