@@ -1,4 +1,7 @@
 <x-app-layout>
+    <x-slot name="title">
+        Edit {{$pageTitle}}
+    </x-slot>
     <x-slot name="slot">
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -17,9 +20,9 @@
                             <div class="card">
                                 <a href="{{ route('role_masters.index') }}" class="btn btn-secondary" role="button">
                                     <i class="fas fa-pencil-alt"></i> Go To {{ $pageTitle }} Table
-                                  </a>
+                                </a>
                                 <div class="card-header">
-                                        <h3 class="card-title">Edit {{ $pageTitle }}</h3>
+                                    <h3 class="card-title">Edit {{ $pageTitle }}</h3>
                                 </div>
                                 <div class="card-body">
                                     <form action="{{ route('role_masters.update', $roleMaster->id) }}" method="POST">
@@ -27,11 +30,13 @@
                                         @method('PATCH')
                                         <div class="mb-3">
                                             <label class="form-label">Role ID</label>
-                                            <input type="text" name="id" id="id" class="form-control" value="{{ $roleMaster->id }}" readonly required>
+                                            <input type="text" name="id" id="id" class="form-control"
+                                                value="{{ $roleMaster->id }}" readonly required>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Role Name</label>
-                                            <input type="text" name="role_str" id="role_str" class="form-control" value="{{ $roleMaster->role_str }}" required>
+                                            <input type="text" name="role_str" id="role_str" class="form-control"
+                                                value="{{ $roleMaster->role_str }}" required>
                                         </div>
                                         <div class="mb-3">
                                             <button type="submit" class="btn btn-primary">Update</button>

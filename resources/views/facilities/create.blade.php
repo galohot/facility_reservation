@@ -1,4 +1,7 @@
 <x-app-layout>
+    <x-slot name="title">
+        Create {{$pageTitle}}
+    </x-slot>
     <x-slot name="slot">
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -44,28 +47,34 @@
                         </div>
                         <div class="mb-4">
                             <label class="form-label required" for="facility_category_id">Select Category</label>
-                            <select name="facility_category_id" id="facility_category_id" class="form-select" style="width: 80%">
+                            <select name="facility_category_id" id="facility_category_id" class="form-select"
+                                style="width: 80%">
                                 <option value="">Select Category</option>
                                 @foreach ($facilityCategories as $facilityCategory)
-                                    <option value="{{ $facilityCategory->id }}">{{ $facilityCategory->category_str }}</option>
+                                    <option value="{{ $facilityCategory->id }}">{{ $facilityCategory->category_str }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="mb-4">
                             <label class="form-label required" for="uker_masters_id">Select Unit Kerja</label>
-                            @if(auth()->check() && auth()->user()->hasRole('admin'))
-                            <select name="uker_masters_id" id="uker_masters_id" class="form-select" style="width: 80%">
-                                <option value="">Select Unit Kerja</option>
-                                @foreach ($ukerMasters as $ukerMaster)
-                                    <option value="{{ $ukerMaster->id }}">{{ $ukerMaster->nama_unit_kerja_eselon_2 }}</option>
-                                @endforeach
-                            </select>
+                            @if (auth()->check() && auth()->user()->hasRole('admin'))
+                                <select name="uker_masters_id" id="uker_masters_id" class="form-select"
+                                    style="width: 80%">
+                                    <option value="">Select Unit Kerja</option>
+                                    @foreach ($ukerMasters as $ukerMaster)
+                                        <option value="{{ $ukerMaster->id }}">
+                                            {{ $ukerMaster->nama_unit_kerja_eselon_2 }}</option>
+                                    @endforeach
+                                </select>
                             @else
-                            <div class="mb-4">
-                                <label class="form-label" for="uker"></label>
-                                <input type="text" value="{{ Auth::user()->ukerMaster->id }}" name="uker_masters_id" id="uker_masters_id" class="form-control" readonly required>
-                                <p>{{ Auth::user()->ukerMaster->nama_unit_kerja_eselon_2 }}</p>
-                            </div>
+                                <div class="mb-4">
+                                    <label class="form-label" for="uker"></label>
+                                    <input type="text" value="{{ Auth::user()->ukerMaster->id }}"
+                                        name="uker_masters_id" id="uker_masters_id" class="form-control" readonly
+                                        required>
+                                    <p>{{ Auth::user()->ukerMaster->nama_unit_kerja_eselon_2 }}</p>
+                                </div>
                             @endif
                         </div>
                         <!-- Add image input fields -->
@@ -90,7 +99,8 @@
                             <input type="text" name="location" id="location" class="form-control">
                         </div>
                         <div class="mb-4">
-                            <label class="form-label" for="google_map_link">Google Map Link (Example/Contoh: https://maps.app.goo.gl/j9tuxnVLYkgQzbjx8)</label>
+                            <label class="form-label" for="google_map_link">Google Map Link (Example/Contoh:
+                                https://maps.app.goo.gl/j9tuxnVLYkgQzbjx8)</label>
                             <input type="text" name="google_map_link" id="google_map_link" class="form-control">
                         </div>
                         <!-- End of image input fields -->
@@ -101,7 +111,8 @@
                             <div>
                                 @foreach ($addons as $addon)
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="addons[]" value="{{ $addon->id }}" id="addon{{ $addon->id }}">
+                                        <input class="form-check-input" type="checkbox" name="addons[]"
+                                            value="{{ $addon->id }}" id="addon{{ $addon->id }}">
                                         <label class="form-check-label" for="addon{{ $addon->id }}">
                                             {{ $addon->addon_str }}
                                         </label>

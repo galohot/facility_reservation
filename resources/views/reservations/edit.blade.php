@@ -1,4 +1,7 @@
 <x-app-layout>
+    <x-slot name="title">
+        Edit {{$pageTitle}}
+    </x-slot>
     <x-slot name="slot">
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -21,7 +24,8 @@
 
 
             <div class="col">
-                <form class="card" action="{{ route('reservations.update', $reservation->id) }}" method="POST" enctype="multipart/form-data">
+                <form class="card" action="{{ route('reservations.update', $reservation->id) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
                     <div class="card-header">
@@ -35,7 +39,9 @@
                             <select name="facility_id" id="facility_id" class="form-select" style="width: 80%">
                                 <option value="">Select Facility</option>
                                 @foreach ($facilities as $facility)
-                                    <option value="{{ $facility->id }}" {{ $facility->id == $reservation->facility_id ? 'selected' : '' }}>{{ $facility->name }}, {{ $facility->facilityCategory->category_str }}</option>
+                                    <option value="{{ $facility->id }}"
+                                        {{ $facility->id == $reservation->facility_id ? 'selected' : '' }}>
+                                        {{ $facility->name }}, {{ $facility->facilityCategory->category_str }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -45,22 +51,31 @@
                         </div>
                         <div class="mb-4">
                             <label class="form-label" for="reservation_start">Event Starts</label>
-                            <input value="{{ $reservation->reservation_start }}" type="datetime-local" name="reservation_start" id="reservation_start" class="form-control"></input>
+                            <input value="{{ $reservation->reservation_start }}" type="datetime-local"
+                                name="reservation_start" id="reservation_start" class="form-control"></input>
                         </div>
                         <div class="mb-4">
                             <label class="form-label" for="reservation_end">Event Ends</label>
-                            <input value="{{ $reservation->reservation_end }}" type="datetime-local" name="reservation_end" id="reservation_end" class="form-control"></input>
+                            <input value="{{ $reservation->reservation_end }}" type="datetime-local"
+                                name="reservation_end" id="reservation_end" class="form-control"></input>
                         </div>
                         <!-- Add doc input fields -->
                         <div class="mb-4">
                             <label class="form-label" for="document">Document/Nota Dinas/Memorandum</label>
                             <input type="file" name="document" id="document" class="form-control">
-                            <p class="badge {{ $reservation->document ? 'bg-success' : 'bg-danger' }} text-white">{{ $reservation->document ? 'A document has been uploaded' : 'No document has been uploaded' }}</p>
+                            <p class="badge {{ $reservation->document ? 'bg-success' : 'bg-danger' }} text-white">
+                                {{ $reservation->document ? 'A document has been uploaded' : 'No document has been uploaded' }}
+                            </p>
                         </div>
                         <div class="mb-4">
-                            <label class="form-label" for="document_attachment">Attachment/Lampiran (Not Required)</label>
-                            <input type="file" name="document_attachment" id="document_attachment" class="form-control">
-                            <p class="badge {{ $reservation->document_attachment ? 'bg-success' : 'bg-danger' }} text-white">{{ $reservation->document_attachment ? 'A document has been uploaded' : 'No document has been uploaded' }}</p>
+                            <label class="form-label" for="document_attachment">Attachment/Lampiran (Not
+                                Required)</label>
+                            <input type="file" name="document_attachment" id="document_attachment"
+                                class="form-control">
+                            <p
+                                class="badge {{ $reservation->document_attachment ? 'bg-success' : 'bg-danger' }} text-white">
+                                {{ $reservation->document_attachment ? 'A document has been uploaded' : 'No document has been uploaded' }}
+                            </p>
                         </div>
                         <!-- End of doc input fields -->
                         <button type="submit" class="btn btn-primary">Submit</button>

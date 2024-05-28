@@ -1,4 +1,7 @@
 <x-app-layout>
+    <x-slot name="title">
+        {{$pageTitle}} Detail
+    </x-slot>
     <x-slot name="slot">
         @if ($errors->any())
             <div class="alert alert-danger">

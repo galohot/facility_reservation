@@ -1,4 +1,7 @@
 <x-app-layout>
+    <x-slot name="title">
+        Create {{$pageTitle}}
+    </x-slot>
     <x-slot name="slot">
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -21,7 +24,8 @@
 
 
             <div class="col">
-                <form class="card" action="{{ route('reservations.store') }}" method="POST" enctype="multipart/form-data">
+                <form class="card" action="{{ route('reservations.store') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="card-header">
                         <h3 class="card-title">Create {{ $pageTitle }}</h3>
@@ -34,7 +38,8 @@
                             <select name="facility_id" id="facility_id" class="form-select" style="width: 80%">
                                 <option value="">Select Facility</option>
                                 @foreach ($facilities as $facility)
-                                    <option value="{{ $facility->id }}">{{ $facility->name }}, {{ $facility->facilityCategory->category_str }}</option>
+                                    <option value="{{ $facility->id }}">{{ $facility->name }},
+                                        {{ $facility->facilityCategory->category_str }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -44,11 +49,13 @@
                         </div>
                         <div class="mb-4 col-6">
                             <label class="form-label" for="reservation_start">Event Starts</label>
-                            <input type="datetime-local" name="reservation_start" id="reservation_start" class="form-control"></input>
+                            <input type="datetime-local" name="reservation_start" id="reservation_start"
+                                class="form-control"></input>
                         </div>
                         <div class="mb-4 col-6">
                             <label class="form-label" for="reservation_end">Event Ends</label>
-                            <input type="datetime-local" name="reservation_end" id="reservation_end" class="form-control"></input>
+                            <input type="datetime-local" name="reservation_end" id="reservation_end"
+                                class="form-control"></input>
                         </div>
                         <!-- Add doc input fields -->
                         <div class="mb-4">
@@ -56,8 +63,10 @@
                             <input type="file" name="document" id="document" class="form-control">
                         </div>
                         <div class="mb-4">
-                            <label class="form-label" for="document_attachment">Attachment/Lampiran (Not Required)</label>
-                            <input type="file" name="document_attachment" id="document_attachment" class="form-control">
+                            <label class="form-label" for="document_attachment">Attachment/Lampiran (Not
+                                Required)</label>
+                            <input type="file" name="document_attachment" id="document_attachment"
+                                class="form-control">
                         </div>
                         <!-- End of doc input fields -->
                         <button type="submit" class="btn btn-primary">Submit</button>

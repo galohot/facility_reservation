@@ -1,14 +1,17 @@
 <x-app-layout>
+    <x-slot name="title">
+        Create {{$pageTitle}}
+    </x-slot>
     <x-slot name="slot">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <section>
             <!-- Include Select2 CSS -->
             <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
@@ -24,7 +27,7 @@
                 <form class="card" action="{{ route('users.store') }}" method="POST">
                     @csrf
                     <div class="card-header">
-                        <h3 class="card-title">Create {{$pageTitle}}</h3>
+                        <h3 class="card-title">Create {{ $pageTitle }}</h3>
                     </div>
                     <div class="card-body">
                         <div class="mb-4">
@@ -40,7 +43,8 @@
                             <select name="uker_master_id" id="uker_master_id" class="form-select" style="width:80%">
                                 <option value="">Select Unit Kerja</option>
                                 @foreach ($ukerMasters as $ukerMaster)
-                                <option value="{{ $ukerMaster->id }}">{{ $ukerMaster->nama_unit_kerja_eselon_2 }}, {{$ukerMaster->satkerMaster->nama_satker}}</option>
+                                    <option value="{{ $ukerMaster->id }}">{{ $ukerMaster->nama_unit_kerja_eselon_2 }},
+                                        {{ $ukerMaster->satkerMaster->nama_satker }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -49,17 +53,19 @@
                             <select name="role_master_id" id="role_master_id" class="form-select" style="width:80%">
                                 <option value="">Select role</option>
                                 @foreach ($roleMasters as $roleMaster)
-                                <option value="{{ $roleMaster->id }}">{{ $roleMaster->role_str }}</option>
+                                    <option value="{{ $roleMaster->id }}">{{ $roleMaster->role_str }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="mb-4">
                             <label class="form-label" for="has_facility">Has Facility:</label>
-                            <input type="checkbox" name="has_facility" id="has_facility" class="form-check-input" value="1">
+                            <input type="checkbox" name="has_facility" id="has_facility" class="form-check-input"
+                                value="1">
                         </div>
                         <div class="mb-4">
                             <label class="form-label" for="has_reservation">Has Reservation:</label>
-                            <input type="checkbox" name="has_reservation" id="has_reservation" class="form-check-input" value="1">
+                            <input type="checkbox" name="has_reservation" id="has_reservation" class="form-check-input"
+                                value="1">
                         </div>
                         <div class="mb-4">
                             <label class="form-label required" for="password">Password:</label>

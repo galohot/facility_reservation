@@ -4,8 +4,10 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>{{$title ?? 'Kemlu Facility Reservation'}}</title>
+    <title>{{ $title ? $title . ' | Layanan Sarpras Kemlu' : 'Layanan Sarpras Kemlu' }}</title>
     <!-- CSS files -->
+    <link rel="icon" href="{{ asset('../build/assets/static/kemlu-favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('../build/assets/static/kemlu-favicon.png') }}" type="image/x-icon">
     <link href="{{ asset('../build/assets/css/tabler.css?1692870487') }}" rel="stylesheet"/>
     <link href="{{ asset('../build/assets/css/tabler-flags.min.css?1692870487') }}" rel="stylesheet"/>
     <link href="{{ asset('../build/assets/css/tabler-payments.min.css?1692870487') }}" rel="stylesheet"/>
@@ -27,9 +29,10 @@
     </style>
     <link href="{{ asset('css/fullcalendar.min.css') }}" rel="stylesheet">
     <script src="{{ asset('js/fullcalendar.min.js') }}"></script>
-  </head>
-  <body >
     <script src="{{ asset('../build/assets/js/demo-theme.min.js?1692870487') }}"></script>
+    {{ $header ?? '' }}
+  </head>
+  <body>
     <div class="page">
       <!-- Sidebar -->
         @include('layouts.navigation.sidebar')
@@ -150,7 +153,7 @@
         </div>
       </div>
     </div>
-
+    {{ $script ?? '' }}
     <!-- Libs JS -->
     <script src="{{ asset('../build/assets/libs/apexcharts/dist/apexcharts.min.js?1692870487') }}" defer></script>
     <script src="{{ asset('../build/assets/libs/jsvectormap/dist/js/jsvectormap.min.js?1692870487') }}" defer></script>

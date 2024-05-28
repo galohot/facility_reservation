@@ -9,7 +9,7 @@
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
      <?php $__env->slot('title', null, []); ?> 
-        Kemlu Facility Reservation
+        Find Facility
      <?php $__env->endSlot(); ?>
      <?php $__env->slot('slot', null, []); ?> 
         <div>

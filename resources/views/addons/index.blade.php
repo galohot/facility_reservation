@@ -1,4 +1,7 @@
 <x-app-layout>
+    <x-slot name="title">
+        {{$pageTitle}}
+    </x-slot>
     <x-slot name="slot">
         @if(session('success'))
             <div class="alert alert-important alert-success alert-dismissible" role="alert">

@@ -1,4 +1,7 @@
 <x-app-layout>
+    <x-slot name="title">
+        Create {{$pageTitle}}
+    </x-slot>
     <x-slot name="slot">
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -14,7 +17,7 @@
                 <form class="card" action="{{ route('role_masters.store') }}" method="POST">
                     @csrf
                     <div class="card-header">
-                        <h3 class="card-title">Create {{$pageTitle}}</h3>
+                        <h3 class="card-title">Create {{ $pageTitle }}</h3>
                     </div>
                     <div class="card-body">
                         <div class="mb-4">

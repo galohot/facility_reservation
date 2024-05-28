@@ -1,4 +1,7 @@
 <x-app-layout>
+    <x-slot name="title">
+        Edit {{$pageTitle}}
+    </x-slot>
     <x-slot name="slot">
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -17,21 +20,24 @@
                             <div class="card">
                                 <a href="{{ route('satker_masters.index') }}" class="btn btn-secondary" role="button">
                                     <i class="fas fa-pencil-alt"></i> Go To {{ $pageTitle }} Table
-                                  </a>
+                                </a>
                                 <div class="card-header">
-                                        <h3 class="card-title">Edit {{ $pageTitle }}</h3>
+                                    <h3 class="card-title">Edit {{ $pageTitle }}</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form action="{{ route('satker_masters.update', $satkerMaster->id) }}" method="POST">
+                                    <form action="{{ route('satker_masters.update', $satkerMaster->id) }}"
+                                        method="POST">
                                         @csrf
                                         @method('PATCH')
                                         <div class="mb-3">
                                             <label class="form-label">Kode Satker</label>
-                                            <input type="text" name="kd_satker" id="kd_satker" class="form-control" value="{{ $satkerMaster->kd_satker }}" required>
+                                            <input type="text" name="kd_satker" id="kd_satker" class="form-control"
+                                                value="{{ $satkerMaster->kd_satker }}" required>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Nama Satker</label>
-                                            <input type="text" name="nama_satker" id="nama_satker" class="form-control" value="{{ $satkerMaster->nama_satker }}" required>
+                                            <input type="text" name="nama_satker" id="nama_satker"
+                                                class="form-control" value="{{ $satkerMaster->nama_satker }}" required>
                                         </div>
                                         <div class="mb-3">
                                             <button type="submit" class="btn btn-primary">Update</button>
