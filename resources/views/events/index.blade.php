@@ -30,11 +30,11 @@
                     },
                     eventClick: function(info) {
                         // Redirect to reservation show route with reservation ID
-                        window.location.href = "{{ route('reservations.show', '') }}/" + info.event.id;
+                        window.location.href = "{{ secure_url('reservations.show', '') }}/" + info.event.id;
                     },
                     dateClick: function(info) {
                         // Redirect to the reservation creation page with the clicked date as a query parameter
-                        window.location.href = "{{ route('reservations.create') }}?start_date=" + info.dateStr;
+                        window.location.href = "{{ secure_url('reservations.create') }}?start_date=" + info.dateStr;
                     }
                 });
                 calendar.render();
@@ -51,7 +51,7 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-md-6">
-                                    <a href="{{ route('reservations.create') }}" class="btn btn-success">
+                                    <a href="{{ secure_url('reservations.create') }}" class="btn btn-success">
                                         Make Reservation
                                     </a>
                                     <h6 class="text-muted">or select a date to schedule an event</h6>
@@ -71,7 +71,7 @@
                 <div class="container-xl">
                     <div class="row row-cards">
                         <div class="col-12">
-                            <form method="GET" action="{{ route('events.index') }}" class="card">
+                            <form method="GET" action="{{ secure_url('events.index') }}" class="card">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-4">

@@ -1,6 +1,6 @@
 <ul class="navbar-nav pt-lg-3">
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('landing') }}">
+        <a class="nav-link" href="{{ secure_url('landing') }}">
             <span
                 class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -17,7 +17,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('dashboard') }}">
+        <a class="nav-link" href="{{ secure_url('dashboard') }}">
             <span
                 class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -34,7 +34,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('events.index') }}">
+        <a class="nav-link" href="{{ secure_url('events.index') }}">
             <span
                 class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -57,7 +57,7 @@
     </li>
     @if (auth()->check() && auth()->user()->hasRole('admin'))
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('users.index') }}">
+            <a class="nav-link" href="{{ secure_url('users.index') }}">
                 <span
                     class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -74,7 +74,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('satker_masters.index') }}">
+            <a class="nav-link" href="{{ secure_url('satker_masters.index') }}">
                 <span
                     class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -97,7 +97,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('uker_masters.index') }}">
+            <a class="nav-link" href="{{ secure_url('uker_masters.index') }}">
                 <span
                     class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -120,7 +120,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('role_masters.index') }}">
+            <a class="nav-link" href="{{ secure_url('role_masters.index') }}">
                 <span
                     class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -146,7 +146,7 @@
     @endif
 
     @if (auth()->check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('manager')))
-        <a class="nav-link" href="{{ route('facility_categories.index') }}">
+        <a class="nav-link" href="{{ secure_url('facility_categories.index') }}">
             <span
                 class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -165,7 +165,7 @@
         </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('addons.index') }}">
+            <a class="nav-link" href="{{ secure_url('addons.index') }}">
                 <span
                     class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -184,7 +184,7 @@
         </li>
     @endif
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('reservations.index') }}">
+        <a class="nav-link" href="{{ secure_url('reservations.index') }}">
             <span
                 class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -205,7 +205,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('facilities.index') }}">
+        <a class="nav-link" href="{{ secure_url('facilities.index') }}">
             <span
                 class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

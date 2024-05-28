@@ -21,7 +21,7 @@
 
 
             <div class="col">
-                <form class="card" action="{{ route('users.store') }}" method="POST">
+                <form class="card" action="{{ secure_url('users.store') }}" method="POST">
                     @csrf
                     <div class="card-header">
                         <h3 class="card-title">Create {{$pageTitle}}</h3>

@@ -22,7 +22,7 @@
                                     <p><strong>User: </strong>{{ $reservation->user->name }}</p>
                                     <p><strong>Email: </strong>{{ $reservation->user->email }}</p>
                                     <p><strong>Event: </strong> {{ $reservation->event }}</p>
-                                    <p><strong>Facility: </strong><a href="{{ route('facilities.show', $reservation->facility->id) }}">{{ $reservation->facility->name }}</a></p>
+                                    <p><strong>Facility: </strong><a href="{{ secure_url('facilities.show', $reservation->facility->id) }}">{{ $reservation->facility->name }}</a></p>
                                     <p><strong>Reservation Start: </strong>{{ $reservation->reservation_start->translatedFormat('l, j F Y, H:i') }}</p>
                                     <p><strong>Reservation End: </strong>{{ $reservation->reservation_end->translatedFormat('l, j F Y, H:i') }}</p>
                                     <p><strong>Unit Kerja Pemohon: </strong>{{ $reservation->user->ukerMaster->nama_unit_kerja_eselon_2 }}</p>
@@ -49,10 +49,10 @@
                                     @endif
                                     <a href="./" class="btn btn-secondary">Back</a>
                                     @if (Auth::user()->roleMaster->role_str == 'admin' || $reservation->user->ukerMaster->id == auth()->user()->ukerMaster->id && $reservation->status == 'pending')
-                                    <a href="{{ route('reservations.edit', $reservation->id) }}" class="btn btn-primary">Edit</a>
+                                    <a href="{{ secure_url('reservations.edit', $reservation->id) }}" class="btn btn-primary">Edit</a>
                                     @endif
                                     @if(auth()->check() && (auth()->user()->hasUker($reservation->facility->ukerMaster->id)) && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('manager') || auth()->user()->hasRole('verificator')))
-                                    <a href="{{ route('reservations.verify', $reservation->id) }}" class="btn btn-primary">Verify</a>
+                                    <a href="{{ secure_url('reservations.verify', $reservation->id) }}" class="btn btn-primary">Verify</a>
                                     @endif
                                 </div>
                             </div>

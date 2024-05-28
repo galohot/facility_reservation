@@ -21,7 +21,7 @@
 
 
             <div class="col">
-                <form class="card" action="{{ route('reservations.store') }}" method="POST" enctype="multipart/form-data">
+                <form class="card" action="{{ secure_url('reservations.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-header">
                         <h3 class="card-title">Create {{ $pageTitle }}</h3>

@@ -67,7 +67,7 @@
                     <div class="container-xl">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('landing') }}">
+                                <a class="nav-link" href="{{ secure_url('landing') }}">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
@@ -86,7 +86,7 @@
                             </li>
                             @if (Auth::user()->roleMaster->role_str == 'user')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('reservation.myreservation') }}">
+                                <a class="nav-link" href="{{ secure_url('reservation.myreservation') }}">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
@@ -105,7 +105,7 @@
                             </li>
                             @endif
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('landing.calendar') }}">
+                                <a class="nav-link" href="{{ secure_url('landing.calendar') }}">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
@@ -124,7 +124,7 @@
                             </li>
                             @if (Auth::user()->roleMaster->role_str != 'admin')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('landing.dashboard') }}">
+                                <a class="nav-link" href="{{ secure_url('landing.dashboard') }}">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
@@ -144,7 +144,7 @@
                             </li>
                             @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('landing.dashboard') }}">
+                                <a class="nav-link" href="{{ secure_url('landing.dashboard') }}">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
@@ -189,7 +189,7 @@
                                         <div class="dropdown-menu-column">
                                             @foreach ($navItems as $navItem)
                                                 <a class="dropdown-item"
-                                                    href="{{ route('available.facilities.show', $navItem->id) }}">
+                                                    href="{{ secure_url('available.facilities.show', $navItem->id) }}">
                                                     {{ $navItem->category_str }}
                                                 </a>
                                             @endforeach
@@ -199,7 +199,7 @@
                             </li>
                             @if (Auth::user()->roleMaster->role_str == 'admin' || Auth::user()->roleMaster->role_str == 'manager' || Auth::user()->roleMaster->role_str == 'verificator')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('dashboard') }}">
+                                <a class="nav-link" href="{{ secure_url('dashboard') }}">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
@@ -219,7 +219,7 @@
                             @endif
                             @if (Auth::user()->roleMaster->role_str != 'user')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('reservations.index') }}">
+                                <a class="nav-link" href="{{ secure_url('reservations.index') }}">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"

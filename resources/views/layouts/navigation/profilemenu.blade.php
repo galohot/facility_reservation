@@ -14,7 +14,7 @@
     <p class="block w-full px-4 py-2 text-sm leading-5 text-white text-start badge bg-info">{{ Auth::user()->email }}</p>
     <div class="dropdown-divider"></div>
     @if(auth()->check() && auth()->user()->hasRole('admin'))
-    <x-dropdown-link :href="route('profile.edit')">
+    <x-dropdown-link :href="secure_url('profile.edit')">
         {{ __('Profile') }}
     </x-dropdown-link>
     <div class="dropdown-divider"></div>

@@ -23,7 +23,7 @@
                                 <div class="card-body">
                                     <p><strong>User: </strong>{{ $reservation->user->name }}</p>
                                     <p><strong>Event: </strong> {{ $reservation->event }}</p>
-                                    <p><strong>Facility: </strong><a href="{{ route('facilities.show', $reservation->facility->id ) }}">{{ $reservation->facility->name }}</a></p>
+                                    <p><strong>Facility: </strong><a href="{{ secure_url('facilities.show', $reservation->facility->id ) }}">{{ $reservation->facility->name }}</a></p>
                                     <p><strong>Reservation Start: </strong>{{ $reservation->reservation_start->translatedFormat('l, j F Y, H:i') }}</p>
                                     <p><strong>Reservation End: </strong>{{ $reservation->reservation_start->translatedFormat('l, j F Y, H:i') }}</p>
                                     <p><strong>Unit Kerja Pemohon: </strong>{{ $reservation->user->ukerMaster->nama_unit_kerja_eselon_2 }}</p>
@@ -53,7 +53,7 @@
                                     @endif
                                     <!-- Buttons for verifying and rejecting -->
                                     @if(auth()->check() && (auth()->user()->hasRole('admin')))
-                                    <form method="POST" action="{{ route('reservations.admin.verify', $reservation->id)}}">
+                                    <form method="POST" action="{{ secure_url('reservations.admin.verify', $reservation->id)}}">
                                         @csrf
                                         @method('PATCH')
                                         <div class="mb-4">
@@ -67,7 +67,7 @@
                                     </form>
                                     @endif
                                     @if (auth()->user()->hasUker($reservation->facility->ukerMaster->id))
-                                    <form method="POST" action="{{ route('reservations.verify', $reservation->id) }}">
+                                    <form method="POST" action="{{ secure_url('reservations.verify', $reservation->id) }}">
                                         @csrf
                                         @method('PATCH')
                                         <div class="mb-4">

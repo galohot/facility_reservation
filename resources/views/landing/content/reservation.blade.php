@@ -24,7 +24,7 @@
 
 
             <div class="col">
-                <form class="card" action="{{ route('landing.store') }}" method="POST" enctype="multipart/form-data">
+                <form class="card" action="{{ secure_url('landing.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-header">
                         <h3 class="card-title">Make Reservation</h3>

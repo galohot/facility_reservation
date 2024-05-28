@@ -5,7 +5,7 @@
     <x-slot name="slot">
         <div>
             <h1>Search for Facilities</h1>
-            <form action="{{ route('landing.search') }}" method="POST">
+            <form action="{{ secure_url('landing.search') }}" method="POST">
                 @csrf
                 <div class="row">
                     <div class="form-group col-sm-12 col-md-3">
@@ -84,9 +84,9 @@
                                     </div>
                                     <div
                                         class="top-0 m-3 d-flex flex-column align-items-end position-absolute end-0">
-                                        <a href="{{ route('reservation.make') }}?facility_id={{ $facility->id }}"
+                                        <a href="{{ secure_url('reservation.make') }}?facility_id={{ $facility->id }}"
                                             class="my-2 btn btn-success w-100">Make Reservation</a>
-                                        <a href="{{ route('facility.page', $facility->id) }}"
+                                        <a href="{{ secure_url('facility.page', $facility->id) }}"
                                             class="btn btn-primary w-100" role="button"><i class="fas fa-eye"></i>
                                             View</a>
                                     </div>

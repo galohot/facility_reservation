@@ -20,8 +20,8 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
             <div class="col">
-                <form class="card" action="{{ route('facilities.update', $facility->id) }}" method="POST" enctype="multipart/form-data">
-                    <a href="{{ route('facilities.index') }}" class="btn btn-secondary" role="button">
+                <form class="card" action="{{ secure_url('facilities.update', $facility->id) }}" method="POST" enctype="multipart/form-data">
+                    <a href="{{ secure_url('facilities.index') }}" class="btn btn-secondary" role="button">
                         <i class="fas fa-pencil-alt"></i> Go To {{ $pageTitle }} Table
                     </a>
                     @csrf

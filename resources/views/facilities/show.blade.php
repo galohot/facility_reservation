@@ -15,9 +15,9 @@
                 <div class="row align-items-center">
                   <div class="col">
                     <a href="./" class="my-2 btn btn-secondary">Back</a>
-                    <a href="{{ route('reservations.create') }}?facility_id={{ $facility->id }}" class="my-2 btn btn-success">Make reservation</a>
+                    <a href="{{ secure_url('reservations.create') }}?facility_id={{ $facility->id }}" class="my-2 btn btn-success">Make reservation</a>
                     @if (Auth::user()->roleMaster->role_str == 'admin' || Auth::user()->roleMaster->role_str == 'manager' && $facility->ukerMaster->id == Auth::user()->ukerMaster->id)
-                    <a href="{{ route('facilities.edit', $facility->id) }}" class="my-2 btn btn-info">Edit Facility</a>
+                    <a href="{{ secure_url('facilities.edit', $facility->id) }}" class="my-2 btn btn-info">Edit Facility</a>
                     @endif
                     <h1 class="fw-bold">{{ $facility->name }}</h1>
                     <div class="my-2">{{ $facility->description }}</div>
