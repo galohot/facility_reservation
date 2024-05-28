@@ -243,10 +243,11 @@
                             <?php endif; ?>
                         </ul>
                     </div>
-                    <marquee width="100%" direction="left" height="20px"
-                        class="text-white bg-primary font-weight-bold d-flex align-items-center">
-                        DEVELOPMENT ENVIRONMENT, DEVELOPMENT ENVIRONMENT, DEVELOPMENT ENVIRONMENT, DEVELOPMENT ENVIRONMENT, DEVELOPMENT ENVIRONMENT, DEVELOPMENT ENVIRONMENT, DEVELOPMENT ENVIRONMENT, DEVELOPMENT ENVIRONMENT, DEVELOPMENT ENVIRONMENT,
+                    <?php if(app()->environment('local')): ?>
+                    <marquee width="100%" direction="left" height="20px" scrollamount="10" loop="infinite" class="text-white bg-primary font-weight-bold d-flex align-items-center">
+                    THIS WEBSITE IS RUNNING ON LOCAL/DEVELOPMENT ENVIRONMENT | CURRENTLY BEING DEVELOPED BY DEV TEAM, CENTER FOR COMMUNICATION AND INFORMATION TECHNOLOGY
                     </marquee>
+                    <?php endif; ?>
                 </div>
             </div>
         </header>
