@@ -1,4 +1,7 @@
 <x-landing-layout>
+    <x-slot name="title">
+        Facilities
+    </x-slot>
     <x-slot name="slot">
         @if ($errors->any())
             <div class="alert alert-danger">
