@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>{{ $title ? $title . ' | Layanan Sarpras Kemlu' : 'Layanan Sarpras Kemlu' }}</title>
     <!-- CSS files -->
+    <link rel="icon" href="{{ asset('../build/assets/static/kemlu-favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('../build/assets/static/kemlu-favicon.png') }}" type="image/x-icon">
     <link href="{{ asset('../build/assets/css/tabler.css?1692870487') }}" rel="stylesheet" />
     <link href="{{ asset('../build/assets/css/tabler-flags.min.css?1692870487') }}" rel="stylesheet" />
     <link href="{{ asset('../build/assets/css/tabler-payments.min.css?1692870487') }}" rel="stylesheet" />
