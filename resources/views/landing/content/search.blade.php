@@ -1,6 +1,6 @@
 <x-landing-layout>
     <x-slot name="title">
-        Kemlu Facility Reservation
+        Find Facility
     </x-slot>
     <x-slot name="slot">
         <div>

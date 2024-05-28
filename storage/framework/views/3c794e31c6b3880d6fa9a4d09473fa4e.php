@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title><?php echo e($title ?? 'static title'); ?></title>
+    <title><?php echo e($title ? $title . ' | Layanan Sarpras Kemlu' : 'Layanan Sarpras Kemlu'); ?></title>
     <!-- CSS files -->
     <link href="<?php echo e(asset('../build/assets/css/tabler.css?1692870487')); ?>" rel="stylesheet" />
     <link href="<?php echo e(asset('../build/assets/css/tabler-flags.min.css?1692870487')); ?>" rel="stylesheet" />

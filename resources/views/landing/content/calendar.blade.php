@@ -1,4 +1,7 @@
 <x-landing-layout>
+    <x-slot name="title">
+        Calendar
+    </x-slot>
     <x-slot name="slot">
         @if ($errors->any())
             <div class="alert alert-danger">

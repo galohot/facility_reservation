@@ -1,4 +1,7 @@
 <x-landing-layout>
+    <x-slot name="title">
+        My Reservation
+    </x-slot>
     <x-slot name="slot">
         @if(session('success'))
             <div class="alert alert-important alert-success alert-dismissible" role="alert">
