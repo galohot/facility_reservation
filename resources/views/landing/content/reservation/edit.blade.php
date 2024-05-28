@@ -23,7 +23,7 @@
         <section>
 
             <div class="col">
-                <form class="card" action="{{ secure_url(route('landing.reservation.update', $reservation->id) }}" method="POST" enctype="multipart/form-data">
+                <form class="card" action="{{ route('landing.reservation.update', $reservation->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
                     <div class="card-header">

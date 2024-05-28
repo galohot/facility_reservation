@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="flex justify-between mt-4 col-6">
-                    <form action="{{ secure_url(route('reservations.index') }}" method="GET" class="flex items-center">
+                    <form action="{{ route('reservations.index') }}" method="GET" class="flex items-center">
                         <input type="text" name="search" placeholder="(leave blank to show all data) Search event, date, unit kerja or description" class="m-2 form-control d-inline-flex">
                         <select name="status" class="m-2 form-control d-inline-flex"> <!-- New select input for status filter -->
                             <option value="">All Status</option>
@@ -44,7 +44,7 @@
                         </select>
                         <button type="submit" class="mx-2 btn btn-primary">Search</button>
                     </form>
-                    <a href="{{ secure_url(route('reservations.create') }}" class="m-2 btn btn-success">
+                    <a href="{{ route('reservations.create') }}" class="m-2 btn btn-success">
                         Make {{$pageTitle}}
                     </a>
                 </div>
@@ -83,7 +83,7 @@
                                                 <span>{{ strtoupper($reservation->status) }}</span>
                                         @endswitch
                                     </td>
-                                    <td class="sort-facility"><a href="{{ secure_url(route('facilities.show', $reservation->facility->id) }}">{{ $reservation->facility->name }}</a></td>
+                                    <td class="sort-facility"><a href="{{ route('facilities.show', $reservation->facility->id) }}">{{ $reservation->facility->name }}</a></td>
                                     <td class="sort-event">{{ $reservation->event }}</td>
                                     <td class="sort-start">{{ $reservation->reservation_start->translatedFormat('l, j F Y, H:i') }}</td>
                                     <td class="sort-end">{{ $reservation->reservation_end->translatedFormat('l, j F Y, H:i') }}</td>
@@ -96,13 +96,13 @@
                                     <td class="sort-actions">
                                         <div class="mr-2" role="group" aria-label="User Actions">
                                             <div class="m-1 d-block">
-                                                <a href="{{ secure_url(route('reservations.show', $reservation->id) }}" class="btn btn-primary" role="button">
+                                                <a href="{{ route('reservations.show', $reservation->id) }}" class="btn btn-primary" role="button">
                                                     <i class="fas fa-eye"></i> View
                                                 </a>
                                             </div>
                                             @if (Auth::user()->roleMaster->role_str == 'admin' || $reservation->status == 'pending')
                                             <div class="m-1 d-block">
-                                                <a href="{{ secure_url(route('reservations.edit', $reservation->id) }}" class="btn btn-secondary" role="button">
+                                                <a href="{{ route('reservations.edit', $reservation->id) }}" class="btn btn-secondary" role="button">
                                                     <i class="fas fa-pencil-alt"></i> Edit
                                                 </a>
                                             </div>
@@ -110,18 +110,18 @@
                                             @if(auth()->check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('manager') || auth()->check() && (auth()->user()->hasRole('verificator'))))
                                             <div class="m-1 d-block">
                                                 @if(auth()->user()->hasRole('admin'))
-                                                <a href="{{ secure_url(route('reservations.admin.verify', $reservation->id)}}" class="btn btn-info" role="button">
+                                                <a href="{{ route('reservations.admin.verify', $reservation->id)}}" class="btn btn-info" role="button">
                                                     <i class="fas fa-pencil-alt"></i> Verify
                                                 </a>
                                             @elseif(auth()->user()->hasRole('manager') || auth()->user()->hasRole('verificator'))
-                                                <a href="{{ secure_url(route('reservations.verify', $reservation->id)}}" class="btn btn-info" role="button">
+                                                <a href="{{ route('reservations.verify', $reservation->id)}}" class="btn btn-info" role="button">
                                                     <i class="fas fa-pencil-alt"></i> Verify
                                                 </a>
                                             @endif
                                             </div>
                                             @endif
                                             <div class="m-1 d-block">
-                                                <form action="{{ secure_url(route('reservations.destroy', $reservation->id) }}" method="POST" class="inline">
+                                                <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST" class="inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger" role="button" onclick="return confirm('Are you sure you want to delete this user?');">

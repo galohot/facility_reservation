@@ -22,7 +22,7 @@
                                     <p><strong>Kode Satuan Kerja</strong> {{ $satkerMaster->kd_satker }}</p>
                                     <p><strong>Nama Satuan Kerja</strong> {{ $satkerMaster->nama_satker }}</p>
                                     <a href="./" class="btn btn-secondary">Back</a>
-                                    <a href="{{ secure_url(route('satker_masters.edit', $satkerMaster->id) }}" class="btn btn-primary">edit</a>
+                                    <a href="{{ route('satker_masters.edit', $satkerMaster->id) }}" class="btn btn-primary">edit</a>
                                 </div>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                         @if ($satkerMaster->kd_satker == $ukerMaster->satker_master_kd_satker)
                             <tr>
                                 <td class="sort-uker">{{ $ukerMaster->nama_unit_kerja_eselon_2 }}</td>
-                                <td class="sort-satker"><a href="{{ secure_url(route('uker_masters.show', $ukerMaster->id) }}" class="btn btn-primary" role="button">
+                                <td class="sort-satker"><a href="{{ route('uker_masters.show', $ukerMaster->id) }}" class="btn btn-primary" role="button">
                                     <i class="fas fa-eye"></i> View
                                 </a></td>
                             </tr>

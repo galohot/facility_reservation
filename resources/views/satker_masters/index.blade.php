@@ -34,11 +34,11 @@
                     </div>
                   </div>
                 <div class="flex justify-between mt-4 col-6">
-                    <form action="{{ secure_url(route('satker_masters.index') }}" method="GET" class="flex items-center">
+                    <form action="{{ route('satker_masters.index') }}" method="GET" class="flex items-center">
                       <input type="text" name="search" placeholder="Search name or email, Leave blank to show all data" class="m-2 form-control d-inline-flex">
                       <button type="submit" class="mx-2 btn btn-primary">Search</button>
                     </form>
-                    <a href="{{ secure_url(route('satker_masters.create') }}" class="m-2 btn btn-success">
+                    <a href="{{ route('satker_masters.create') }}" class="m-2 btn btn-success">
                         Create {{$pageTitle}}
                       </a>
                   </div>
@@ -59,16 +59,16 @@
                       <td class="sort-actions">
                         <div class="mr-2" role="group" aria-label="User Actions">
                             <div class="m-1 d-block">
-                                <a href="{{ secure_url(route('satker_masters.show', $satkerMaster->id) }}" class="btn btn-primary" role="button">
+                                <a href="{{ route('satker_masters.show', $satkerMaster->id) }}" class="btn btn-primary" role="button">
                                   <i class="fas fa-eye"></i> View
                                 </a>
                             </div>
                             <div class="m-1 d-block">
-                                <a href="{{ secure_url(route('satker_masters.edit', $satkerMaster->id) }}" class="btn btn-secondary" role="button">
+                                <a href="{{ route('satker_masters.edit', $satkerMaster->id) }}" class="btn btn-secondary" role="button">
                                   <i class="fas fa-pencil-alt"></i> Edit
                                 </a>
                             </div>
-                            <form action="{{ secure_url(route('satker_masters.destroy', $satkerMaster->id) }}" method="POST" class="inline">
+                            <form action="{{ route('satker_masters.destroy', $satkerMaster->id) }}" method="POST" class="inline">
                               @csrf
                               @method('DELETE')
                               <div class="m-1 d-block">

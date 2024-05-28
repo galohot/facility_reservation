@@ -11,7 +11,7 @@
         @endif
         <section>
             <div class="col">
-                <form class="card" action="{{ secure_url(route('satker_masters.store') }}" method="POST">
+                <form class="card" action="{{ route('satker_masters.store') }}" method="POST">
                     @csrf
                     <div class="card-header">
                         <h3 class="card-title">Create {{$pageTitle}}</h3>

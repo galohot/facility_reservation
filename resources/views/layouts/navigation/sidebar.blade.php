@@ -4,7 +4,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="navbar-brand navbar-brand-autodark">
-        <a href={{ secure_url(route('events.index') }}>
+        <a href={{ route('events.index') }}>
           <img src="{{ asset('../build/assets/static/kemlu-center.png') }}" height="100px" alt="Kemlu-Logo">
         </a>
       </div>

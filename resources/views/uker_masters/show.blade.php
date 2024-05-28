@@ -23,7 +23,7 @@
                                     <p><strong>Nama Satuan Kerja Eselon I</strong> {{ $ukerMaster->satkerMaster->nama_satker }}</p>
                                     <p><strong>Kode Satuan Kerja</strong> {{ $ukerMaster->satkerMaster->kd_satker }}</p>
                                     <a href="./" class="btn btn-secondary">Back</a>
-                                    <a href="{{ secure_url(route('uker_masters.edit', $ukerMaster->id) }}" class="btn btn-primary">edit</a>
+                                    <a href="{{ route('uker_masters.edit', $ukerMaster->id) }}" class="btn btn-primary">edit</a>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                         @if ($user->uker_master_id == $ukerMaster->id)
                         <tr>
                             <td class="sort-uker">{{ $user->name }}</td>
-                            <td class="sort-satker"><a href="{{ secure_url(route('users.show', $user->id) }}" class="btn btn-primary" role="button">
+                            <td class="sort-satker"><a href="{{ route('users.show', $user->id) }}" class="btn btn-primary" role="button">
                                 <i class="fas fa-eye"></i> View
                               </a></td>
                         </tr>
@@ -76,7 +76,7 @@
                         <tr>
                             <td class="sort-uker">{{ $facility->name }}</td>
                             <td class="sort-uker">{{ $facility->facilityCategory->category_str }}</td>
-                            <td class="sort-satker"><a href="{{ secure_url(route('facilities.show', $facility->id) }}" class="btn btn-primary" role="button">
+                            <td class="sort-satker"><a href="{{ route('facilities.show', $facility->id) }}" class="btn btn-primary" role="button">
                                 <i class="fas fa-eye"></i> View
                               </a></td>
                         </tr>
