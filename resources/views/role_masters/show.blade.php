@@ -22,7 +22,7 @@
                                     <p><strong>Role ID</strong> {{ $roleMaster->id }}</p>
                                     <p><strong>Role Name</strong> {{ $roleMaster->role_str }}</p>
                                     <a href="./" class="btn btn-secondary">Back</a>
-                                    <a href="{{ secure_url('role_masters.edit', $roleMaster->id) }}" class="btn btn-primary">edit</a>
+                                    <a href="{{ secure_url(route('role_masters.edit', $roleMaster->id) }}" class="btn btn-primary">edit</a>
                                 </div>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                         @if ($user->role_master_id == $roleMaster->id)
                         <tr>
                             <td class="sort-uker">{{ $user->name }}</td>
-                            <td class="sort-satker">                            <a href="{{ secure_url('users.show', $user->id) }}" class="btn btn-primary" role="button">
+                            <td class="sort-satker">                            <a href="{{ secure_url(route('users.show', $user->id) }}" class="btn btn-primary" role="button">
                                 <i class="fas fa-eye"></i> View
                               </a></td>
                         </tr>

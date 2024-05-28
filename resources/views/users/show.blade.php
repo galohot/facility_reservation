@@ -24,8 +24,8 @@
                                     <p><strong>Satuan Kerja:</strong> {{ $user->ukerMaster->satkerMaster->nama_satker }}</p>
                                     <p><strong>Unit Kerja:</strong> {{ $user->ukerMaster->nama_unit_kerja_eselon_2 }}</p>
                                     <p><strong>Role</strong> {{ $user->roleMaster->role_str }}</p>
-                                    <a href="{{ secure_url('users.index') }}" class="btn btn-secondary">Back</a>
-                                    <a href="{{ secure_url('users.edit', $user->id) }}" class="btn btn-primary">edit</a>
+                                    <a href="{{ secure_url(route('users.index') }}" class="btn btn-secondary">Back</a>
+                                    <a href="{{ secure_url(route('users.edit', $user->id) }}" class="btn btn-primary">edit</a>
                                 </div>
                             </div>
                         </div>

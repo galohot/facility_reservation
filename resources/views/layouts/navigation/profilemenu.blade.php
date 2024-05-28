@@ -14,14 +14,14 @@
     <p class="block w-full px-4 py-2 text-sm leading-5 text-white text-start badge bg-info">{{ Auth::user()->email }}</p>
     <div class="dropdown-divider"></div>
     @if(auth()->check() && auth()->user()->hasRole('admin'))
-    <x-dropdown-link :href="secure_url('profile.edit')">
+    <x-dropdown-link :href="secure_url(route('profile.edit')">
         {{ __('Profile') }}
     </x-dropdown-link>
     <div class="dropdown-divider"></div>
     @endif
-    <form method="POST" action="{{ secure_url('logout') }}">
+    <form method="POST" action="{{ secure_url(route('logout') }}">
         @csrf
-        <x-dropdown-link :href="secure_url('logout')"
+        <x-dropdown-link :href="secure_url(route('logout')"
             onclick="event.preventDefault();
                         this.closest('form').submit();">
             {{ __('Log Out') }}

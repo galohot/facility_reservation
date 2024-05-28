@@ -28,11 +28,11 @@
                     },
                     eventClick: function(info) {
                         // Redirect to reservation show route with reservation ID
-                        window.location.href = "{{ secure_url('reservations.show', '') }}/" + info.event.id;
+                        window.location.href = "{{ secure_url(route('reservations.show', '') }}/" + info.event.id;
                     },
                     dateClick: function(info) {
                         // Redirect to the reservation creation page with the clicked date as a query parameter
-                        window.location.href = "{{ secure_url('reservation.make') }}?start_date=" + info
+                        window.location.href = "{{ secure_url(route('reservation.make') }}?start_date=" + info
                             .dateStr;
                     }
                 });
@@ -50,7 +50,7 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-md-6">
-                                            <a href="{{ secure_url('reservations.create') }}" class="btn btn-success">
+                                            <a href="{{ secure_url(route('reservations.create') }}" class="btn btn-success">
                                                 Make Reservation
                                             </a>
                                             <h6 class="text-muted">or select a date to schedule an event</h6>
@@ -70,7 +70,7 @@
                 <div class="container-xl">
                     <div class="row row-cards">
                         <div class="col-12">
-                            <form method="GET" action="{{ secure_url('events.index') }}" class="card">
+                            <form method="GET" action="{{ secure_url(route('events.index') }}" class="card">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-4">

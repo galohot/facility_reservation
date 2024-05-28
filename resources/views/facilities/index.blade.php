@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="flex justify-between mt-4 col-6">
-                    <form action="{{ secure_url('facilities.index') }}" method="GET" class="flex items-center">
+                    <form action="{{ secure_url(route('facilities.index') }}" method="GET" class="flex items-center">
                         <input type="text" name="search" placeholder="Search name or location, Leave blank to show all data" class="m-2 form-control d-inline-flex">
                         <select name="category" class="m-2 form-control d-inline-flex"> <!-- New select input for category filter -->
                             <option value="">All Categories</option>
@@ -51,7 +51,7 @@
                         <button type="submit" class="mx-2 btn btn-primary">Search</button>
                     </form>
                     @if(auth()->check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('manager')))
-                    <a href="{{ secure_url('facilities.create') }}" class="m-2 btn btn-success">
+                    <a href="{{ secure_url(route('facilities.create') }}" class="m-2 btn btn-success">
                         Create {{$pageTitle}}
                     </a>
                     @endif
@@ -75,7 +75,7 @@
                                 <td class="sort-location">
                                     {{ $facility->location}}
                                     </td>
-                                <td class="sort-name"><a href="{{ secure_url('facilities.show', $facility->id) }}">{{ $facility->name }}</a></td>
+                                <td class="sort-name"><a href="{{ secure_url(route('facilities.show', $facility->id) }}">{{ $facility->name }}</a></td>
                                 <td class="sort-description">{{ $facility->description }}</td>
                                 <td class="sort-category">{{ $facility->facilityCategory->category_str }}</td>
                                 <td class="sort-capacity">{{ $facility->capacity == null ? 'No data' : $facility->capacity}}</td>
@@ -83,17 +83,17 @@
                                 <td class="sort-actions">
                                     <div class="mr-2" role="group" aria-label="User Actions">
                                         <div class="m-1 d-block">
-                                            <a href="{{ secure_url('facilities.show', $facility->id) }}" class="btn btn-primary" role="button">
+                                            <a href="{{ secure_url(route('facilities.show', $facility->id) }}" class="btn btn-primary" role="button">
                                                 <i class="fas fa-eye"></i> View
                                             </a>
                                         </div>
                                         @if(auth()->check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('manager')))
                                         <div class="m-1 d-block">
-                                            <a href="{{ secure_url('facilities.edit', $facility->id) }}" class="btn btn-secondary" role="button">
+                                            <a href="{{ secure_url(route('facilities.edit', $facility->id) }}" class="btn btn-secondary" role="button">
                                                 <i class="fas fa-pencil-alt"></i> Edit
                                             </a>
                                         </div>
-                                        <form action="{{ secure_url('facilities.destroy', $facility->id) }}" method="POST" class="inline">
+                                        <form action="{{ secure_url(route('facilities.destroy', $facility->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <div class="m-1 d-block">

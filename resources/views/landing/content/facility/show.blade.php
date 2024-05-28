@@ -12,7 +12,7 @@
             @endif
 
             <div class="my-4">
-                <form action="{{ secure_url('available.facilities.show', $facilityCategory->id) }}" method="GET">
+                <form action="{{ secure_url(route('available.facilities.show', $facilityCategory->id) }}" method="GET">
                     <input type="text" name="search" placeholder="Search name or location" class="form-control">
                     <button type="submit" class="mt-2 btn btn-primary">Search</button>
                 </form>
@@ -69,8 +69,8 @@
                                         <p>Managed by: <span class="text-white badge bg-info">{{ $facility->ukerMaster->nama_unit_kerja_eselon_2 }}</span></p>
                                     </div>
                                     <div class="top-0 m-3 d-flex flex-column align-items-end position-absolute end-0">
-                                        <a href="{{ secure_url('reservation.make') }}?facility_id={{ $facility->id }}" class="my-2 btn btn-success w-100">Make reservation</a>
-                                        <a href="{{ secure_url('facility.page', $facility->id) }}" class="btn btn-primary w-100" role="button"><i class="fas fa-eye"></i> View</a>
+                                        <a href="{{ secure_url(route('reservation.make') }}?facility_id={{ $facility->id }}" class="my-2 btn btn-success w-100">Make reservation</a>
+                                        <a href="{{ secure_url(route('facility.page', $facility->id) }}" class="btn btn-primary w-100" role="button"><i class="fas fa-eye"></i> View</a>
                                     </div>
                                 </div>
                             </div>

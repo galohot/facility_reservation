@@ -20,7 +20,7 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
             <div class="col">
-                <form class="card" action="{{ secure_url('uker_masters.store') }}" method="POST">
+                <form class="card" action="{{ secure_url(route('uker_masters.store') }}" method="POST">
                     @csrf
                     <div class="card-header">
                         <h3 class="card-title">Create {{$pageTitle}}</h3>

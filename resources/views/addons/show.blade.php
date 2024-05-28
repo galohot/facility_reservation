@@ -22,7 +22,7 @@
                                     <p><strong>Addon ID</strong> {{ $addon->id }}</p>
                                     <p><strong>Addon String</strong> {{ $addon->addon_str }}</p>
                                     <a href="./" class="btn btn-secondary">Back</a>
-                                    <a href="{{ secure_url('addons.edit', $addon->id) }}" class="btn btn-primary">edit</a>
+                                    <a href="{{ secure_url(route('addons.edit', $addon->id) }}" class="btn btn-primary">edit</a>
                                 </div>
                             </div>
                         </div>

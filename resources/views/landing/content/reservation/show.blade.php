@@ -23,7 +23,7 @@
                                     <p><strong>Email: </strong>{{ $reservation->user->email }}</p>
                                     <p><strong>Event: </strong> {{ $reservation->event }}</p>
                                     <p><strong>Facility: </strong><a
-                                            href="{{ secure_url('facilities.show', $reservation->facility->id) }}">{{ $reservation->facility->name }}</a>
+                                            href="{{ secure_url(route('facilities.show', $reservation->facility->id) }}">{{ $reservation->facility->name }}</a>
                                     </p>
                                     <p><strong>Reservation Start:
                                         </strong>{{ $reservation->reservation_start->translatedFormat('l, j F Y, H:i') }}
@@ -71,7 +71,7 @@
                                     <a href="./" class="btn btn-secondary">Back</a>
                                     @if (Auth::user()->roleMaster->role_str == 'admin' ||
                                             ($reservation->user->ukerMaster->id == auth()->user()->ukerMaster->id && $reservation->status == 'pending'))
-                                        <a href="{{ secure_url('landing.reservation.edit', $reservation->id) }}"
+                                        <a href="{{ secure_url(route('landing.reservation.edit', $reservation->id) }}"
                                             class="btn btn-primary">Edit</a>
                                     @endif
                                     @if (auth()->check() &&
@@ -79,7 +79,7 @@
                                             (auth()->user()->hasRole('admin') ||
                                                 auth()->user()->hasRole('manager') ||
                                                 auth()->user()->hasRole('verificator')))
-                                        <a href="{{ secure_url('reservations.verify', $reservation->id) }}"
+                                        <a href="{{ secure_url(route('reservations.verify', $reservation->id) }}"
                                             class="btn btn-primary">Verify</a>
                                     @endif
                                 </div>
