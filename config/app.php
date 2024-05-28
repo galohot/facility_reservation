@@ -55,7 +55,6 @@ return [
 
     'url' => env('APP_URL', 'https://layanansarpras.kemlu.go.id'),
     'asset_url' => env('ASSET_URL', 'https://layanansarpras.kemlu.go.id'),
-
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
