@@ -245,7 +245,7 @@
                     </div>
                     <?php if(app()->environment('local')): ?>
                     <marquee width="100%" direction="left" height="20px" scrollamount="10" loop="infinite" class="text-white bg-primary font-weight-bold d-flex align-items-center">
-                    THIS WEBSITE IS RUNNING ON LOCAL/DEVELOPMENT ENVIRONMENT | CURRENTLY BEING DEVELOPED BY DEV TEAM, CENTER FOR COMMUNICATION AND INFORMATION TECHNOLOGY
+                    THIS WEBSITE IS RUNNING ON LOCAL/DEVELOPMENT ENVIRONMENT ||| CURRENTLY BEING DEVELOPED BY DEV TEAM, CENTER FOR COMMUNICATION AND INFORMATION TECHNOLOGY ||| MINISTRY OF FOREIGN AFFAIRS OF THE REPUBLIC OF INDONESIA
                     </marquee>
                     <?php endif; ?>
                 </div>
