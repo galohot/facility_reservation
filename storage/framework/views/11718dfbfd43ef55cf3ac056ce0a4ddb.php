@@ -22,22 +22,26 @@
                                         <div class="subheader">Approved Reservation</div>
                                     </div>
                                     <div class="mb-3 h1">
-                                        <?php echo e(number_format(($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100, 2)); ?>
+                                        <?php if($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount > 0): ?>
+                                            <?php echo e(number_format(($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100, 2)); ?>
 
-                                        %
+                                            %
+                                        <?php else: ?>
+                                            0.00%
+                                        <?php endif; ?>
                                     </div>
                                     <div class="mb-2 d-flex">
                                         <div>Approved Reservation: <?php echo e($approvedReservationCount); ?></div>
                                     </div>
                                     <div class="progress progress-sm">
                                         <div class="progress-bar bg-success"
-                                            style="width: <?php echo e(($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100); ?>%"
+                                            style="width: <?php echo e($approvedReservationCount > 0 ? ($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0); ?>%"
                                             role="progressbar"
-                                            aria-valuenow="<?php echo e(($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100); ?>"
+                                            aria-valuenow="<?php echo e($approvedReservationCount > 0 ? ($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0); ?>"
                                             aria-valuemin="0" aria-valuemax="100"
-                                            aria-label="<?php echo e(($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100); ?>% Complete">
+                                            aria-label="<?php echo e($approvedReservationCount > 0 ? ($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0); ?>% Complete">
                                             <span
-                                                class="visually-hidden"><?php echo e(($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100); ?>%
+                                                class="visually-hidden"><?php echo e($approvedReservationCount > 0 ? ($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0); ?>%
                                                 Complete</span>
                                         </div>
                                     </div>
@@ -52,22 +56,26 @@
                                         <div class="subheader">Rejected Reservation</div>
                                     </div>
                                     <div class="mb-3 h1">
-                                        <?php echo e(number_format(($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100, 2)); ?>
+                                        <?php if($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount > 0): ?>
+                                            <?php echo e(number_format(($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100, 2)); ?>
 
-                                        %
+                                            %
+                                        <?php else: ?>
+                                            0.00%
+                                        <?php endif; ?>
                                     </div>
                                     <div class="mb-2 d-flex">
                                         <div>Rejected Reservation: <?php echo e($rejectedReservationCount); ?></div>
                                     </div>
                                     <div class="progress progress-sm">
                                         <div class="progress-bar bg-danger"
-                                            style="width: <?php echo e(($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100); ?>%"
+                                            style="width: <?php echo e($rejectedReservationCount > 0 ? ($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0); ?>%"
                                             role="progressbar"
-                                            aria-valuenow="<?php echo e(($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100); ?>"
+                                            aria-valuenow="<?php echo e($rejectedReservationCount > 0 ? ($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0); ?>"
                                             aria-valuemin="0" aria-valuemax="100"
-                                            aria-label="<?php echo e(($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100); ?>% Complete">
+                                            aria-label="<?php echo e($rejectedReservationCount > 0 ? ($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0); ?>% Complete">
                                             <span
-                                                class="visually-hidden"><?php echo e(($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100); ?>%
+                                                class="visually-hidden"><?php echo e($rejectedReservationCount > 0 ? ($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0); ?>%
                                                 Complete</span>
                                         </div>
                                     </div>
@@ -82,28 +90,33 @@
                                         <div class="subheader">Pending Reservation</div>
                                     </div>
                                     <div class="mb-3 h1">
-                                        <?php echo e(number_format(($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100, 2)); ?>
+                                        <?php if($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount > 0): ?>
+                                            <?php echo e(number_format(($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100, 2)); ?>
 
-                                        %
+                                            %
+                                        <?php else: ?>
+                                            0.00%
+                                        <?php endif; ?>
                                     </div>
                                     <div class="mb-2 d-flex">
                                         <div>Pending Reservation: <?php echo e($pendingReservationCount); ?></div>
                                     </div>
                                     <div class="progress progress-sm">
                                         <div class="progress-bar bg-warning"
-                                            style="width: <?php echo e(($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100); ?>%"
+                                            style="width: <?php echo e($pendingReservationCount > 0 ? ($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0); ?>%"
                                             role="progressbar"
-                                            aria-valuenow="<?php echo e(($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100); ?>"
+                                            aria-valuenow="<?php echo e($pendingReservationCount > 0 ? ($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0); ?>"
                                             aria-valuemin="0" aria-valuemax="100"
-                                            aria-label="<?php echo e(($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100); ?>% Complete">
+                                            aria-label="<?php echo e($pendingReservationCount > 0 ? ($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0); ?>% Complete">
                                             <span
-                                                class="visually-hidden"><?php echo e(($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100); ?>%
+                                                class="visually-hidden"><?php echo e($pendingReservationCount > 0 ? ($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0); ?>%
                                                 Complete</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-12">
                             <div class="row row-cards">
                                 <div class="col-sm-6 col-lg-3">

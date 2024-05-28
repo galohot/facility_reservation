@@ -13,21 +13,25 @@
                                         <div class="subheader">Approved Reservation</div>
                                     </div>
                                     <div class="mb-3 h1">
-                                        {{ number_format(($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100, 2) }}
-                                        %
+                                        @if ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount > 0)
+                                            {{ number_format(($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100, 2) }}
+                                            %
+                                        @else
+                                            0.00%
+                                        @endif
                                     </div>
                                     <div class="mb-2 d-flex">
                                         <div>Approved Reservation: {{ $approvedReservationCount }}</div>
                                     </div>
                                     <div class="progress progress-sm">
                                         <div class="progress-bar bg-success"
-                                            style="width: {{ ($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}%"
+                                            style="width: {{ $approvedReservationCount > 0 ? ($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0 }}%"
                                             role="progressbar"
-                                            aria-valuenow="{{ ($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}"
+                                            aria-valuenow="{{ $approvedReservationCount > 0 ? ($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0 }}"
                                             aria-valuemin="0" aria-valuemax="100"
-                                            aria-label="{{ ($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}% Complete">
+                                            aria-label="{{ $approvedReservationCount > 0 ? ($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0 }}% Complete">
                                             <span
-                                                class="visually-hidden">{{ ($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}%
+                                                class="visually-hidden">{{ $approvedReservationCount > 0 ? ($approvedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0 }}%
                                                 Complete</span>
                                         </div>
                                     </div>
@@ -42,21 +46,25 @@
                                         <div class="subheader">Rejected Reservation</div>
                                     </div>
                                     <div class="mb-3 h1">
-                                        {{ number_format(($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100, 2) }}
-                                        %
+                                        @if ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount > 0)
+                                            {{ number_format(($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100, 2) }}
+                                            %
+                                        @else
+                                            0.00%
+                                        @endif
                                     </div>
                                     <div class="mb-2 d-flex">
                                         <div>Rejected Reservation: {{ $rejectedReservationCount }}</div>
                                     </div>
                                     <div class="progress progress-sm">
                                         <div class="progress-bar bg-danger"
-                                            style="width: {{ ($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}%"
+                                            style="width: {{ $rejectedReservationCount > 0 ? ($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0 }}%"
                                             role="progressbar"
-                                            aria-valuenow="{{ ($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}"
+                                            aria-valuenow="{{ $rejectedReservationCount > 0 ? ($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0 }}"
                                             aria-valuemin="0" aria-valuemax="100"
-                                            aria-label="{{ ($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}% Complete">
+                                            aria-label="{{ $rejectedReservationCount > 0 ? ($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0 }}% Complete">
                                             <span
-                                                class="visually-hidden">{{ ($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}%
+                                                class="visually-hidden">{{ $rejectedReservationCount > 0 ? ($rejectedReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0 }}%
                                                 Complete</span>
                                         </div>
                                     </div>
@@ -71,27 +79,32 @@
                                         <div class="subheader">Pending Reservation</div>
                                     </div>
                                     <div class="mb-3 h1">
-                                        {{ number_format(($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100, 2) }}
-                                        %
+                                        @if ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount > 0)
+                                            {{ number_format(($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100, 2) }}
+                                            %
+                                        @else
+                                            0.00%
+                                        @endif
                                     </div>
                                     <div class="mb-2 d-flex">
                                         <div>Pending Reservation: {{ $pendingReservationCount }}</div>
                                     </div>
                                     <div class="progress progress-sm">
                                         <div class="progress-bar bg-warning"
-                                            style="width: {{ ($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}%"
+                                            style="width: {{ $pendingReservationCount > 0 ? ($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0 }}%"
                                             role="progressbar"
-                                            aria-valuenow="{{ ($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}"
+                                            aria-valuenow="{{ $pendingReservationCount > 0 ? ($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0 }}"
                                             aria-valuemin="0" aria-valuemax="100"
-                                            aria-label="{{ ($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}% Complete">
+                                            aria-label="{{ $pendingReservationCount > 0 ? ($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0 }}% Complete">
                                             <span
-                                                class="visually-hidden">{{ ($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 }}%
+                                                class="visually-hidden">{{ $pendingReservationCount > 0 ? ($pendingReservationCount / ($approvedReservationCount + $rejectedReservationCount + $pendingReservationCount)) * 100 : 0 }}%
                                                 Complete</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-12">
                             <div class="row row-cards">
                                 <div class="col-sm-6 col-lg-3">

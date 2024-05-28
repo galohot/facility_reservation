@@ -11,7 +11,7 @@
   </a>
   <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
     <div class="dropdown-divider"></div>
-    <p class="block w-full px-4 py-2 text-start text-sm leading-5 badge bg-info text-white"><?php echo e(Auth::user()->email); ?></p>
+    <p class="block w-full px-4 py-2 text-sm leading-5 text-white text-start badge bg-info"><?php echo e(Auth::user()->email); ?></p>
     <div class="dropdown-divider"></div>
     <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
     <?php if (isset($component)) { $__componentOriginal68cb1971a2b92c9735f83359058f7108 = $component; } ?>
