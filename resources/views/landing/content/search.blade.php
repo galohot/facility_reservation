@@ -101,7 +101,7 @@
         @endif
     </div>
     <div>
-        <div class="row row-cards">
+        <div class="mt-5 row row-cards">
             @foreach ($categories as $category)
                 <div class="col-md-6 col-xl-3">
                     <a class="card card-link" href="{{ route('available.facilities.show', $category->id) }}">
@@ -120,7 +120,7 @@
                 </div>
             @endforeach
         </div>
-        </div>
+    </div>
 </x-slot>
 <x-slot name="script">
     <!-- Removed unnecessary script -->

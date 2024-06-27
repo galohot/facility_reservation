@@ -111,7 +111,7 @@
         <?php endif; ?>
     </div>
     <div>
-        <div class="row row-cards">
+        <div class="mt-5 row row-cards">
             <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="col-md-6 col-xl-3">
                     <a class="card card-link" href="<?php echo e(route('available.facilities.show', $category->id)); ?>">
@@ -130,7 +130,7 @@
                 </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
-        </div>
+    </div>
  <?php $__env->endSlot(); ?>
  <?php $__env->slot('script', null, []); ?> 
     <!-- Removed unnecessary script -->
