@@ -1,17 +1,26 @@
-<x-landing-layout>
-    <x-slot name="title">
+<?php if (isset($component)) { $__componentOriginal61b7c119be9b054fc3033ecd71de14c0 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal61b7c119be9b054fc3033ecd71de14c0 = $attributes; } ?>
+<?php $component = App\View\Components\LandingLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('landing-layout'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\LandingLayout::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+     <?php $__env->slot('title', null, []); ?> 
         Calendar
-    </x-slot>
-    <x-slot name="slot">
-        @if ($errors->any())
+     <?php $__env->endSlot(); ?>
+     <?php $__env->slot('slot', null, []); ?> 
+        <?php if($errors->any()): ?>
             <div class="alert alert-danger">
                 <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li><?php echo e($error); ?></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </ul>
             </div>
-        @endif
+        <?php endif; ?>
 
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
         <script src='fullcalendar/dist/index.global.js'></script>
@@ -21,7 +30,7 @@
                 var calendar = new FullCalendar.Calendar(calendarEl, {
                     initialView: 'dayGridMonth',
                     selectable: false,
-                    events: @json($events),
+                    events: <?php echo json_encode($events, 15, 512) ?>,
                     eventContent: function(info) {
                         return {
                             html: '<div class="uker-info"><b>' + info.event.extendedProps.facility +
@@ -31,11 +40,11 @@
                     },
                     eventClick: function(info) {
                         // Redirect to reservation show route with reservation ID
-                        window.location.href = "{{ route('reservations.show', '') }}/" + info.event.id;
+                        window.location.href = "<?php echo e(route('reservations.show', '')); ?>/" + info.event.id;
                     },
                     dateClick: function(info) {
                         // Redirect to the reservation creation page with the clicked date as a query parameter
-                        window.location.href = "{{ route('reservation.make') }}?start_date=" + info
+                        window.location.href = "<?php echo e(route('reservation.make')); ?>?start_date=" + info
                             .dateStr;
                     }
                 });
@@ -53,7 +62,7 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-md-6">
-                                            <a href="{{ route('reservations.create') }}" class="btn btn-success">
+                                            <a href="<?php echo e(route('reservations.create')); ?>" class="btn btn-success">
                                                 Make Reservation
                                             </a>
                                             <h6 class="text-muted">or select a date to schedule an event</h6>
@@ -73,7 +82,7 @@
                 <div class="container-xl">
                     <div class="row row-cards">
                         <div class="col-12">
-                            <form method="GET" action="{{ route('landing.calendar') }}" class="card">
+                            <form method="GET" action="<?php echo e(route('landing.calendar')); ?>" class="card">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-4">
@@ -122,5 +131,15 @@
             </div>
         </div>
 
-    </x-slot>
-</x-landing-layout>
+     <?php $__env->endSlot(); ?>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal61b7c119be9b054fc3033ecd71de14c0)): ?>
+<?php $attributes = $__attributesOriginal61b7c119be9b054fc3033ecd71de14c0; ?>
+<?php unset($__attributesOriginal61b7c119be9b054fc3033ecd71de14c0); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal61b7c119be9b054fc3033ecd71de14c0)): ?>
+<?php $component = $__componentOriginal61b7c119be9b054fc3033ecd71de14c0; ?>
+<?php unset($__componentOriginal61b7c119be9b054fc3033ecd71de14c0); ?>
+<?php endif; ?>
+<?php /**PATH C:\Users\UKPBJ\Herd\facility_reservation\resources\views/landing/content/calendar.blade.php ENDPATH**/ ?>
