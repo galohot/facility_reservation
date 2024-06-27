@@ -77,7 +77,42 @@
         </div>
 
 
-        
+        <div class="page">
+            <div class="content">
+                <div class="container-xl">
+                    <div class="row row-cards">
+                        <div class="col-12">
+                            <form method="GET" action="<?php echo e(route('landing.calendar')); ?>" class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="text" name="search" placeholder="Search..."
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <select name="status" class="form-control">
+                                                    <option value="">Select Status (All)</option>
+                                                    <option value="pending">Pending</option>
+                                                    <option value="approved">Approved</option>
+                                                    <option value="rejected">Rejected</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- Additional filters can be added here -->
+                                        <div class="col-md-2">
+                                            <button type="submit" class="btn btn-primary">Filter</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         <div class="page">

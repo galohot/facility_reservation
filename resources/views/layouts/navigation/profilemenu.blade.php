@@ -2,6 +2,7 @@
         @php
             $user = auth()->user();
             $userInfo = $user->getUserInfo();
+            $uker = $user->ukerMaster->nama_unit_kerja_eselon_2;
         @endphp
         <div class="d-none d-xl-block ps-2">
             <div>{{ $userInfo['name'] }}</div>
