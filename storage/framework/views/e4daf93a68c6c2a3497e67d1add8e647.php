@@ -85,7 +85,7 @@
                 <div class="container-xl">
                     <div class="row row-cards">
                         <div class="col-12">
-                            <form method="GET" action="<?php echo e(route('landing.calendar')); ?>" class="card">
+                            <form method="GET" action="<?php echo e(route('events.index')); ?>" class="card">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-4">

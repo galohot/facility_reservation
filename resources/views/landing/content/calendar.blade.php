@@ -68,7 +68,7 @@
         </div>
 
 
-        <div class="page">
+        {{-- <div class="page">
             <div class="content">
                 <div class="container-xl">
                     <div class="row row-cards">
@@ -103,7 +103,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
 
         <div class="page">

@@ -108,17 +108,19 @@ class EventController extends Controller
         $events = [];
 
         foreach ($reservations as $reservation) {
-            $events[] = [
-                'id' => $reservation->id, // Unique identifier
-                'title' => $reservation->event,
-                'start' => $reservation->reservation_start->toDateTimeString(),
-                'end' => $reservation->reservation_end->toDateTimeString(),
-                'status' => $reservation->status,
-                'uker' => $reservation->user->ukerMaster->nama_unit_kerja_eselon_2, // Additional field
-                'color' => $reservation->status == 'pending' ? '#857e05' : ($reservation->status == 'rejected' ? '#b00e13' : '#324729'),
-                'facility' => $reservation->facility->name . ', ' . $reservation->facility->facilityCategory->category_str
-                // Add more fields as needed
-            ];
+            if ($reservation->status =='approved'){
+                $events[] = [
+                    'id' => $reservation->id, // Unique identifier
+                    'title' => $reservation->event,
+                    'start' => $reservation->reservation_start->toDateTimeString(),
+                    'end' => $reservation->reservation_end->toDateTimeString(),
+                    'status' => $reservation->status,
+                    'uker' => $reservation->user->ukerMaster->nama_unit_kerja_eselon_2, // Additional field
+                    'color' => $reservation->status == 'pending' ? '#857e05' : ($reservation->status == 'rejected' ? '#b00e13' : '#324729'),
+                    'facility' => $reservation->facility->name . ', ' . $reservation->facility->facilityCategory->category_str
+                    // Add more fields as needed
+                ];
+            }
         }
 
         return view('landing.content.calendar', compact('events'));
