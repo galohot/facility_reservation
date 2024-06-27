@@ -168,4 +168,5 @@ class SatkerMasterSeeder extends Seeder
                 'nama_satker' => $nama_satker
             ]);
         }
-    }}
+    }
+}
