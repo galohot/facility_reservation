@@ -90,16 +90,37 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @empty
-                    <li class="list-group-item">No facilities available for the selected date range and category.
-                    </li>
+                    @empty
+                        <li class="list-group-item">No facilities available for the selected date range and
+                            category.
+                        </li>
                 @endforelse
 
             </ul>
             <!-- Pagination Links -->
         @endif
     </div>
+    <div>
+        <div class="row row-cards">
+            @foreach ($categories as $category)
+                <div class="col-md-6 col-xl-3">
+                    <a class="card card-link" href="{{ route('available.facilities.show', $category->id) }}">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <span class="rounded avatar" style="background-image: url({{ asset('storage/' . $category->facilities->first()->image_main) }})"></span>
+                                </div>
+                                <div class="col">
+                                    <div class="font-weight-medium">{{ $category->category_str }}</div>
+                                    <div class="text-secondary">{{ $category->facilities->count() }} Facilities</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+        </div>
 </x-slot>
 <x-slot name="script">
     <!-- Removed unnecessary script -->

@@ -100,16 +100,37 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                    <li class="list-group-item">No facilities available for the selected date range and category.
-                    </li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                        <li class="list-group-item">No facilities available for the selected date range and
+                            category.
+                        </li>
                 <?php endif; ?>
 
             </ul>
             <!-- Pagination Links -->
         <?php endif; ?>
     </div>
+    <div>
+        <div class="row row-cards">
+            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div class="col-md-6 col-xl-3">
+                    <a class="card card-link" href="<?php echo e(route('available.facilities.show', $category->id)); ?>">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <span class="rounded avatar" style="background-image: url(<?php echo e(asset('storage/' . $category->facilities->first()->image_main)); ?>)"></span>
+                                </div>
+                                <div class="col">
+                                    <div class="font-weight-medium"><?php echo e($category->category_str); ?></div>
+                                    <div class="text-secondary"><?php echo e($category->facilities->count()); ?> Facilities</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        </div>
+        </div>
  <?php $__env->endSlot(); ?>
  <?php $__env->slot('script', null, []); ?> 
     <!-- Removed unnecessary script -->
