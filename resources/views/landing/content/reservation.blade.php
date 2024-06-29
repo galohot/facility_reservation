@@ -30,7 +30,7 @@
         @endif
         <section>
             <div class="col">
-                <form class="card" action="{{ route('landing.store') }}" method="POST" enctype="multipart/form-data">
+                <form class="card" id="reservationForm" action="{{ route('landing.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-header">
                         <h3 class="card-title">Make Reservation</h3>
@@ -39,7 +39,7 @@
                         <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                         <input type="hidden" name="description" value="pending">
                         <div class="mb-4">
-                            <label class="form-label required" for="facility_category_id">Select Facility</label>
+                            <label class="form-label required" for="facility_id">Select Facility</label>
                             <select name="facility_id" id="facility_id" class="form-select" style="width: 80%">
                                 <option value="">Select Facility</option>
                                 @foreach ($facilities as $facility)
@@ -48,8 +48,11 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="my-3 form-group col-3 d-flex align-items-end">
+                            <button type="button" id="checkAvailability" class="ms-2 btn btn-primary">Check Availability</button>
+                        </div>
                         <div class="mb-4">
-                            <label class="form-label required" for="name">Event</label>
+                            <label class="form-label required" for="event">Event</label>
                             <textarea name="event" id="event" class="form-control" required></textarea>
                         </div>
                         <div class="mb-4 col-6">
@@ -68,8 +71,7 @@
                             <input type="file" name="document" id="document" class="form-control">
                         </div>
                         <div class="mb-4">
-                            <label class="form-label" for="document_attachment">Attachment/Lampiran (Not
-                                Required)</label>
+                            <label class="form-label" for="document_attachment">Attachment/Lampiran (Not Required)</label>
                             <input type="file" name="document_attachment" id="document_attachment"
                                 class="form-control">
                         </div>
@@ -107,6 +109,31 @@
                     const facilityId = urlParams.get('facility_id');
                     if (facilityId) {
                         document.getElementById('facility_id').value = facilityId;
+                    }
+                });
+
+                $('#checkAvailability').on('click', function() {
+                    var facilityId = $('#facility_id').val();
+                    if (facilityId) {
+                        $.ajax({
+                            url: '{{ route("facility.checkAvailability") }}',
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                facility_id: facilityId
+                            },
+                            success: function(response) {
+                                // Process and display the response (unavailable dates)
+                                // You can use a modal, alert, or update a section of the page with the data
+                                console.log(response); // For debugging
+                            },
+                            error: function(xhr) {
+                                // Handle any errors that occurred during the request
+                                console.error(xhr.responseText);
+                            }
+                        });
+                    } else {
+                        alert('Please select a facility first.');
                     }
                 });
             </script>

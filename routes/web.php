@@ -14,8 +14,9 @@ use App\Http\Controllers\UkerMasterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-
-Route::get('/', function () { return redirect('landing');});
+Route::get('/', function () {
+    return redirect('landing');
+});
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
@@ -27,13 +28,12 @@ Route::get('/landing/dashboard', [DashboardController::class, 'landingIndex'])
 Route::middleware(['auth', 'role:admin,manager'])->group(function () {
     Route::get('/facilities/create', [FacilityController::class, 'create'])->name('facilities.create');
     Route::post('/facilities', [FacilityController::class, 'store'])->name('facilities.store');
-        Route::middleware('verify.manager')->group(function () {
-            Route::get('/facilities/{facility}/edit', [FacilityController::class, 'edit'])->name('facilities.edit');
-            Route::get('/facilities/{facility}/reservation-history', [FacilityController::class, 'reservationHistory'])->name('facilities.reservationhistory');
-            Route::patch('/facilities/{facility}', [FacilityController::class, 'update'])->name('facilities.update');
-            Route::delete('/facilities/{facility}', [FacilityController::class, 'destroy'])->name('facilities.destroy');
-
-        });
+    Route::middleware('verify.manager')->group(function () {
+        Route::get('/facilities/{facility}/edit', [FacilityController::class, 'edit'])->name('facilities.edit');
+        Route::get('/facilities/{facility}/reservation-history', [FacilityController::class, 'reservationHistory'])->name('facilities.reservationhistory');
+        Route::patch('/facilities/{facility}', [FacilityController::class, 'update'])->name('facilities.update');
+        Route::delete('/facilities/{facility}', [FacilityController::class, 'destroy'])->name('facilities.destroy');
+    });
     Route::get('/facility-categories', [FacilityCategoryController::class, 'index'])->name('facility_categories.index');
     Route::get('/facility-categories/create', [FacilityCategoryController::class, 'create'])->name('facility_categories.create');
     Route::post('/facility-categories', [FacilityCategoryController::class, 'store'])->name('facility_categories.store');
@@ -53,7 +53,7 @@ Route::middleware(['auth', 'role:admin,manager'])->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/events',[EventController::class,'index'])->name('events.index');
+    Route::get('/events', [EventController::class, 'index'])->name('events.index');
 
     Route::get('/facilities', [FacilityController::class, 'index'])->name('facilities.index');
     Route::get('/facilities/{facility}', [FacilityController::class, 'show'])->name('facilities.show');
@@ -70,9 +70,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/landing', [FacilityController::class, 'landingPage'])->name('landing');
     Route::post('/landing/search', [FacilityController::class, 'searchFacilities'])->name('landing.search');
     Route::get('/landing/search', [FacilityController::class, 'landingPage'])->name('landing.search.get');
+    // web.php
+
+    Route::post('/facility/check-availability', [FacilityController::class, 'checkAvailability'])->name('facility.checkAvailability');
+
     Route::get('/landing/reservation/make', [ReservationController::class, 'landingCreate'])->name('reservation.make');
     Route::post('/landing', [ReservationController::class, 'landingStore'])->name('landing.store');
-    Route::get('/landing/calendar',[EventController::class,'landingIndex'])->name('landing.calendar');
+    Route::get('/landing/calendar', [EventController::class, 'landingIndex'])->name('landing.calendar');
     Route::get('/landing/kemlu-facility/{facilityCategory}', [FacilityCategoryController::class, 'landingShow'])->name('available.facilities.show');
     Route::get('/landing/facility-page/{facility}', [FacilityController::class, 'facilityPage'])->name('facility.page');
     Route::get('/landing/reservation-detail/{reservation}', [ReservationController::class, 'landingShow'])->name('landing.reservation.show');
@@ -80,14 +84,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/landing/reservation/{reservation}', [ReservationController::class, 'landingUpdate'])->name('landing.reservation.update');
 });
 
-
-
 Route::middleware(['auth', 'verify.reservation', 'role:manager,verificator'])->group(function () {
     // Routes for verification
     Route::get('/reservations/{reservation}/verify', [ReservationController::class, 'preverify'])->name('reservations.preverify');
     Route::patch('/reservations/{reservation}/verify', [ReservationController::class, 'verify'])->name('reservations.verify');
 });
-
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // Routes for verification
@@ -95,7 +96,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::patch('/reservations/admin/{reservation}/verify', [ReservationController::class, 'verify'])->name('reservations.admin.verify');
 });
 
-Route::middleware(['auth', 'verify.reservation','verify.status'])->group(function () {
+Route::middleware(['auth', 'verify.reservation', 'verify.status'])->group(function () {
     Route::get('/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservations.edit');
     Route::patch('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
     Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
@@ -111,12 +112,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
-
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-        // SatkerMaster routes
+    // SatkerMaster routes
     Route::get('/satker-masters', [SatkerMasterController::class, 'index'])->name('satker_masters.index');
     Route::get('/satker-masters/create', [SatkerMasterController::class, 'create'])->name('satker_masters.create');
     Route::post('/satker-masters', [SatkerMasterController::class, 'store'])->name('satker_masters.store');
@@ -125,7 +125,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::patch('/satker-masters/{satkerMaster}', [SatkerMasterController::class, 'update'])->name('satker_masters.update');
     Route::delete('/satker-masters/{satkerMaster}', [SatkerMasterController::class, 'destroy'])->name('satker_masters.destroy');
 
-        // UkerMaster routes
+    // UkerMaster routes
     Route::get('/uker-masters', [UkerMasterController::class, 'index'])->name('uker_masters.index');
     Route::get('/uker-masters/create', [UkerMasterController::class, 'create'])->name('uker_masters.create');
     Route::post('/uker-masters', [UkerMasterController::class, 'store'])->name('uker_masters.store');
@@ -161,6 +161,4 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 // });
 
-
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

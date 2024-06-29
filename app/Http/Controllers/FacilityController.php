@@ -296,4 +296,29 @@ class FacilityController extends Controller
             return view('error')->with('message', 'Unable to search facilities. Please try again later.');
         }
     }
+
+    // FacilityController.php
+
+public function checkAvailability(Request $request)
+{
+    $facilityId = $request->input('facility_id');
+    $currentDateTime = now();
+
+    // Retrieve all reservations for the facility with status 'approved' and start date in the future
+    $reservations = Reservation::where('facility_id', $facilityId)
+        ->where('status', 'approved')
+        ->where('reservation_start', '>', $currentDateTime)
+        ->get(['reservation_start', 'reservation_end']);
+
+    // Format the reservations into a structure that is useful for your frontend
+    $unavailableDates = $reservations->map(function ($reservation) {
+        return [
+            'start' => $reservation->reservation_start->toDateTimeString(),
+            'end' => $reservation->reservation_end->toDateTimeString(),
+        ];
+    });
+
+    return response()->json($unavailableDates);
+}
+
 }
