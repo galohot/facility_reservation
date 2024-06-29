@@ -2,6 +2,13 @@
     <x-slot name="title">
         Find Facility
     </x-slot>
+    <x-slot name="header">
+        <!-- Include Flatpickr CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+        <!-- Include Flatpickr JS -->
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    </x-slot>
     <x-slot name="slot">
         <div>
             <h1>Search for Facilities</h1>
@@ -23,13 +30,13 @@
                     <div class="form-group col-sm-12 col-md-3">
                         <label for="start_date">Start Date</label>
                         <p>(This cannot be empty)</p>
-                        <input type="datetime-local" name="start_date" id="start_date" class="form-control"
+                        <input type="datetime-local" name="start_date" id="start_date" class="form-control flatpickr"
                             value="{{ old('start_date', $startDate ?? '') }}">
                     </div>
                     <div class="form-group col-sm-12 col-md-3">
                         <label for="end_date">End Date</label>
                         <p>(Fill in the end date)</p>
-                        <input type="datetime-local" name="end_date" id="end_date" class="form-control"
+                        <input type="datetime-local" name="end_date" id="end_date" class="form-control flatpickr"
                             value="{{ old('end_date', $endDate ?? '') }}">
                     </div>
                 </div>
@@ -108,11 +115,13 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-auto">
-                                    <span class="rounded avatar" style="background-image: url({{ asset('storage/' . $category->facilities->first()->image_main) }})"></span>
+                                    <span class="rounded avatar"
+                                        style="background-image: url({{ asset('storage/' . $category->facilities->first()->image_main) }})"></span>
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">{{ $category->category_str }}</div>
-                                    <div class="text-secondary">{{ $category->facilities->count() }} Facilities</div>
+                                    <div class="text-secondary">{{ $category->facilities->count() }} Facilities
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -123,6 +132,16 @@
     </div>
 </x-slot>
 <x-slot name="script">
-    <!-- Removed unnecessary script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Flatpickr with minuteIncrement set to 30
+            flatpickr('.flatpickr', {
+                enableTime: true,
+                dateFormat: "Y-m-d H:i",
+                time_24hr: true,
+                minuteIncrement: 30
+            });
+        });
+    </script>
 </x-slot>
 </x-landing-layout>

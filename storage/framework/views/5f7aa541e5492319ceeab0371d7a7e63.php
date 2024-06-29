@@ -11,6 +11,13 @@
      <?php $__env->slot('title', null, []); ?> 
         Find Facility
      <?php $__env->endSlot(); ?>
+     <?php $__env->slot('header', null, []); ?> 
+        <!-- Include Flatpickr CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+        <!-- Include Flatpickr JS -->
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+     <?php $__env->endSlot(); ?>
      <?php $__env->slot('slot', null, []); ?> 
         <div>
             <h1>Search for Facilities</h1>
@@ -33,13 +40,13 @@
                     <div class="form-group col-sm-12 col-md-3">
                         <label for="start_date">Start Date</label>
                         <p>(This cannot be empty)</p>
-                        <input type="datetime-local" name="start_date" id="start_date" class="form-control"
+                        <input type="datetime-local" name="start_date" id="start_date" class="form-control flatpickr"
                             value="<?php echo e(old('start_date', $startDate ?? '')); ?>">
                     </div>
                     <div class="form-group col-sm-12 col-md-3">
                         <label for="end_date">End Date</label>
                         <p>(Fill in the end date)</p>
-                        <input type="datetime-local" name="end_date" id="end_date" class="form-control"
+                        <input type="datetime-local" name="end_date" id="end_date" class="form-control flatpickr"
                             value="<?php echo e(old('end_date', $endDate ?? '')); ?>">
                     </div>
                 </div>
@@ -111,18 +118,20 @@
         <?php endif; ?>
     </div>
     <div>
-        <div class="row row-cards">
+        <div class="mt-5 row row-cards">
             <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="col-md-6 col-xl-3">
                     <a class="card card-link" href="<?php echo e(route('available.facilities.show', $category->id)); ?>">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-auto">
-                                    <span class="rounded avatar" style="background-image: url(<?php echo e(asset('storage/' . $category->facilities->first()->image_main)); ?>)"></span>
+                                    <span class="rounded avatar"
+                                        style="background-image: url(<?php echo e(asset('storage/' . $category->facilities->first()->image_main)); ?>)"></span>
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium"><?php echo e($category->category_str); ?></div>
-                                    <div class="text-secondary"><?php echo e($category->facilities->count()); ?> Facilities</div>
+                                    <div class="text-secondary"><?php echo e($category->facilities->count()); ?> Facilities
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -130,10 +139,20 @@
                 </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
-        </div>
+    </div>
  <?php $__env->endSlot(); ?>
  <?php $__env->slot('script', null, []); ?> 
-    <!-- Removed unnecessary script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Flatpickr with minuteIncrement set to 30
+            flatpickr('.flatpickr', {
+                enableTime: true,
+                dateFormat: "Y-m-d H:i",
+                time_24hr: true,
+                minuteIncrement: 30
+            });
+        });
+    </script>
  <?php $__env->endSlot(); ?>
  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
