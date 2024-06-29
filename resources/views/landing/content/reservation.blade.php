@@ -30,7 +30,8 @@
         @endif
         <section>
             <div class="col">
-                <form class="card" id="reservationForm" action="{{ route('landing.store') }}" method="POST" enctype="multipart/form-data">
+                <form class="card" id="reservationForm" action="{{ route('landing.store') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="card-header">
                         <h3 class="card-title">Make Reservation</h3>
@@ -49,31 +50,42 @@
                             </select>
                         </div>
                         <div class="my-3 form-group col-3 d-flex align-items-end">
-                            <button type="button" id="checkAvailability" class="ms-2 btn btn-primary">Check Availability</button>
+                            <button type="button" id="checkAvailability" class="ms-2 btn btn-primary">Check
+                                Availability</button>
                         </div>
+                        <!-- Add the badge and hide initially -->
                         <div class="mb-4">
-                            <label class="form-label required" for="event">Event</label>
-                            <textarea name="event" id="event" class="form-control" required></textarea>
-                        </div>
-                        <div class="mb-4 col-6">
-                            <label class="form-label" for="reservation_start">Event Starts</label>
-                            <input type="text" name="reservation_start" id="reservation_start"
-                                class="form-control flatpickr"></input>
-                        </div>
-                        <div class="mb-4 col-6">
-                            <label class="form-label" for="reservation_end">Event Ends</label>
-                            <input type="text" name="reservation_end" id="reservation_end"
-                                class="form-control flatpickr"></input>
-                        </div>
-                        <!-- Add doc input fields -->
-                        <div class="mb-4">
-                            <label class="form-label" for="document">Document/Nota Dinas/Memorandum</label>
-                            <input type="file" name="document" id="document" class="form-control">
-                        </div>
-                        <div class="mb-4">
-                            <label class="form-label" for="document_attachment">Attachment/Lampiran (Not Required)</label>
-                            <input type="file" name="document_attachment" id="document_attachment"
-                                class="form-control">
+                            <p id="availabilitySuccess" class="text-white badge bg-success" style="display:none;">Availability
+                                check successful!</p>
+                            </div>
+                        <!-- Hide the date pickers initially -->
+                        <div id="datePickers" style="display:none;">
+                            <p class="text-white badge bg-warning">Please redo the availibility check if different facility is selected</p>
+                            <div class="mb-4 col-6">
+                                <label class="form-label" for="reservation_start">Event Starts</label>
+                                <input type="text" name="reservation_start" id="reservation_start"
+                                    class="form-control flatpickr"></input>
+                            </div>
+                            <div class="mb-4 col-6">
+                                <label class="form-label" for="reservation_end">Event Ends</label>
+                                <input type="text" name="reservation_end" id="reservation_end"
+                                    class="form-control flatpickr"></input>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label required" for="event">Event</label>
+                                <textarea name="event" id="event" class="form-control" required></textarea>
+                            </div>
+                            <!-- Add doc input fields -->
+                            <div class="mb-4">
+                                <label class="form-label" for="document">Document/Nota Dinas/Memorandum</label>
+                                <input type="file" name="document" id="document" class="form-control">
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="document_attachment">Attachment/Lampiran (Not
+                                    Required)</label>
+                                <input type="file" name="document_attachment" id="document_attachment"
+                                    class="form-control">
+                            </div>
                         </div>
                         <!-- End of doc input fields -->
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -116,7 +128,7 @@
                     var facilityId = $('#facility_id').val();
                     if (facilityId) {
                         $.ajax({
-                            url: '{{ route("facility.checkAvailability") }}',
+                            url: '{{ route('facility.checkAvailability') }}',
                             type: 'POST',
                             data: {
                                 _token: '{{ csrf_token() }}',
@@ -126,6 +138,32 @@
                                 // Process and display the response (unavailable dates)
                                 // You can use a modal, alert, or update a section of the page with the data
                                 console.log(response); // For debugging
+
+                                // Initialize Flatpickr with disabled dates and times
+                                flatpickr('.flatpickr', {
+                                    enableTime: true,
+                                    dateFormat: "Y-m-d H:i",
+                                    time_24hr: true,
+                                    minuteIncrement: 30,
+                                    disable: [
+                                        function(date) {
+                                            for (var i = 0; i < response.length; i++) {
+                                                var unavailable = response[i];
+                                                var start = new Date(unavailable.start);
+                                                var end = new Date(unavailable.end);
+
+                                                if (date >= start && date <= end) {
+                                                    return true;
+                                                }
+                                            }
+                                            return false;
+                                        }
+                                    ]
+                                });
+
+                                // Show the date pickers and success message
+                                $('#datePickers').show();
+                                $('#availabilitySuccess').show();
                             },
                             error: function(xhr) {
                                 // Handle any errors that occurred during the request
@@ -137,6 +175,7 @@
                     }
                 });
             </script>
+
         </x-slot>
     </x-slot>
 </x-landing-layout>
