@@ -312,9 +312,12 @@ class FacilityController extends Controller
 
         // Format the reservations into a structure that is useful for your frontend
         $unavailableDates = $reservations->map(function ($reservation) {
+            // Clone the reservation end time and add 15 minutes to it
+            $endDateTime = $reservation->reservation_end->clone()->addMinutes(15);
+
             return [
                 'start' => $reservation->reservation_start->toDateTimeString(),
-                'end' => $reservation->reservation_end->toDateTimeString(),
+                'end' => $endDateTime->toDateTimeString(),
             ];
         });
 

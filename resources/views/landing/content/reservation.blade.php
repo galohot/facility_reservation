@@ -111,7 +111,7 @@
                         enableTime: true,
                         dateFormat: "Y-m-d H:i",
                         time_24hr: true,
-                        minuteIncrement: 30
+                        minuteIncrement: 15
                     });
 
                     // Retrieve and set query parameters if present
@@ -151,7 +151,7 @@
                                     enableTime: true,
                                     dateFormat: "Y-m-d H:i",
                                     time_24hr: true,
-                                    minuteIncrement: 30,
+                                    minuteIncrement: 15,
                                     disable: [
                                         function(date) {
                                             for (var i = 0; i < response.length; i++) {
