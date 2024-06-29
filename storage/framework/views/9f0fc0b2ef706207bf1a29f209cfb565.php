@@ -64,12 +64,15 @@
                         </div>
                         <!-- Add the badge and hide initially -->
                         <div class="mb-4">
-                            <p id="availabilitySuccess" class="text-white badge bg-success" style="display:none;">Availability
+                            <p id="availabilitySuccess" class="text-white badge bg-success" style="display:none;">
+                                Availability
                                 check successful!</p>
-                            </div>
+                        </div>
                         <!-- Hide the date pickers initially -->
                         <div id="datePickers" style="display:none;">
-                            <p class="text-white badge bg-warning">Please redo the availibility check if different facility is selected</p>
+                            <p class="text-white badge bg-warning">Please redo the availibility check if different
+                                facility is selected</p>
+                            <div id="unavailableDates"></div>
                             <div class="mb-4 col-6">
                                 <label class="form-label" for="reservation_start">Event Starts</label>
                                 <input type="text" name="reservation_start" id="reservation_start"
@@ -144,6 +147,10 @@
                                 facility_id: facilityId
                             },
                             success: function(response) {
+                                // Sort unavailable dates by start date/time (earliest first)
+                                response.sort(function(a, b) {
+                                    return new Date(a.start) - new Date(b.start);
+                                });
                                 // Process and display the response (unavailable dates)
                                 // You can use a modal, alert, or update a section of the page with the data
                                 console.log(response); // For debugging
@@ -173,6 +180,29 @@
                                 // Show the date pickers and success message
                                 $('#datePickers').show();
                                 $('#availabilitySuccess').show();
+                                // Display unavailable dates as compact badges
+                                var unavailableDatesText = response.map(function(date) {
+                                    var start = new Date(date.start);
+                                    var end = new Date(date.end);
+                                    var formattedStart = start.toLocaleDateString('id-ID', {
+                                        day: 'numeric',
+                                        month: 'long',
+                                        year: 'numeric',
+                                        hour: 'numeric',
+                                        minute: 'numeric'
+                                    });
+                                    var formattedEnd = end.toLocaleDateString('id-ID', {
+                                        day: 'numeric',
+                                        month: 'long',
+                                        year: 'numeric',
+                                        hour: 'numeric',
+                                        minute: 'numeric'
+                                    });
+                                    return '<span>Already reserved on: </span><span class="mb-1 text-white badge bg-danger">' +
+                                        formattedStart + ' - ' + formattedEnd + '</span><br />';
+                                }).join(' ');
+
+                                $('#unavailableDates').html(unavailableDatesText);
                             },
                             error: function(xhr) {
                                 // Handle any errors that occurred during the request
