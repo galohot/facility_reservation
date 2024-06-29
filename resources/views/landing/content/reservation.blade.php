@@ -61,7 +61,7 @@
                         </div>
                         <!-- Hide the date pickers initially -->
                         <div id="datePickers" style="display:none;">
-                            <p class="text-white badge bg-warning">Please redo the availibility check if different
+                            <p class="text-white badge bg-warning">Please redo the availability check if different
                                 facility is selected</p>
                             <div id="unavailableDates"></div>
                             <div class="mb-4 col-6">
@@ -106,7 +106,7 @@
                 });
 
                 document.addEventListener('DOMContentLoaded', function() {
-                    // Initialize Flatpickr with minuteIncrement set to 30
+                    // Initialize Flatpickr with minuteIncrement set to 15
                     flatpickr('.flatpickr', {
                         enableTime: true,
                         dateFormat: "Y-m-d H:i",
@@ -143,29 +143,42 @@
                                     return new Date(a.start) - new Date(b.start);
                                 });
                                 // Process and display the response (unavailable dates)
-                                // You can use a modal, alert, or update a section of the page with the data
                                 console.log(response); // For debugging
 
-                                // Initialize Flatpickr with disabled dates and times
+                                // Initialize Flatpickr with unavailable dates marked
                                 flatpickr('.flatpickr', {
                                     enableTime: true,
                                     dateFormat: "Y-m-d H:i",
                                     time_24hr: true,
                                     minuteIncrement: 15,
-                                    disable: [
-                                        function(date) {
-                                            for (var i = 0; i < response.length; i++) {
-                                                var unavailable = response[i];
-                                                var start = new Date(unavailable.start);
-                                                var end = new Date(unavailable.end);
+                                    onChange: function(selectedDates, dateStr, instance) {
+                                        var isUnavailable = response.some(function(unavailable) {
+                                            var start = new Date(unavailable.start);
+                                            var end = new Date(unavailable.end);
 
-                                                if (date >= start && date <= end) {
-                                                    return true;
-                                                }
-                                            }
-                                            return false;
+                                            return selectedDates.some(function(date) {
+                                                return date >= start && date <= end;
+                                            });
+                                        });
+
+                                        if (isUnavailable) {
+                                            alert("This date and time is already booked");
+                                            instance.clear();
                                         }
-                                    ]
+                                    },
+                                    onDayCreate: function(dObj, dStr, fp, dayElem) {
+                                        var dateStr = dayElem.dateObj.toISOString().split('T')[0];
+                                        var isUnavailable = response.some(function(unavailable) {
+                                            var start = new Date(unavailable.start).toISOString().split('T')[0];
+                                            var end = new Date(unavailable.end).toISOString().split('T')[0];
+
+                                            return dateStr >= start && dateStr <= end;
+                                        });
+
+                                        if (isUnavailable) {
+                                            dayElem.classList.add('unavailable-date');
+                                        }
+                                    }
                                 });
 
                                 // Show the date pickers and success message
@@ -205,7 +218,11 @@
                     }
                 });
             </script>
-
+            <style>
+                .unavailable-date {
+                    background-color: #ffcccb !important;
+                }
+            </style>
         </x-slot>
     </x-slot>
 </x-landing-layout>
