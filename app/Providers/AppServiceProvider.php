@@ -55,6 +55,9 @@ class AppServiceProvider extends ServiceProvider
         View::composer(['addons.index', 'addons.create', 'addons.show', 'addons.edit'], function ($view) {
             $view->with('pageTitle', 'Addon');
         });
+        View::composer(['pengaduans.index', 'pengaduans.create', 'pengaduans.show', 'pengaduans.edit'], function ($view) {
+            $view->with('pageTitle', 'Pengaduan');
+        });
 
         Paginator::useBootstrap();
 

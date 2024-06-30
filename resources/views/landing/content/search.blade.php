@@ -174,28 +174,22 @@
     </div>
     <div class="container mt-4">
         <div class="row">
-            <div class="col-md-6">
-                <div class="m-1 card custom-card">
-                    <div class="text-center card-body">
-                        <h5 class="card-title">Pengaduan Fasilitas</h5>
-                        <p class="card-text">Description</p>
-                        <a href="https://wa.me/1234567890" class="btn btn-whatsapp" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Contact Us on WhatsApp
-                        </a>
+            @foreach ($pengaduans as $pengaduan)
+                @if ($pengaduan->is_active)
+                    <div class="col-md-6">
+                        <div class="m-1 card custom-card">
+                            <div class="text-center card-body">
+                                <h5 class="card-title">{{ $pengaduan->title }}</h5>
+                                <p class="card-text">{{ $pengaduan->description }}</p>
+                                <a href="https://wa.me/{{ $pengaduan->phone_number }}" class="btn btn-whatsapp"
+                                    target="_blank">
+                                    <i class="fab fa-whatsapp"></i> Contact Us on WhatsApp
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="m-1 card custom-card">
-                    <div class="text-center card-body">
-                        <h5 class="card-title">Pengaduan Layanan</h5>
-                        <p class="card-text">Description</p>
-                        <a href="https://wa.me/1234567890" class="btn btn-whatsapp" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Contact Us on WhatsApp
-                        </a>
-                    </div>
-                </div>
-            </div>
+                @endif
+            @endforeach
         </div>
     </div>
 

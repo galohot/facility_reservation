@@ -184,28 +184,22 @@
     </div>
     <div class="container mt-4">
         <div class="row">
-            <div class="col-md-6">
-                <div class="m-1 card custom-card">
-                    <div class="text-center card-body">
-                        <h5 class="card-title">Pengaduan Fasilitas</h5>
-                        <p class="card-text">Description</p>
-                        <a href="https://wa.me/1234567890" class="btn btn-whatsapp" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Contact Us on WhatsApp
-                        </a>
+            <?php $__currentLoopData = $pengaduans; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pengaduan): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php if($pengaduan->is_active): ?>
+                    <div class="col-md-6">
+                        <div class="m-1 card custom-card">
+                            <div class="text-center card-body">
+                                <h5 class="card-title"><?php echo e($pengaduan->title); ?></h5>
+                                <p class="card-text"><?php echo e($pengaduan->description); ?></p>
+                                <a href="https://wa.me/<?php echo e($pengaduan->phone_number); ?>" class="btn btn-whatsapp"
+                                    target="_blank">
+                                    <i class="fab fa-whatsapp"></i> Contact Us on WhatsApp
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="m-1 card custom-card">
-                    <div class="text-center card-body">
-                        <h5 class="card-title">Pengaduan Layanan</h5>
-                        <p class="card-text">Description</p>
-                        <a href="https://wa.me/1234567890" class="btn btn-whatsapp" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Contact Us on WhatsApp
-                        </a>
-                    </div>
-                </div>
-            </div>
+                <?php endif; ?>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
     </div>
 

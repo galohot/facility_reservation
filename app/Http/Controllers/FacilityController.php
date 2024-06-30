@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Addon;
 use App\Models\Facility;
 use App\Models\FacilityCategory;
+use App\Models\Pengaduan;
 use App\Models\Reservation;
 use App\Models\UkerMaster;
 use Illuminate\Http\Request;
@@ -247,7 +248,10 @@ class FacilityController extends Controller
     {
         try {
             $categories = FacilityCategory::all();
-            return view('landing.content.search', compact('categories'));
+
+            $pengaduans = Pengaduan::all();
+
+            return view('landing.content.search', compact('categories','pengaduans'));
         } catch (\Exception $e) {
             // Return an error view or a response with a message
             return view('error')->with('message', 'Unable to load categories. Please try again later.');

@@ -6,6 +6,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\FacilityAddonController;
 use App\Http\Controllers\FacilityCategoryController;
 use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoleMasterController;
@@ -94,6 +95,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Routes for verification
     Route::get('/reservations/admin/{reservation}/verify', [ReservationController::class, 'preverify'])->name('reservations.admin.preverify');
     Route::patch('/reservations/admin/{reservation}/verify', [ReservationController::class, 'verify'])->name('reservations.admin.verify');
+
+    // Routes for Pengaduan management
+    Route::get('/pengaduans', [PengaduanController::class, 'index'])->name('pengaduans.index');
+    Route::get('/pengaduans/create', [PengaduanController::class, 'create'])->name('pengaduans.create');
+    Route::post('/pengaduans', [PengaduanController::class, 'store'])->name('pengaduans.store');
+    Route::get('/pengaduans/{pengaduan}', [PengaduanController::class, 'show'])->name('pengaduans.show');
+    Route::get('/pengaduans/{pengaduan}/edit', [PengaduanController::class, 'edit'])->name('pengaduans.edit');
+    Route::patch('/pengaduans/{pengaduan}', [PengaduanController::class, 'update'])->name('pengaduans.update');
+    Route::delete('/pengaduans/{pengaduan}', [PengaduanController::class, 'destroy'])->name('pengaduans.destroy');
 });
 
 Route::middleware(['auth', 'verify.reservation', 'verify.status'])->group(function () {
