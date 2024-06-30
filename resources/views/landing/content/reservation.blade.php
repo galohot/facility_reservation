@@ -64,12 +64,12 @@
                             <p class="text-white badge bg-warning">Please redo the availability check if different
                                 facility is selected</p>
                             <div id="unavailableDates"></div>
-                            <div class="mb-4 col-6">
+                            <div class="mb-4 col col-md-6">
                                 <label class="form-label" for="reservation_start">Event Starts</label>
                                 <input type="text" name="reservation_start" id="reservation_start"
                                     class="form-control flatpickr"></input>
                             </div>
-                            <div class="mb-4 col-6">
+                            <div class="mb-4 col col-md-6">
                                 <label class="form-label" for="reservation_end">Event Ends</label>
                                 <input type="text" name="reservation_end" id="reservation_end"
                                     class="form-control flatpickr"></input>
@@ -88,10 +88,10 @@
                                     Required)</label>
                                 <input type="file" name="document_attachment" id="document_attachment"
                                     class="form-control">
-                            </div>
+                                </div>
+                                <!-- End of doc input fields -->
+                                <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
-                        <!-- End of doc input fields -->
-                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>
