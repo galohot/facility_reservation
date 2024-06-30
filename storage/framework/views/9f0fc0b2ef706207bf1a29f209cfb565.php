@@ -65,194 +65,230 @@
                         <!-- Add the badge and hide initially -->
                         <div class="mb-4">
                             <p id="availabilitySuccess" class="text-white badge bg-success" style="display:none;">
-                                Availability
-                                check successful!</p>
+                                Availability check successful!
+                            </p>
                         </div>
                         <!-- Hide the date pickers initially -->
                         <div id="datePickers" style="display:none;">
-                            <p class="text-white badge bg-warning">Please redo the availability check if different
-                                facility is selected</p>
-                            <div id="unavailableDates"></div>
-                            <div class="mb-4 col col-md-6">
-                                <label class="form-label" for="reservation_start">Event Starts</label>
-                                <input type="text" name="reservation_start" id="reservation_start"
-                                    class="form-control flatpickr"></input>
-                            </div>
-                            <div class="mb-4 col col-md-6">
-                                <label class="form-label" for="reservation_end">Event Ends</label>
-                                <input type="text" name="reservation_end" id="reservation_end"
-                                    class="form-control flatpickr"></input>
-                            </div>
-                            <div class="mb-4">
-                                <label class="form-label required" for="event">Event</label>
-                                <textarea name="event" id="event" class="form-control" required></textarea>
-                            </div>
-                            <!-- Add doc input fields -->
-                            <div class="mb-4">
-                                <label class="form-label" for="document">Document/Nota Dinas/Memorandum</label>
-                                <input type="file" name="document" id="document" class="form-control">
-                            </div>
-                            <div class="mb-4">
-                                <label class="form-label" for="document_attachment">Attachment/Lampiran (Not
-                                    Required)</label>
-                                <input type="file" name="document_attachment" id="document_attachment"
-                                    class="form-control">
+                            <!-- Facility Card -->
+                            <div id="facilityCard" style="display:none;" class="my-2 col">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-12 col-md-3">
+                                            <img id="facilityImage" class="object-cover w-100 h-100 card-img-start"
+                                                src="" alt="Facility Image">
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <div class="card-body">
+                                                <h5 id="facilityName" class="card-title"></h5>
+                                                <p id="facilityLocation" class="text-secondary"></p>
+                                                <div
+                                                    class="top-0 m-3 d-flex flex-column align-items-end position-absolute end-0">
+                                                    <a href="#" id="viewFacilityLink"
+                                                        class="btn btn-primary w-100" role="button"><i
+                                                            class="fas fa-eye"></i> View</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="unavailableDates"></div>
+                                <div class="mb-4 col col-md-6">
+                                    <label class="form-label" for="reservation_start">Event Starts</label>
+                                    <input type="text" name="reservation_start" id="reservation_start"
+                                        class="form-control flatpickr">
+                                </div>
+                                <div class="mb-4 col col-md-6">
+                                    <label class="form-label" for="reservation_end">Event Ends</label>
+                                    <input type="text" name="reservation_end" id="reservation_end"
+                                        class="form-control flatpickr">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label required" for="event">Event</label>
+                                    <textarea name="event" id="event" class="form-control" required></textarea>
+                                </div>
+                                <!-- Add doc input fields -->
+                                <div class="mb-4">
+                                    <label class="form-label" for="document">Document/Nota Dinas/Memorandum</label>
+                                    <input type="file" name="document" id="document" class="form-control">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label" for="document_attachment">Attachment/Lampiran (Not
+                                        Required)</label>
+                                    <input type="file" name="document_attachment" id="document_attachment"
+                                        class="form-control">
                                 </div>
                                 <!-- End of doc input fields -->
                                 <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
                         </div>
-                    </div>
                 </form>
             </div>
         </section>
-         <?php $__env->slot('script', null, []); ?> 
-            <script>
-                $(document).ready(function() {
-                    $('#facility_id').select2({
-                        placeholder: 'Search for Facility to reserve',
-                        allowClear: true
-                    });
+     <?php $__env->endSlot(); ?>
+     <?php $__env->slot('script', null, []); ?> 
+        <script>
+            $(document).ready(function() {
+                $('#facility_id').select2({
+                    placeholder: 'Search for Facility to reserve',
+                    allowClear: true
+                });
+            });
+
+            document.addEventListener('DOMContentLoaded', function() {
+                // Initialize Flatpickr with minuteIncrement set to 15
+                flatpickr('.flatpickr', {
+                    enableTime: true,
+                    dateFormat: "Y-m-d H:i",
+                    time_24hr: true,
+                    minuteIncrement: 15
                 });
 
-                document.addEventListener('DOMContentLoaded', function() {
-                    // Initialize Flatpickr with minuteIncrement set to 15
-                    flatpickr('.flatpickr', {
-                        enableTime: true,
-                        dateFormat: "Y-m-d H:i",
-                        time_24hr: true,
-                        minuteIncrement: 15
-                    });
+                // Retrieve and set query parameters if present
+                const urlParams = new URLSearchParams(window.location.search);
+                const startDate = urlParams.get('start_date');
+                if (startDate) {
+                    document.getElementById('reservation_start')._flatpickr.setDate(startDate + 'T08:00');
+                }
 
-                    // Retrieve and set query parameters if present
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const startDate = urlParams.get('start_date');
-                    if (startDate) {
-                        document.getElementById('reservation_start')._flatpickr.setDate(startDate + 'T08:00');
-                    }
+                const facilityId = urlParams.get('facility_id');
+                if (facilityId) {
+                    document.getElementById('facility_id').value = facilityId;
+                }
+            });
 
-                    const facilityId = urlParams.get('facility_id');
-                    if (facilityId) {
-                        document.getElementById('facility_id').value = facilityId;
-                    }
-                });
+            $('#checkAvailability').on('click', function() {
+                var facilityId = $('#facility_id').val();
+                if (facilityId) {
+                    $.ajax({
+                        url: '<?php echo e(route('facility.checkAvailability')); ?>',
+                        type: 'POST',
+                        data: {
+                            _token: '<?php echo e(csrf_token()); ?>',
+                            facility_id: facilityId
+                        },
+                        success: function(response) {
+                            // Sort unavailable dates by start date/time (earliest first)
+                            response.unavailableDates.sort(function(a, b) {
+                                return new Date(a.start) - new Date(b.start);
+                            });
 
-                $('#checkAvailability').on('click', function() {
-                    var facilityId = $('#facility_id').val();
-                    if (facilityId) {
-                        $.ajax({
-                            url: '<?php echo e(route('facility.checkAvailability')); ?>',
-                            type: 'POST',
-                            data: {
-                                _token: '<?php echo e(csrf_token()); ?>',
-                                facility_id: facilityId
-                            },
-                            success: function(response) {
-                                // Sort unavailable dates by start date/time (earliest first)
-                                response.sort(function(a, b) {
-                                    return new Date(a.start) - new Date(b.start);
-                                });
-                                // Process and display the response (unavailable dates)
-                                console.log(response); // For debugging
+                            // Process and display the response (unavailable dates)
+                            console.log(response); // For debugging
 
-                                // Initialize Flatpickr with unavailable dates marked
-                                flatpickr('.flatpickr', {
-                                    enableTime: true,
-                                    dateFormat: "Y-m-d H:i",
-                                    time_24hr: true,
-                                    disableMobile: true,
-                                    minuteIncrement: 15,
-                                    onChange: function(selectedDates, dateStr, instance) {
-                                        var isUnavailable = response.some(function(unavailable) {
-                                            var start = new Date(unavailable.start);
-                                            var end = new Date(unavailable.end);
+                            // Destroy the existing Flatpickr instance
+                            $('.flatpickr').each(function() {
+                                const instance = $(this).data('flatpickr');
+                                if (instance) {
+                                    instance.destroy();
+                                }
+                            });
 
-                                            return selectedDates.some(function(date) {
-                                                return date >= start && date <= end;
-                                            });
+                            // Initialize Flatpickr with unavailable dates marked
+                            flatpickr('.flatpickr', {
+                                enableTime: true,
+                                dateFormat: "Y-m-d H:i",
+                                time_24hr: true,
+                                minuteIncrement: 15,
+                                disable: response.unavailableDates.map(function(unavailable) {
+                                    return {
+                                        from: new Date(unavailable.start).toISOString(),
+                                        to: new Date(unavailable.end).toISOString()
+                                    };
+                                }),
+                                onChange: function(selectedDates, dateStr, instance) {
+                                    var isUnavailable = response.unavailableDates.some(function(
+                                        unavailable) {
+                                        var start = new Date(unavailable.start);
+                                        var end = new Date(unavailable.end);
+
+                                        return selectedDates.some(function(date) {
+                                            return date >= start && date <= end;
                                         });
+                                    });
 
-                                        if (isUnavailable) {
-                                            alert("This date and time is already booked");
-                                            instance.clear();
-                                        }
-                                    },
-                                    onDayCreate: function(dObj, dStr, fp, dayElem) {
-                                        var dateStr = dayElem.dateObj.toISOString().split('T')[0];
-                                        var isUnavailable = response.some(function(unavailable) {
-                                            var start = new Date(unavailable.start)
-                                                .toISOString().split('T')[0];
-                                            var end = new Date(unavailable.end)
-                                                .toISOString().split('T')[0];
-
-                                            return dateStr >= start && dateStr <= end;
-                                        });
-
-                                        if (isUnavailable) {
-                                            dayElem.classList.add('unavailable-date');
-                                        }
+                                    if (isUnavailable) {
+                                        alert("This date and time is already booked");
+                                        instance.clear();
                                     }
-                                });
+                                },
+                                onDayCreate: function(dObj, dStr, fp, dayElem) {
+                                    var dateStr = dayElem.dateObj.toISOString().split('T')[0];
+                                    var isUnavailable = response.unavailableDates.some(function(
+                                        unavailable) {
+                                        var start = new Date(unavailable.start)
+                                            .toISOString().split('T')[0];
+                                        var end = new Date(unavailable.end)
+                                            .toISOString().split('T')[0];
 
-                                // Show the date pickers and success message
-                                $('#datePickers').show();
-                                $('#availabilitySuccess').show();
+                                        return dateStr >= start && dateStr <= end;
+                                    });
 
-                                // Hide the success message after 3 seconds
-                                setTimeout(function() {
-                                    $('#availabilitySuccess').fadeOut();
-                                }, 3000);
+                                    if (isUnavailable) {
+                                        dayElem.classList.add('unavailable-date');
+                                    }
+                                }
+                            });
 
-                                // Display unavailable dates in an ordered list
-                                var unavailableDatesHtml = response.length > 0 ?
-                                    '<p><strong>This Facility has been reserved on:</strong></p><ol>' + response
-                                    .map(function(date) {
-                                        var start = new Date(date.start);
-                                        var end = new Date(date.end);
-                                        var formattedStart = start.toLocaleDateString('id-ID', {
-                                            day: 'numeric',
-                                            month: 'long',
-                                            year: 'numeric',
-                                            hour: 'numeric',
-                                            minute: 'numeric'
-                                        });
-                                        var formattedEnd = end.toLocaleDateString('id-ID', {
-                                            day: 'numeric',
-                                            month: 'long',
-                                            year: 'numeric',
-                                            hour: 'numeric',
-                                            minute: 'numeric'
-                                        });
-                                        return '<li class="my-1"><span class="text-white badge bg-danger">' +
-                                            formattedStart + ' - ' + formattedEnd + '</span></li>';
-                                    }).join('') + '</ol>' :
-                                    '<p class="text-white badge bg-teal">This facility has no upcoming reservations.</p>';
-                                $('#unavailableDates').html(unavailableDatesHtml);
-                            },
-                            error: function(xhr) {
-                                // Handle any errors that occurred during the request
-                                console.error(xhr.responseText);
-                            }
-                        });
-                    } else {
-                        alert('Please select a facility first.');
-                    }
-                });
-            </script>
-            <style>
-                .unavailable-date {
-                    background-color: #ffcccb !important;
+                            // Show the date pickers and success message
+                            $('#datePickers').show();
+                            $('#availabilitySuccess').show();
+
+                            // Hide the success message after 3 seconds
+                            setTimeout(function() {
+                                $('#availabilitySuccess').fadeOut();
+                            }, 3000);
+
+                            // Display unavailable dates in an ordered list
+                            var unavailableDatesHtml = response.unavailableDates.length > 0 ?
+                                '<p><strong>This Facility has been reserved on:</strong></p><ol>' + response
+                                .unavailableDates
+                                .map(function(date) {
+                                    var start = new Date(date.start);
+                                    var end = new Date(date.end);
+                                    var formattedStart = start.toLocaleDateString('id-ID', {
+                                        day: 'numeric',
+                                        month: 'long',
+                                        year: 'numeric',
+                                        hour: 'numeric',
+                                        minute: 'numeric'
+                                    });
+                                    var formattedEnd = end.toLocaleDateString('id-ID', {
+                                        day: 'numeric',
+                                        month: 'long',
+                                        year: 'numeric',
+                                        hour: 'numeric',
+                                        minute: 'numeric'
+                                    });
+                                    return '<li class="my-1"><span class="text-white badge bg-danger">' +
+                                        formattedStart + '</span>' + ' s.d. ' +
+                                        '<span class="text-white badge bg-danger">' + formattedEnd +
+                                        '</span></li>';
+                                }).join('') + '</ol>' :
+                                '<p class="text-white badge bg-teal">This facility has no upcoming reservations.</p>';
+                            $('#unavailableDates').html(unavailableDatesHtml);
+
+                            // Display the facility card
+                            $('#facilityCard').show();
+                            $('#facilityName').text(response.facility.name);
+                            $('#facilityLocation').text(response.facility.location);
+                            $('#facilityImage').attr('src', '<?php echo e(asset('storage')); ?>/' + response.facility
+                                .image_main);
+                            $('#viewFacilityLink').attr('href', '<?php echo e(route('facility.page', '')); ?>/' +
+                                response.facility.id);
+                        },
+                        error: function(xhr) {
+                            // Handle any errors that occurred during the request
+                            console.error(xhr.responseText);
+                        }
+                    });
+                } else {
+                    alert('Please select a facility first.');
                 }
+            });
+        </script>
 
-                .badge {
-                    display: inline-block;
-                    max-width: 100%;
-                    overflow: inherit;
-                    text-overflow: ellipsis;
-                    white-space: normal;
-                    text-align: left;
-                }
-            </style>
-         <?php $__env->endSlot(); ?>
      <?php $__env->endSlot(); ?>
  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>

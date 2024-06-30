@@ -304,6 +304,9 @@ class FacilityController extends Controller
         $facilityId = $request->input('facility_id');
         $currentDateTime = now();
 
+        // Retrieve facility details
+        $facility = Facility::find($facilityId);
+
         // Retrieve all reservations for the facility with status 'approved' and start date in the future
         $reservations = Reservation::where('facility_id', $facilityId)
             ->where('status', 'approved')
@@ -321,6 +324,9 @@ class FacilityController extends Controller
             ];
         });
 
-        return response()->json($unavailableDates);
+        return response()->json([
+            'unavailableDates' => $unavailableDates,
+            'facility' => $facility,
+        ]);
     }
 }
