@@ -149,6 +149,7 @@
                 enableTime: true,
                 dateFormat: "Y-m-d H:i",
                 time_24hr: true,
+                disableMobile: true,
                 minuteIncrement: 30
             });
         });

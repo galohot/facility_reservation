@@ -133,6 +133,7 @@
                     enableTime: true,
                     dateFormat: "Y-m-d H:i",
                     time_24hr: true,
+                    disableMobile: true,
                     minuteIncrement: 15
                 });
 
@@ -178,6 +179,7 @@
                                 enableTime: true,
                                 dateFormat: "Y-m-d H:i",
                                 time_24hr: true,
+                                disableMobile: true,
                                 minuteIncrement: 15,
                                 disable: response.unavailableDates.map(function(unavailable) {
                                     return {
