@@ -165,9 +165,6 @@
                                 return new Date(a.start) - new Date(b.start);
                             });
 
-                            // Process and display the response (unavailable dates)
-                            console.log(response); // For debugging
-
                             // Destroy the existing Flatpickr instance
                             $('.flatpickr').each(function() {
                                 const instance = $(this).data('flatpickr');
@@ -185,7 +182,9 @@
                                 disable: response.unavailableDates.map(function(unavailable) {
                                     return {
                                         from: new Date(unavailable.start).toISOString(),
-                                        to: new Date(unavailable.end).toISOString()
+                                        to: new Date(new Date(unavailable.end).setSeconds(0,
+                                                0) - 87300000)
+                                        .toISOString() // End of the day
                                     };
                                 }),
                                 onChange: function(selectedDates, dateStr, instance) {
@@ -211,7 +210,7 @@
                                         var start = new Date(unavailable.start)
                                             .toISOString().split('T')[0];
                                         var end = new Date(unavailable.end)
-                                            .toISOString().split('T')[0];
+                                        .toISOString().split('T')[0];
 
                                         return dateStr >= start && dateStr <= end;
                                     });
