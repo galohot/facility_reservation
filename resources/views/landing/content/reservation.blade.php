@@ -150,6 +150,7 @@
                                     enableTime: true,
                                     dateFormat: "Y-m-d H:i",
                                     time_24hr: true,
+                                    disableMobile: true,
                                     minuteIncrement: 15,
                                     onChange: function(selectedDates, dateStr, instance) {
                                         var isUnavailable = response.some(function(unavailable) {
