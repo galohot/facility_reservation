@@ -187,6 +187,12 @@
                                 // Show the date pickers and success message
                                 $('#datePickers').show();
                                 $('#availabilitySuccess').show();
+
+                                // Hide the success message after 3 seconds
+                                setTimeout(function() {
+                                    $('#availabilitySuccess').fadeOut();
+                                }, 3000);
+
                                 // Display unavailable dates in an ordered list
                                 var unavailableDatesHtml = response.length > 0 ?
                                     '<p><strong>This Facility has been reserved on:</strong></p><ol>' + response
