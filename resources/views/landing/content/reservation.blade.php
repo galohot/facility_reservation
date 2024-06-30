@@ -170,8 +170,10 @@
                                     onDayCreate: function(dObj, dStr, fp, dayElem) {
                                         var dateStr = dayElem.dateObj.toISOString().split('T')[0];
                                         var isUnavailable = response.some(function(unavailable) {
-                                            var start = new Date(unavailable.start).toISOString().split('T')[0];
-                                            var end = new Date(unavailable.end).toISOString().split('T')[0];
+                                            var start = new Date(unavailable.start)
+                                                .toISOString().split('T')[0];
+                                            var end = new Date(unavailable.end)
+                                                .toISOString().split('T')[0];
 
                                             return dateStr >= start && dateStr <= end;
                                         });
@@ -185,29 +187,31 @@
                                 // Show the date pickers and success message
                                 $('#datePickers').show();
                                 $('#availabilitySuccess').show();
-                                // Display unavailable dates as compact badges
-                                var unavailableDatesText = response.map(function(date) {
-                                    var start = new Date(date.start);
-                                    var end = new Date(date.end);
-                                    var formattedStart = start.toLocaleDateString('id-ID', {
-                                        day: 'numeric',
-                                        month: 'long',
-                                        year: 'numeric',
-                                        hour: 'numeric',
-                                        minute: 'numeric'
-                                    });
-                                    var formattedEnd = end.toLocaleDateString('id-ID', {
-                                        day: 'numeric',
-                                        month: 'long',
-                                        year: 'numeric',
-                                        hour: 'numeric',
-                                        minute: 'numeric'
-                                    });
-                                    return '<span>Already reserved on: </span><span class="mb-1 text-white badge bg-danger">' +
-                                        formattedStart + ' - ' + formattedEnd + '</span><br />';
-                                }).join(' ');
-
-                                $('#unavailableDates').html(unavailableDatesText);
+                                // Display unavailable dates in an ordered list
+                                var unavailableDatesHtml = response.length > 0 ?
+                                    '<p><strong>This Facility has been reserved on:</strong></p><ol>' + response
+                                    .map(function(date) {
+                                        var start = new Date(date.start);
+                                        var end = new Date(date.end);
+                                        var formattedStart = start.toLocaleDateString('id-ID', {
+                                            day: 'numeric',
+                                            month: 'long',
+                                            year: 'numeric',
+                                            hour: 'numeric',
+                                            minute: 'numeric'
+                                        });
+                                        var formattedEnd = end.toLocaleDateString('id-ID', {
+                                            day: 'numeric',
+                                            month: 'long',
+                                            year: 'numeric',
+                                            hour: 'numeric',
+                                            minute: 'numeric'
+                                        });
+                                        return '<li class="my-1"><span class="text-white badge bg-danger">' +
+                                            formattedStart + ' - ' + formattedEnd + '</span></li>';
+                                    }).join('') + '</ol>' :
+                                    '<p class="text-white badge bg-teal">This facility has no upcoming reservations.</p>';
+                                $('#unavailableDates').html(unavailableDatesHtml);
                             },
                             error: function(xhr) {
                                 // Handle any errors that occurred during the request
@@ -222,6 +226,15 @@
             <style>
                 .unavailable-date {
                     background-color: #ffcccb !important;
+                }
+
+                .badge {
+                    display: inline-block;
+                    max-width: 100%;
+                    overflow: inherit;
+                    text-overflow: ellipsis;
+                    white-space: normal;
+                    text-align: left;
                 }
             </style>
         </x-slot>
