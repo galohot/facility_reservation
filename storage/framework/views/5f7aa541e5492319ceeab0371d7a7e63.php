@@ -17,6 +17,48 @@
 
         <!-- Include Flatpickr JS -->
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <style>
+            /* Custom styles for the WhatsApp contact card */
+            .custom-card {
+                border: 1px solid #e3e6f0;
+                border-radius: 8px;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                background-color: #ffffff;
+            }
+
+            .custom-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .custom-card .card-title {
+                color: #343a40;
+                font-weight: bold;
+            }
+
+            .custom-card .card-text {
+                color: #6c757d;
+                margin-bottom: 1.5rem;
+            }
+
+            .custom-card .btn-whatsapp {
+                background-color: #25d366;
+                border-color: #25d366;
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .custom-card .btn-whatsapp:hover {
+                background-color: #1ebe53;
+                border-color: #1ebe53;
+            }
+
+            .custom-card .btn-whatsapp i {
+                margin-right: 8px;
+            }
+        </style>
      <?php $__env->endSlot(); ?>
      <?php $__env->slot('slot', null, []); ?> 
         <div>
@@ -140,6 +182,33 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
     </div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="m-1 card custom-card">
+                    <div class="text-center card-body">
+                        <h5 class="card-title">Pengaduan Fasilitas</h5>
+                        <p class="card-text">Description</p>
+                        <a href="https://wa.me/1234567890" class="btn btn-whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Contact Us on WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="m-1 card custom-card">
+                    <div class="text-center card-body">
+                        <h5 class="card-title">Pengaduan Layanan</h5>
+                        <p class="card-text">Description</p>
+                        <a href="https://wa.me/1234567890" class="btn btn-whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Contact Us on WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
  <?php $__env->endSlot(); ?>
  <?php $__env->slot('script', null, []); ?> 
     <script>
